@@ -1,0 +1,158 @@
+[
+  {
+    "claim": "CartiGSFM defines a three-layer cartilage state model",
+    "rationale": "This is a description of the method architecture, not an empirical claim",
+    "safety_classification": "MAIN_TEXT_READY",
+    "confidence": "HIGH",
+    "required_caveats": [
+      "All results are atlas-internal unless explicitly stated otherwise",
+      "Do not claim mechanistic proof",
+      "Do not claim clinical or translational utility without external validation"
+    ],
+    "can_claim": true
+  },
+  {
+    "claim": "Full three-layer model outperforms single-layer alternatives on tissue classification and OA classification",
+    "rationale": "Supported by P5 ablation study showing full model has best balanced accuracy and AUROC",
+    "safety_classification": "MAIN_TEXT_READY",
+    "confidence": "HIGH",
+    "required_caveats": [
+      "All results are atlas-internal unless explicitly stated otherwise",
+      "Do not claim mechanistic proof",
+      "Do not claim clinical or translational utility without external validation"
+    ],
+    "can_claim": true
+  },
+  {
+    "claim": "Avascular_Antimineralization axis scores are increased in OA cartilage",
+    "rationale": "FDR significant, high robustness score correlation, confirmed in P3 analysis",
+    "safety_classification": "MAIN_TEXT_READY",
+    "confidence": "HIGH",
+    "required_caveats": [
+      "All results are atlas-internal unless explicitly stated otherwise",
+      "Do not claim mechanistic proof",
+      "Do not claim clinical or translational utility without external validation"
+    ],
+    "can_claim": true
+  },
+  {
+    "claim": "ECM, MMP, and ADAMTS remodeling axes are significantly increased in OA",
+    "rationale": "All pass FDR significance in P3 atlas analysis, high robustness",
+    "safety_classification": "MAIN_TEXT_READY",
+    "confidence": "HIGH",
+    "required_caveats": [
+      "All results are atlas-internal unless explicitly stated otherwise",
+      "Do not claim mechanistic proof",
+      "Do not claim clinical or translational utility without external validation"
+    ],
+    "can_claim": true
+  },
+  {
+    "claim": "Hypoxia and Ferroptosis scores are decreased in OA compared to normal hyaline cartilage",
+    "rationale": "FDR significant in P3 analysis, counterintuitive direction but statistically valid",
+    "safety_classification": "MAIN_TEXT_READY",
+    "confidence": "HIGH",
+    "required_caveats": [
+      "All results are atlas-internal unless explicitly stated otherwise",
+      "Do not claim mechanistic proof",
+      "Do not claim clinical or translational utility without external validation"
+    ],
+    "can_claim": true
+  },
+  {
+    "claim": "ElasticCartilage_Auricular axis identifies NEC/ear cartilage samples",
+    "rationale": "Significant difference in P3, but note low top-label stability (~0.30)",
+    "safety_classification": "SUPPLEMENTARY_ONLY",
+    "confidence": "HIGH",
+    "required_caveats": [
+      "All results are atlas-internal unless explicitly stated otherwise",
+      "Do not claim mechanistic proof",
+      "Do not claim clinical or translational utility without external validation"
+    ],
+    "can_claim": true
+  },
+  {
+    "claim": "Microtia cartilage preserves elastic cartilage identity (AvAm and ElasticCartilage axes not different from normal)",
+    "rationale": "No significant differences detected, but n=3 vs n=4 severely underpowered",
+    "safety_classification": "EXPLORATORY",
+    "confidence": "HIGH",
+    "required_caveats": [
+      "All results are atlas-internal unless explicitly stated otherwise",
+      "Do not claim mechanistic proof",
+      "Do not claim clinical or translational utility without external validation"
+    ],
+    "can_claim": true
+  },
+  {
+    "claim": "Microtia cartilage shows trends toward increased inflammation and hypoxia signaling",
+    "rationale": "Trends visible but do not pass FDR threshold due to small sample size",
+    "safety_classification": "EXPLORATORY",
+    "confidence": "HIGH",
+    "required_caveats": [
+      "All results are atlas-internal unless explicitly stated otherwise",
+      "Do not claim mechanistic proof",
+      "Do not claim clinical or translational utility without external validation"
+    ],
+    "can_claim": true
+  },
+  {
+    "claim": "CartiGSFM has been externally validated on independent datasets",
+    "rationale": "P4 not completed, no external validation has been performed",
+    "safety_classification": "PENDING_INDEPENDENT_VALIDATION",
+    "confidence": "HIGH",
+    "required_caveats": [
+      "All results are atlas-internal unless explicitly stated otherwise",
+      "Do not claim mechanistic proof",
+      "Do not claim clinical or translational utility without external validation"
+    ],
+    "can_claim": false
+  },
+  {
+    "claim": "CartiGSFM is a trained cartilage large language model (LLM)",
+    "rationale": "CartiGSFM is a dictionary-based projection method, NOT an LLM. This is a fundamental misrepresentation",
+    "safety_classification": "NOT_SUPPORTED",
+    "confidence": "HIGH",
+    "required_caveats": [
+      "All results are atlas-internal unless explicitly stated otherwise",
+      "Do not claim mechanistic proof",
+      "Do not claim clinical or translational utility without external validation"
+    ],
+    "can_claim": false
+  },
+  {
+    "claim": "All CartiGSFM atlas findings should be considered pending independent experimental validation",
+    "rationale": "True by design - all results are atlas-internal and need independent confirmation",
+    "safety_classification": "PENDING_INDEPENDENT_VALIDATION",
+    "confidence": "HIGH",
+    "required_caveats": [
+      "All results are atlas-internal unless explicitly stated otherwise",
+      "Do not claim mechanistic proof",
+      "Do not claim clinical or translational utility without external validation"
+    ],
+    "can_claim": false
+  },
+  {
+    "claim": "Inflammation_NFkB, IL1_Signaling, and TNF_Signaling are significantly increased in OA",
+    "rationale": "Inflammation axes show trends but DO NOT pass FDR < 0.05 significance threshold",
+    "safety_classification": "NOT_SUPPORTED",
+    "confidence": "HIGH",
+    "required_caveats": [
+      "All results are atlas-internal unless explicitly stated otherwise",
+      "Do not claim mechanistic proof",
+      "Do not claim clinical or translational utility without external validation"
+    ],
+    "can_claim": false
+  },
+  {
+    "claim": "OA inflammation axes show non-significant trends toward increased scores",
+    "rationale": "Inflammation_NFkB, IL1_Signaling, TNF_Signaling all show upward trends in OA but none reach FDR significance threshold",
+    "safety_classification": "EXPLORATORY",
+    "can_claim": true,
+    "confidence": "LOW",
+    "required_caveats": [
+      "All results are atlas-internal only",
+      "No axis reaches FDR significance threshold",
+      "Trend only, not statistically significant"
+    ]
+  }
+]

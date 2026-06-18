@@ -1,0 +1,3133 @@
+[
+  {
+    "axis_id": "functional_axis::Avascular_Antimineralization",
+    "layer": "functional_axis",
+    "name_en": "Avascular_Antimineralization",
+    "name_cn": "抗血管化抗钙化",
+    "biological_meaning": "Functional gene module: 抗血管化抗钙化",
+    "core_supporting_genes": [
+      "MGP",
+      "CNMD",
+      "TNMD",
+      "TIMP3",
+      "TNFRSF11B",
+      "ANKH",
+      "ENPP1",
+      "FRZB",
+      "SOX9",
+      "ACAN"
+    ],
+    "anti_genes": [],
+    "expected_biological_contexts": [
+      "Functional enrichment",
+      "Module scoring",
+      "Pathway projection"
+    ],
+    "atlas_observations": [
+      "OA vs normal hyaline: increased in OA (significant, FDR=0.0198, delta=0.211)"
+    ],
+    "p5_robustness_status": {
+      "mean_score_correlation": 0.9885746535591804,
+      "mean_top_label_agreement": 0.9,
+      "robustness_note": "High score stability across 10-30% marker dropout"
+    },
+    "confidence_level": "HIGH",
+    "known_limitations": [
+      "Consensus-only; atlas-specific weighting limited to AvAm axis"
+    ],
+    "recommended_interpretation_wording": [
+      "This sample shows enrichment for Avascular_Antimineralization gene module",
+      "This cluster exhibits Avascular_Antimineralization transcriptional signature",
+      "Atlas-internal analysis shows Avascular_Antimineralization scores are associated with tissue/disease state",
+      "Avascular_Antimineralization signature suggests cartilage tissue identity with active anti-vascularization and anti-mineralization programs",
+      "MGP, CNMD, and other classic cartilage anti-calcification markers contribute to this axis"
+    ],
+    "forbidden_overclaim_wording": [
+      "DO NOT claim: 'proves {axis_name} causes disease X'",
+      "DO NOT claim: 'experimentally validated'",
+      "DO NOT claim: 'independent validation confirms'",
+      "DO NOT claim: 'therapeutic target' without external evidence",
+      "DO NOT claim: 'this axis directly measures {specific molecular mechanism}'",
+      "DO NOT claim: 'this proves anti-vascular therapy will work in this sample'",
+      "DO NOT claim: 'MGP levels directly indicate treatment response'"
+    ],
+    "key_gene_evidence": {
+      "anti_vascular": [
+        "TNMD",
+        "TIMP3"
+      ],
+      "anti_mineralization": [
+        "MGP",
+        "CNMD",
+        "ANKH",
+        "ENPP1"
+      ],
+      "inflammation_modulation": [
+        "TNFRSF11B",
+        "FRZB"
+      ]
+    }
+  },
+  {
+    "axis_id": "tissue_developmental_state::ElasticCartilage_Auricular",
+    "layer": "tissue_developmental_state",
+    "name_en": "ElasticCartilage_Auricular",
+    "name_cn": "弹性软骨/耳软骨",
+    "biological_meaning": "Tissue-level cartilage identity: 弹性软骨/耳软骨",
+    "core_supporting_genes": [
+      "TXNRD1",
+      "GCLM",
+      "SLC4A7",
+      "IL1RL1",
+      "LAMC2",
+      "FABP5",
+      "ELN",
+      "STC1",
+      "LOXL1",
+      "FBLN5"
+    ],
+    "anti_genes": [
+      "ACAN",
+      "SNORC",
+      "MGP",
+      "S100B",
+      "CYTL1",
+      "FGFBP2",
+      "COL9A3",
+      "SMOC2",
+      "HAPLN1",
+      "COL2A1",
+      "MIA",
+      "CILP",
+      "FBLN1",
+      "VCAN",
+      "S100A4",
+      "ABI3BP",
+      "ANGPTL7",
+      "COL1A2",
+      "COL1A1",
+      "THY1",
+      "SCX",
+      "ADAMTS5",
+      "MKX"
+    ],
+    "expected_biological_contexts": [
+      "Tissue origin classification",
+      "Cross-tissue comparison",
+      "Bulk RNA-seq deconvolution"
+    ],
+    "atlas_observations": [
+      "NEC vs NHC: increased in elastic cartilage (significant, FDR=0.0006, delta=1.643)"
+    ],
+    "p5_robustness_status": {
+      "mean_score_correlation": 0.9968011498367682,
+      "mean_top_label_agreement": 0.3,
+      "robustness_note": "High score stability across 10-30% marker dropout"
+    },
+    "confidence_level": "MEDIUM_SCORE_ONLY",
+    "known_limitations": [
+      "Tissue-level only; does not capture cell-state heterogeneity within tissue",
+      "Low top-label stability (~0.30 agreement across marker dropout)"
+    ],
+    "recommended_interpretation_wording": [
+      "This sample shows enrichment for ElasticCartilage_Auricular gene module",
+      "This cluster exhibits ElasticCartilage_Auricular transcriptional signature",
+      "Atlas-internal analysis shows ElasticCartilage_Auricular scores are associated with tissue/disease state"
+    ],
+    "forbidden_overclaim_wording": [
+      "DO NOT claim: 'proves {axis_name} causes disease X'",
+      "DO NOT claim: 'experimentally validated'",
+      "DO NOT claim: 'independent validation confirms'",
+      "DO NOT claim: 'therapeutic target' without external evidence",
+      "DO NOT claim: 'this axis directly measures {specific molecular mechanism}'"
+    ]
+  },
+  {
+    "axis_id": "functional_axis::ECM_Organization",
+    "layer": "functional_axis",
+    "name_en": "ECM_Organization",
+    "name_cn": "细胞外基质组织",
+    "biological_meaning": "Functional gene module: 细胞外基质组织",
+    "core_supporting_genes": [
+      {
+        "gene": "COL4A1",
+        "freq_in": 0.856,
+        "freq_bg": 0.153,
+        "log2_spec": 2.157,
+        "weight": 1.846
+      },
+      {
+        "gene": "COL4A2",
+        "freq_in": 0.846,
+        "freq_bg": 0.156,
+        "log2_spec": 2.12,
+        "weight": 1.794
+      },
+      {
+        "gene": "COL6A2",
+        "freq_in": 0.769,
+        "freq_bg": 0.115,
+        "log2_spec": 2.313,
+        "weight": 1.779
+      },
+      {
+        "gene": "COL4A6",
+        "freq_in": 0.75,
+        "freq_bg": 0.105,
+        "log2_spec": 2.364,
+        "weight": 1.773
+      },
+      {
+        "gene": "COL6A1",
+        "freq_in": 0.75,
+        "freq_bg": 0.109,
+        "log2_spec": 2.333,
+        "weight": 1.75
+      },
+      {
+        "gene": "COL4A4",
+        "freq_in": 0.692,
+        "freq_bg": 0.092,
+        "log2_spec": 2.389,
+        "weight": 1.654
+      },
+      {
+        "gene": "COL5A2",
+        "freq_in": 0.76,
+        "freq_bg": 0.132,
+        "log2_spec": 2.151,
+        "weight": 1.634
+      },
+      {
+        "gene": "COL9A1",
+        "freq_in": 0.731,
+        "freq_bg": 0.118,
+        "log2_spec": 2.216,
+        "weight": 1.619
+      },
+      {
+        "gene": "COL6A3",
+        "freq_in": 0.721,
+        "freq_bg": 0.117,
+        "log2_spec": 2.211,
+        "weight": 1.594
+      },
+      {
+        "gene": "COL9A3",
+        "freq_in": 0.721,
+        "freq_bg": 0.118,
+        "log2_spec": 2.196,
+        "weight": 1.584
+      },
+      {
+        "gene": "COL9A2",
+        "freq_in": 0.731,
+        "freq_bg": 0.125,
+        "log2_spec": 2.16,
+        "weight": 1.579
+      },
+      {
+        "gene": "COL5A3",
+        "freq_in": 0.673,
+        "freq_bg": 0.097,
+        "log2_spec": 2.302,
+        "weight": 1.55
+      },
+      {
+        "gene": "COL4A5",
+        "freq_in": 0.692,
+        "freq_bg": 0.108,
+        "log2_spec": 2.228,
+        "weight": 1.542
+      },
+      {
+        "gene": "COL1A2",
+        "freq_in": 0.856,
+        "freq_bg": 0.211,
+        "log2_spec": 1.794,
+        "weight": 1.536
+      },
+      {
+        "gene": "COL4A3",
+        "freq_in": 0.673,
+        "freq_bg": 0.104,
+        "log2_spec": 2.231,
+        "weight": 1.502
+      },
+      {
+        "gene": "COL5A1",
+        "freq_in": 0.712,
+        "freq_bg": 0.127,
+        "log2_spec": 2.102,
+        "weight": 1.496
+      },
+      {
+        "gene": "COL15A1",
+        "freq_in": 0.644,
+        "freq_bg": 0.109,
+        "log2_spec": 2.123,
+        "weight": 1.368
+      },
+      {
+        "gene": "COL16A1",
+        "freq_in": 0.615,
+        "freq_bg": 0.095,
+        "log2_spec": 2.2,
+        "weight": 1.354
+      },
+      {
+        "gene": "COL6A6",
+        "freq_in": 0.538,
+        "freq_bg": 0.053,
+        "log2_spec": 2.513,
+        "weight": 1.353
+      },
+      {
+        "gene": "COL3A1",
+        "freq_in": 0.75,
+        "freq_bg": 0.184,
+        "log2_spec": 1.772,
+        "weight": 1.329
+      },
+      {
+        "gene": "COL7A1",
+        "freq_in": 0.577,
+        "freq_bg": 0.078,
+        "log2_spec": 2.288,
+        "weight": 1.32
+      },
+      {
+        "gene": "LAMC1",
+        "freq_in": 0.644,
+        "freq_bg": 0.118,
+        "log2_spec": 2.048,
+        "weight": 1.319
+      },
+      {
+        "gene": "COL1A1",
+        "freq_in": 0.837,
+        "freq_bg": 0.25,
+        "log2_spec": 1.565,
+        "weight": 1.31
+      },
+      {
+        "gene": "COL14A1",
+        "freq_in": 0.625,
+        "freq_bg": 0.111,
+        "log2_spec": 2.071,
+        "weight": 1.294
+      },
+      {
+        "gene": "COL11A1",
+        "freq_in": 0.692,
+        "freq_bg": 0.154,
+        "log2_spec": 1.862,
+        "weight": 1.289
+      },
+      {
+        "gene": "COL8A2",
+        "freq_in": 0.567,
+        "freq_bg": 0.079,
+        "log2_spec": 2.254,
+        "weight": 1.279
+      },
+      {
+        "gene": "COL17A1",
+        "freq_in": 0.538,
+        "freq_bg": 0.065,
+        "log2_spec": 2.356,
+        "weight": 1.269
+      },
+      {
+        "gene": "COL12A1",
+        "freq_in": 0.587,
+        "freq_bg": 0.097,
+        "log2_spec": 2.113,
+        "weight": 1.24
+      },
+      {
+        "gene": "COL8A1",
+        "freq_in": 0.577,
+        "freq_bg": 0.097,
+        "log2_spec": 2.096,
+        "weight": 1.209
+      },
+      {
+        "gene": "COL2A1",
+        "freq_in": 0.779,
+        "freq_bg": 0.244,
+        "log2_spec": 1.497,
+        "weight": 1.166
+      }
+    ],
+    "anti_genes": [],
+    "expected_biological_contexts": [
+      "Functional enrichment",
+      "Module scoring",
+      "Pathway projection"
+    ],
+    "atlas_observations": [
+      "OA vs normal hyaline: increased in OA (significant, FDR=0.0035, delta=0.163)"
+    ],
+    "p5_robustness_status": {
+      "mean_score_correlation": 0.989333000020564,
+      "mean_top_label_agreement": 0.9,
+      "robustness_note": "High score stability across 10-30% marker dropout"
+    },
+    "confidence_level": "HIGH",
+    "known_limitations": [
+      "Consensus-only; atlas-specific weighting limited to AvAm axis"
+    ],
+    "recommended_interpretation_wording": [
+      "This sample shows enrichment for ECM_Organization gene module",
+      "This cluster exhibits ECM_Organization transcriptional signature",
+      "Atlas-internal analysis shows ECM_Organization scores are associated with tissue/disease state"
+    ],
+    "forbidden_overclaim_wording": [
+      "DO NOT claim: 'proves {axis_name} causes disease X'",
+      "DO NOT claim: 'experimentally validated'",
+      "DO NOT claim: 'independent validation confirms'",
+      "DO NOT claim: 'therapeutic target' without external evidence",
+      "DO NOT claim: 'this axis directly measures {specific molecular mechanism}'"
+    ]
+  },
+  {
+    "axis_id": "functional_axis::CollagenMetabolism",
+    "layer": "functional_axis",
+    "name_en": "CollagenMetabolism",
+    "name_cn": "胶原代谢",
+    "biological_meaning": "Functional gene module: 胶原代谢",
+    "core_supporting_genes": [
+      {
+        "gene": "COL9A3",
+        "freq_in": 0.85,
+        "freq_bg": 0.114,
+        "log2_spec": 2.46,
+        "weight": 2.091
+      },
+      {
+        "gene": "COL5A1",
+        "freq_in": 0.85,
+        "freq_bg": 0.122,
+        "log2_spec": 2.386,
+        "weight": 2.028
+      },
+      {
+        "gene": "COL9A2",
+        "freq_in": 0.84,
+        "freq_bg": 0.121,
+        "log2_spec": 2.383,
+        "weight": 2.002
+      },
+      {
+        "gene": "COL9A1",
+        "freq_in": 0.82,
+        "freq_bg": 0.115,
+        "log2_spec": 2.401,
+        "weight": 1.969
+      },
+      {
+        "gene": "COL6A1",
+        "freq_in": 0.8,
+        "freq_bg": 0.107,
+        "log2_spec": 2.438,
+        "weight": 1.95
+      },
+      {
+        "gene": "COL5A2",
+        "freq_in": 0.84,
+        "freq_bg": 0.129,
+        "log2_spec": 2.311,
+        "weight": 1.942
+      },
+      {
+        "gene": "COL4A1",
+        "freq_in": 0.87,
+        "freq_bg": 0.153,
+        "log2_spec": 2.183,
+        "weight": 1.899
+      },
+      {
+        "gene": "COL5A3",
+        "freq_in": 0.76,
+        "freq_bg": 0.093,
+        "log2_spec": 2.498,
+        "weight": 1.899
+      },
+      {
+        "gene": "COL15A1",
+        "freq_in": 0.78,
+        "freq_bg": 0.104,
+        "log2_spec": 2.427,
+        "weight": 1.893
+      },
+      {
+        "gene": "COL14A1",
+        "freq_in": 0.78,
+        "freq_bg": 0.105,
+        "log2_spec": 2.421,
+        "weight": 1.889
+      },
+      {
+        "gene": "COL4A5",
+        "freq_in": 0.78,
+        "freq_bg": 0.105,
+        "log2_spec": 2.419,
+        "weight": 1.887
+      },
+      {
+        "gene": "COL16A1",
+        "freq_in": 0.75,
+        "freq_bg": 0.09,
+        "log2_spec": 2.516,
+        "weight": 1.887
+      },
+      {
+        "gene": "COL12A1",
+        "freq_in": 0.75,
+        "freq_bg": 0.091,
+        "log2_spec": 2.504,
+        "weight": 1.878
+      },
+      {
+        "gene": "COL6A2",
+        "freq_in": 0.79,
+        "freq_bg": 0.114,
+        "log2_spec": 2.356,
+        "weight": 1.861
+      },
+      {
+        "gene": "COL11A1",
+        "freq_in": 0.85,
+        "freq_bg": 0.148,
+        "log2_spec": 2.182,
+        "weight": 1.855
+      },
+      {
+        "gene": "COL4A6",
+        "freq_in": 0.77,
+        "freq_bg": 0.105,
+        "log2_spec": 2.406,
+        "weight": 1.853
+      },
+      {
+        "gene": "COL1A2",
+        "freq_in": 0.94,
+        "freq_bg": 0.208,
+        "log2_spec": 1.94,
+        "weight": 1.824
+      },
+      {
+        "gene": "COL6A3",
+        "freq_in": 0.78,
+        "freq_bg": 0.114,
+        "log2_spec": 2.336,
+        "weight": 1.822
+      },
+      {
+        "gene": "COL3A1",
+        "freq_in": 0.88,
+        "freq_bg": 0.179,
+        "log2_spec": 2.019,
+        "weight": 1.777
+      },
+      {
+        "gene": "COL7A1",
+        "freq_in": 0.67,
+        "freq_bg": 0.075,
+        "log2_spec": 2.527,
+        "weight": 1.693
+      },
+      {
+        "gene": "COL8A2",
+        "freq_in": 0.67,
+        "freq_bg": 0.076,
+        "log2_spec": 2.519,
+        "weight": 1.688
+      },
+      {
+        "gene": "COL17A1",
+        "freq_in": 0.64,
+        "freq_bg": 0.061,
+        "log2_spec": 2.634,
+        "weight": 1.686
+      },
+      {
+        "gene": "COL4A2",
+        "freq_in": 0.81,
+        "freq_bg": 0.157,
+        "log2_spec": 2.052,
+        "weight": 1.662
+      },
+      {
+        "gene": "COL13A1",
+        "freq_in": 0.67,
+        "freq_bg": 0.08,
+        "log2_spec": 2.467,
+        "weight": 1.653
+      },
+      {
+        "gene": "COL4A3",
+        "freq_in": 0.71,
+        "freq_bg": 0.103,
+        "log2_spec": 2.316,
+        "weight": 1.645
+      },
+      {
+        "gene": "COL8A1",
+        "freq_in": 0.68,
+        "freq_bg": 0.093,
+        "log2_spec": 2.354,
+        "weight": 1.601
+      },
+      {
+        "gene": "COL1A1",
+        "freq_in": 0.92,
+        "freq_bg": 0.246,
+        "log2_spec": 1.71,
+        "weight": 1.573
+      },
+      {
+        "gene": "COL4A4",
+        "freq_in": 0.67,
+        "freq_bg": 0.092,
+        "log2_spec": 2.337,
+        "weight": 1.566
+      },
+      {
+        "gene": "COL27A1",
+        "freq_in": 0.62,
+        "freq_bg": 0.074,
+        "log2_spec": 2.433,
+        "weight": 1.508
+      },
+      {
+        "gene": "COL24A1",
+        "freq_in": 0.56,
+        "freq_bg": 0.05,
+        "log2_spec": 2.604,
+        "weight": 1.458
+      }
+    ],
+    "anti_genes": [],
+    "expected_biological_contexts": [
+      "Functional enrichment",
+      "Module scoring",
+      "Pathway projection"
+    ],
+    "atlas_observations": [
+      "OA vs normal hyaline: increased in OA (significant, FDR=0.0035, delta=0.181)"
+    ],
+    "p5_robustness_status": {
+      "mean_score_correlation": null,
+      "mean_top_label_agreement": null,
+      "robustness_note": "Lower stability"
+    },
+    "confidence_level": "LOW",
+    "known_limitations": [
+      "Consensus-only; atlas-specific weighting limited to AvAm axis"
+    ],
+    "recommended_interpretation_wording": [
+      "This sample shows enrichment for CollagenMetabolism gene module",
+      "This cluster exhibits CollagenMetabolism transcriptional signature",
+      "Atlas-internal analysis shows CollagenMetabolism scores are associated with tissue/disease state"
+    ],
+    "forbidden_overclaim_wording": [
+      "DO NOT claim: 'proves {axis_name} causes disease X'",
+      "DO NOT claim: 'experimentally validated'",
+      "DO NOT claim: 'independent validation confirms'",
+      "DO NOT claim: 'therapeutic target' without external evidence",
+      "DO NOT claim: 'this axis directly measures {specific molecular mechanism}'"
+    ]
+  },
+  {
+    "axis_id": "functional_axis::Proteoglycan",
+    "layer": "functional_axis",
+    "name_en": "Proteoglycan",
+    "name_cn": "蛋白聚糖代谢",
+    "biological_meaning": "Functional gene module: 蛋白聚糖代谢",
+    "core_supporting_genes": [
+      {
+        "gene": "MXRA5",
+        "freq_in": 0.69,
+        "freq_bg": 0.028,
+        "log2_spec": 3.244,
+        "weight": 2.238
+      },
+      {
+        "gene": "FBN1",
+        "freq_in": 0.86,
+        "freq_bg": 0.116,
+        "log2_spec": 2.452,
+        "weight": 2.108
+      },
+      {
+        "gene": "CDH11",
+        "freq_in": 0.77,
+        "freq_bg": 0.078,
+        "log2_spec": 2.675,
+        "weight": 2.06
+      },
+      {
+        "gene": "PODN",
+        "freq_in": 0.66,
+        "freq_bg": 0.035,
+        "log2_spec": 3.06,
+        "weight": 2.02
+      },
+      {
+        "gene": "ISLR",
+        "freq_in": 0.59,
+        "freq_bg": 0.012,
+        "log2_spec": 3.362,
+        "weight": 1.983
+      },
+      {
+        "gene": "POSTN",
+        "freq_in": 0.81,
+        "freq_bg": 0.108,
+        "log2_spec": 2.448,
+        "weight": 1.983
+      },
+      {
+        "gene": "COL6A3",
+        "freq_in": 0.82,
+        "freq_bg": 0.113,
+        "log2_spec": 2.417,
+        "weight": 1.982
+      },
+      {
+        "gene": "COL14A1",
+        "freq_in": 0.79,
+        "freq_bg": 0.105,
+        "log2_spec": 2.442,
+        "weight": 1.929
+      },
+      {
+        "gene": "PRRX1",
+        "freq_in": 0.66,
+        "freq_bg": 0.051,
+        "log2_spec": 2.815,
+        "weight": 1.858
+      },
+      {
+        "gene": "PCDH18",
+        "freq_in": 0.56,
+        "freq_bg": 0.012,
+        "log2_spec": 3.3,
+        "weight": 1.848
+      },
+      {
+        "gene": "AEBP1",
+        "freq_in": 0.6,
+        "freq_bg": 0.037,
+        "log2_spec": 2.898,
+        "weight": 1.739
+      },
+      {
+        "gene": "BGN",
+        "freq_in": 0.77,
+        "freq_bg": 0.122,
+        "log2_spec": 2.249,
+        "weight": 1.732
+      },
+      {
+        "gene": "MFAP4",
+        "freq_in": 0.6,
+        "freq_bg": 0.038,
+        "log2_spec": 2.884,
+        "weight": 1.73
+      },
+      {
+        "gene": "THBS2",
+        "freq_in": 0.76,
+        "freq_bg": 0.118,
+        "log2_spec": 2.271,
+        "weight": 1.726
+      },
+      {
+        "gene": "FIBIN",
+        "freq_in": 0.53,
+        "freq_bg": 0.012,
+        "log2_spec": 3.232,
+        "weight": 1.713
+      },
+      {
+        "gene": "ABI3BP",
+        "freq_in": 0.55,
+        "freq_bg": 0.025,
+        "log2_spec": 3.008,
+        "weight": 1.654
+      },
+      {
+        "gene": "SSC5D",
+        "freq_in": 0.54,
+        "freq_bg": 0.021,
+        "log2_spec": 3.054,
+        "weight": 1.649
+      },
+      {
+        "gene": "ADAMTS2",
+        "freq_in": 0.7,
+        "freq_bg": 0.101,
+        "log2_spec": 2.312,
+        "weight": 1.618
+      },
+      {
+        "gene": "COL1A2",
+        "freq_in": 0.88,
+        "freq_bg": 0.21,
+        "log2_spec": 1.837,
+        "weight": 1.617
+      },
+      {
+        "gene": "COL3A1",
+        "freq_in": 0.83,
+        "freq_bg": 0.181,
+        "log2_spec": 1.928,
+        "weight": 1.6
+      },
+      {
+        "gene": "COL5A2",
+        "freq_in": 0.75,
+        "freq_bg": 0.133,
+        "log2_spec": 2.131,
+        "weight": 1.598
+      },
+      {
+        "gene": "COL12A1",
+        "freq_in": 0.68,
+        "freq_bg": 0.094,
+        "log2_spec": 2.345,
+        "weight": 1.595
+      },
+      {
+        "gene": "SULF1",
+        "freq_in": 0.64,
+        "freq_bg": 0.073,
+        "log2_spec": 2.49,
+        "weight": 1.594
+      },
+      {
+        "gene": "OLFML3",
+        "freq_in": 0.5,
+        "freq_bg": 0.01,
+        "log2_spec": 3.184,
+        "weight": 1.592
+      },
+      {
+        "gene": "ITGBL1",
+        "freq_in": 0.52,
+        "freq_bg": 0.019,
+        "log2_spec": 3.044,
+        "weight": 1.583
+      },
+      {
+        "gene": "LOXL1",
+        "freq_in": 0.59,
+        "freq_bg": 0.052,
+        "log2_spec": 2.656,
+        "weight": 1.567
+      },
+      {
+        "gene": "COL5A1",
+        "freq_in": 0.73,
+        "freq_bg": 0.127,
+        "log2_spec": 2.142,
+        "weight": 1.564
+      },
+      {
+        "gene": "COLEC12",
+        "freq_in": 0.54,
+        "freq_bg": 0.029,
+        "log2_spec": 2.893,
+        "weight": 1.562
+      },
+      {
+        "gene": "COL8A1",
+        "freq_in": 0.67,
+        "freq_bg": 0.093,
+        "log2_spec": 2.33,
+        "weight": 1.561
+      },
+      {
+        "gene": "COL6A1",
+        "freq_in": 0.7,
+        "freq_bg": 0.111,
+        "log2_spec": 2.224,
+        "weight": 1.556
+      }
+    ],
+    "anti_genes": [],
+    "expected_biological_contexts": [
+      "Functional enrichment",
+      "Module scoring",
+      "Pathway projection"
+    ],
+    "atlas_observations": [
+      "OA vs normal hyaline: increased in OA (significant, FDR=0.0035, delta=0.227)"
+    ],
+    "p5_robustness_status": {
+      "mean_score_correlation": null,
+      "mean_top_label_agreement": null,
+      "robustness_note": "Lower stability"
+    },
+    "confidence_level": "LOW",
+    "known_limitations": [
+      "Consensus-only; atlas-specific weighting limited to AvAm axis"
+    ],
+    "recommended_interpretation_wording": [
+      "This sample shows enrichment for Proteoglycan gene module",
+      "This cluster exhibits Proteoglycan transcriptional signature",
+      "Atlas-internal analysis shows Proteoglycan scores are associated with tissue/disease state"
+    ],
+    "forbidden_overclaim_wording": [
+      "DO NOT claim: 'proves {axis_name} causes disease X'",
+      "DO NOT claim: 'experimentally validated'",
+      "DO NOT claim: 'independent validation confirms'",
+      "DO NOT claim: 'therapeutic target' without external evidence",
+      "DO NOT claim: 'this axis directly measures {specific molecular mechanism}'"
+    ]
+  },
+  {
+    "axis_id": "functional_axis::MMP_Activity",
+    "layer": "functional_axis",
+    "name_en": "MMP_Activity",
+    "name_cn": "基质金属蛋白酶活性",
+    "biological_meaning": "Functional gene module: 基质金属蛋白酶活性",
+    "core_supporting_genes": [
+      {
+        "gene": "MMP15",
+        "freq_in": 0.72,
+        "freq_bg": 0.071,
+        "log2_spec": 2.673,
+        "weight": 1.924
+      },
+      {
+        "gene": "MMP8",
+        "freq_in": 0.81,
+        "freq_bg": 0.119,
+        "log2_spec": 2.346,
+        "weight": 1.901
+      },
+      {
+        "gene": "MMP10",
+        "freq_in": 0.77,
+        "freq_bg": 0.105,
+        "log2_spec": 2.404,
+        "weight": 1.851
+      },
+      {
+        "gene": "MMP17",
+        "freq_in": 0.66,
+        "freq_bg": 0.062,
+        "log2_spec": 2.66,
+        "weight": 1.755
+      },
+      {
+        "gene": "MMP19",
+        "freq_in": 0.72,
+        "freq_bg": 0.102,
+        "log2_spec": 2.337,
+        "weight": 1.682
+      },
+      {
+        "gene": "MMP11",
+        "freq_in": 0.69,
+        "freq_bg": 0.087,
+        "log2_spec": 2.437,
+        "weight": 1.681
+      },
+      {
+        "gene": "MMP12",
+        "freq_in": 0.75,
+        "freq_bg": 0.124,
+        "log2_spec": 2.198,
+        "weight": 1.649
+      },
+      {
+        "gene": "MMP7",
+        "freq_in": 0.81,
+        "freq_bg": 0.171,
+        "log2_spec": 1.963,
+        "weight": 1.59
+      },
+      {
+        "gene": "MMP16",
+        "freq_in": 0.63,
+        "freq_bg": 0.076,
+        "log2_spec": 2.435,
+        "weight": 1.534
+      },
+      {
+        "gene": "MMP1",
+        "freq_in": 0.96,
+        "freq_bg": 0.289,
+        "log2_spec": 1.575,
+        "weight": 1.512
+      },
+      {
+        "gene": "MMP14",
+        "freq_in": 0.88,
+        "freq_bg": 0.236,
+        "log2_spec": 1.701,
+        "weight": 1.497
+      },
+      {
+        "gene": "MMP13",
+        "freq_in": 0.91,
+        "freq_bg": 0.264,
+        "log2_spec": 1.614,
+        "weight": 1.469
+      },
+      {
+        "gene": "MMP3",
+        "freq_in": 0.92,
+        "freq_bg": 0.285,
+        "log2_spec": 1.533,
+        "weight": 1.411
+      },
+      {
+        "gene": "MMP2",
+        "freq_in": 0.99,
+        "freq_bg": 0.344,
+        "log2_spec": 1.401,
+        "weight": 1.387
+      },
+      {
+        "gene": "MMP24",
+        "freq_in": 0.55,
+        "freq_bg": 0.057,
+        "log2_spec": 2.484,
+        "weight": 1.366
+      },
+      {
+        "gene": "MMP28",
+        "freq_in": 0.55,
+        "freq_bg": 0.076,
+        "log2_spec": 2.255,
+        "weight": 1.24
+      },
+      {
+        "gene": "MMP20",
+        "freq_in": 0.46,
+        "freq_bg": 0.036,
+        "log2_spec": 2.571,
+        "weight": 1.182
+      },
+      {
+        "gene": "MMP9",
+        "freq_in": 0.97,
+        "freq_bg": 0.397,
+        "log2_spec": 1.19,
+        "weight": 1.154
+      },
+      {
+        "gene": "MMP26",
+        "freq_in": 0.47,
+        "freq_bg": 0.046,
+        "log2_spec": 2.436,
+        "weight": 1.145
+      },
+      {
+        "gene": "ADAMTS4",
+        "freq_in": 0.61,
+        "freq_bg": 0.13,
+        "log2_spec": 1.877,
+        "weight": 1.145
+      },
+      {
+        "gene": "MMP25",
+        "freq_in": 0.46,
+        "freq_bg": 0.05,
+        "log2_spec": 2.344,
+        "weight": 1.078
+      },
+      {
+        "gene": "ADAMTS15",
+        "freq_in": 0.45,
+        "freq_bg": 0.059,
+        "log2_spec": 2.2,
+        "weight": 0.99
+      },
+      {
+        "gene": "MMP23B",
+        "freq_in": 0.45,
+        "freq_bg": 0.06,
+        "log2_spec": 2.188,
+        "weight": 0.985
+      },
+      {
+        "gene": "MMP27",
+        "freq_in": 0.42,
+        "freq_bg": 0.043,
+        "log2_spec": 2.337,
+        "weight": 0.982
+      },
+      {
+        "gene": "ADAMTS5",
+        "freq_in": 0.55,
+        "freq_bg": 0.149,
+        "log2_spec": 1.591,
+        "weight": 0.875
+      },
+      {
+        "gene": "ADAMTS3",
+        "freq_in": 0.46,
+        "freq_bg": 0.087,
+        "log2_spec": 1.896,
+        "weight": 0.872
+      },
+      {
+        "gene": "ADAMTS16",
+        "freq_in": 0.42,
+        "freq_bg": 0.063,
+        "log2_spec": 2.057,
+        "weight": 0.864
+      },
+      {
+        "gene": "ADAMTS18",
+        "freq_in": 0.4,
+        "freq_bg": 0.055,
+        "log2_spec": 2.101,
+        "weight": 0.84
+      },
+      {
+        "gene": "MMP21",
+        "freq_in": 0.35,
+        "freq_bg": 0.026,
+        "log2_spec": 2.396,
+        "weight": 0.839
+      },
+      {
+        "gene": "ADAMTS14",
+        "freq_in": 0.41,
+        "freq_bg": 0.068,
+        "log2_spec": 1.966,
+        "weight": 0.806
+      }
+    ],
+    "anti_genes": [],
+    "expected_biological_contexts": [
+      "Functional enrichment",
+      "Module scoring",
+      "Pathway projection"
+    ],
+    "atlas_observations": [
+      "OA vs normal hyaline: increased in OA (significant, FDR=0.0105, delta=0.110)"
+    ],
+    "p5_robustness_status": {
+      "mean_score_correlation": 0.9883794630120166,
+      "mean_top_label_agreement": 0.9,
+      "robustness_note": "High score stability across 10-30% marker dropout"
+    },
+    "confidence_level": "HIGH",
+    "known_limitations": [
+      "Consensus-only; atlas-specific weighting limited to AvAm axis"
+    ],
+    "recommended_interpretation_wording": [
+      "This sample shows enrichment for MMP_Activity gene module",
+      "This cluster exhibits MMP_Activity transcriptional signature",
+      "Atlas-internal analysis shows MMP_Activity scores are associated with tissue/disease state"
+    ],
+    "forbidden_overclaim_wording": [
+      "DO NOT claim: 'proves {axis_name} causes disease X'",
+      "DO NOT claim: 'experimentally validated'",
+      "DO NOT claim: 'independent validation confirms'",
+      "DO NOT claim: 'therapeutic target' without external evidence",
+      "DO NOT claim: 'this axis directly measures {specific molecular mechanism}'"
+    ]
+  },
+  {
+    "axis_id": "functional_axis::ADAMTS_Activity",
+    "layer": "functional_axis",
+    "name_en": "ADAMTS_Activity",
+    "name_cn": "ADAMTS蛋白酶活性",
+    "biological_meaning": "Functional gene module: ADAMTS蛋白酶活性",
+    "core_supporting_genes": [
+      {
+        "gene": "ADAMTS20",
+        "freq_in": 0.807,
+        "freq_bg": 0.043,
+        "log2_spec": 3.209,
+        "weight": 2.59
+      },
+      {
+        "gene": "ADAMTS3",
+        "freq_in": 0.86,
+        "freq_bg": 0.072,
+        "log2_spec": 2.896,
+        "weight": 2.49
+      },
+      {
+        "gene": "ADAMTS9",
+        "freq_in": 0.825,
+        "freq_bg": 0.07,
+        "log2_spec": 2.868,
+        "weight": 2.365
+      },
+      {
+        "gene": "ADAMTS18",
+        "freq_in": 0.754,
+        "freq_bg": 0.042,
+        "log2_spec": 3.131,
+        "weight": 2.362
+      },
+      {
+        "gene": "ADAMTS8",
+        "freq_in": 0.737,
+        "freq_bg": 0.051,
+        "log2_spec": 2.962,
+        "weight": 2.182
+      },
+      {
+        "gene": "ADAMTS16",
+        "freq_in": 0.737,
+        "freq_bg": 0.051,
+        "log2_spec": 2.959,
+        "weight": 2.18
+      },
+      {
+        "gene": "ADAMTS4",
+        "freq_in": 0.842,
+        "freq_bg": 0.121,
+        "log2_spec": 2.382,
+        "weight": 2.006
+      },
+      {
+        "gene": "ADAMTS19",
+        "freq_in": 0.649,
+        "freq_bg": 0.033,
+        "log2_spec": 3.068,
+        "weight": 1.991
+      },
+      {
+        "gene": "ADAMTS2",
+        "freq_in": 0.789,
+        "freq_bg": 0.098,
+        "log2_spec": 2.506,
+        "weight": 1.979
+      },
+      {
+        "gene": "ADAMTS5",
+        "freq_in": 0.842,
+        "freq_bg": 0.138,
+        "log2_spec": 2.244,
+        "weight": 1.889
+      },
+      {
+        "gene": "ADAMTS1",
+        "freq_in": 0.825,
+        "freq_bg": 0.132,
+        "log2_spec": 2.265,
+        "weight": 1.868
+      },
+      {
+        "gene": "ADAMTS14",
+        "freq_in": 0.667,
+        "freq_bg": 0.058,
+        "log2_spec": 2.728,
+        "weight": 1.818
+      },
+      {
+        "gene": "ADAMTS10",
+        "freq_in": 0.649,
+        "freq_bg": 0.051,
+        "log2_spec": 2.788,
+        "weight": 1.81
+      },
+      {
+        "gene": "ADAMTS7",
+        "freq_in": 0.719,
+        "freq_bg": 0.092,
+        "log2_spec": 2.436,
+        "weight": 1.753
+      },
+      {
+        "gene": "ADAMTS6",
+        "freq_in": 0.614,
+        "freq_bg": 0.042,
+        "log2_spec": 2.855,
+        "weight": 1.753
+      },
+      {
+        "gene": "ADAMTS15",
+        "freq_in": 0.632,
+        "freq_bg": 0.052,
+        "log2_spec": 2.739,
+        "weight": 1.73
+      },
+      {
+        "gene": "MMP19",
+        "freq_in": 0.719,
+        "freq_bg": 0.102,
+        "log2_spec": 2.335,
+        "weight": 1.68
+      },
+      {
+        "gene": "MMP24",
+        "freq_in": 0.614,
+        "freq_bg": 0.055,
+        "log2_spec": 2.662,
+        "weight": 1.635
+      },
+      {
+        "gene": "MMP17",
+        "freq_in": 0.632,
+        "freq_bg": 0.063,
+        "log2_spec": 2.587,
+        "weight": 1.634
+      },
+      {
+        "gene": "MMP28",
+        "freq_in": 0.649,
+        "freq_bg": 0.072,
+        "log2_spec": 2.518,
+        "weight": 1.634
+      },
+      {
+        "gene": "MMP16",
+        "freq_in": 0.649,
+        "freq_bg": 0.075,
+        "log2_spec": 2.483,
+        "weight": 1.612
+      },
+      {
+        "gene": "ADAMTS17",
+        "freq_in": 0.561,
+        "freq_bg": 0.036,
+        "log2_spec": 2.835,
+        "weight": 1.591
+      },
+      {
+        "gene": "ADAMTS12",
+        "freq_in": 0.667,
+        "freq_bg": 0.091,
+        "log2_spec": 2.341,
+        "weight": 1.561
+      },
+      {
+        "gene": "MMP15",
+        "freq_in": 0.632,
+        "freq_bg": 0.074,
+        "log2_spec": 2.458,
+        "weight": 1.553
+      },
+      {
+        "gene": "MMP8",
+        "freq_in": 0.719,
+        "freq_bg": 0.122,
+        "log2_spec": 2.157,
+        "weight": 1.552
+      },
+      {
+        "gene": "MMP11",
+        "freq_in": 0.649,
+        "freq_bg": 0.088,
+        "log2_spec": 2.339,
+        "weight": 1.518
+      },
+      {
+        "gene": "MMP23B",
+        "freq_in": 0.579,
+        "freq_bg": 0.055,
+        "log2_spec": 2.583,
+        "weight": 1.496
+      },
+      {
+        "gene": "MMP26",
+        "freq_in": 0.544,
+        "freq_bg": 0.043,
+        "log2_spec": 2.669,
+        "weight": 1.452
+      },
+      {
+        "gene": "MMP10",
+        "freq_in": 0.667,
+        "freq_bg": 0.109,
+        "log2_spec": 2.174,
+        "weight": 1.449
+      },
+      {
+        "gene": "ADAMTS13",
+        "freq_in": 0.579,
+        "freq_bg": 0.064,
+        "log2_spec": 2.462,
+        "weight": 1.426
+      }
+    ],
+    "anti_genes": [],
+    "expected_biological_contexts": [
+      "Functional enrichment",
+      "Module scoring",
+      "Pathway projection"
+    ],
+    "atlas_observations": [
+      "OA vs normal hyaline: increased in OA (significant, FDR=0.0035, delta=0.160)"
+    ],
+    "p5_robustness_status": {
+      "mean_score_correlation": null,
+      "mean_top_label_agreement": null,
+      "robustness_note": "Lower stability"
+    },
+    "confidence_level": "LOW",
+    "known_limitations": [
+      "Consensus-only; atlas-specific weighting limited to AvAm axis"
+    ],
+    "recommended_interpretation_wording": [
+      "This sample shows enrichment for ADAMTS_Activity gene module",
+      "This cluster exhibits ADAMTS_Activity transcriptional signature",
+      "Atlas-internal analysis shows ADAMTS_Activity scores are associated with tissue/disease state"
+    ],
+    "forbidden_overclaim_wording": [
+      "DO NOT claim: 'proves {axis_name} causes disease X'",
+      "DO NOT claim: 'experimentally validated'",
+      "DO NOT claim: 'independent validation confirms'",
+      "DO NOT claim: 'therapeutic target' without external evidence",
+      "DO NOT claim: 'this axis directly measures {specific molecular mechanism}'"
+    ]
+  },
+  {
+    "axis_id": "functional_axis::Hypoxia",
+    "layer": "functional_axis",
+    "name_en": "Hypoxia",
+    "name_cn": "低氧响应",
+    "biological_meaning": "Functional gene module: 低氧响应",
+    "core_supporting_genes": [
+      {
+        "gene": "EPAS1",
+        "freq_in": 0.7,
+        "freq_bg": 0.115,
+        "log2_spec": 2.181,
+        "weight": 1.527
+      },
+      {
+        "gene": "SLC2A1",
+        "freq_in": 0.713,
+        "freq_bg": 0.128,
+        "log2_spec": 2.099,
+        "weight": 1.496
+      },
+      {
+        "gene": "EGLN3",
+        "freq_in": 0.5,
+        "freq_bg": 0.061,
+        "log2_spec": 2.305,
+        "weight": 1.153
+      },
+      {
+        "gene": "VHL",
+        "freq_in": 0.537,
+        "freq_bg": 0.091,
+        "log2_spec": 2.062,
+        "weight": 1.108
+      },
+      {
+        "gene": "HIF1A",
+        "freq_in": 0.775,
+        "freq_bg": 0.257,
+        "log2_spec": 1.424,
+        "weight": 1.104
+      },
+      {
+        "gene": "VEGFA",
+        "freq_in": 0.95,
+        "freq_bg": 0.402,
+        "log2_spec": 1.147,
+        "weight": 1.09
+      },
+      {
+        "gene": "EGLN1",
+        "freq_in": 0.425,
+        "freq_bg": 0.054,
+        "log2_spec": 2.193,
+        "weight": 0.932
+      },
+      {
+        "gene": "ARNT",
+        "freq_in": 0.35,
+        "freq_bg": 0.04,
+        "log2_spec": 2.148,
+        "weight": 0.752
+      },
+      {
+        "gene": "FH",
+        "freq_in": 0.338,
+        "freq_bg": 0.038,
+        "log2_spec": 2.146,
+        "weight": 0.724
+      },
+      {
+        "gene": "PFKFB3",
+        "freq_in": 0.35,
+        "freq_bg": 0.061,
+        "log2_spec": 1.854,
+        "weight": 0.649
+      },
+      {
+        "gene": "FLCN",
+        "freq_in": 0.287,
+        "freq_bg": 0.035,
+        "log2_spec": 1.996,
+        "weight": 0.574
+      },
+      {
+        "gene": "TFE3",
+        "freq_in": 0.287,
+        "freq_bg": 0.037,
+        "log2_spec": 1.955,
+        "weight": 0.562
+      },
+      {
+        "gene": "EGLN2",
+        "freq_in": 0.263,
+        "freq_bg": 0.021,
+        "log2_spec": 2.134,
+        "weight": 0.56
+      },
+      {
+        "gene": "PIK3CA",
+        "freq_in": 0.525,
+        "freq_bg": 0.256,
+        "log2_spec": 0.91,
+        "weight": 0.478
+      },
+      {
+        "gene": "BNIP3",
+        "freq_in": 0.325,
+        "freq_bg": 0.09,
+        "log2_spec": 1.426,
+        "weight": 0.463
+      },
+      {
+        "gene": "LDHA",
+        "freq_in": 0.287,
+        "freq_bg": 0.065,
+        "log2_spec": 1.554,
+        "weight": 0.447
+      },
+      {
+        "gene": "RHEB",
+        "freq_in": 0.25,
+        "freq_bg": 0.039,
+        "log2_spec": 1.746,
+        "weight": 0.436
+      },
+      {
+        "gene": "ELOB",
+        "freq_in": 0.212,
+        "freq_bg": 0.015,
+        "log2_spec": 2.005,
+        "weight": 0.426
+      },
+      {
+        "gene": "CUL2",
+        "freq_in": 0.212,
+        "freq_bg": 0.016,
+        "log2_spec": 1.982,
+        "weight": 0.421
+      },
+      {
+        "gene": "CA9",
+        "freq_in": 0.263,
+        "freq_bg": 0.059,
+        "log2_spec": 1.524,
+        "weight": 0.4
+      },
+      {
+        "gene": "PGK1",
+        "freq_in": 0.237,
+        "freq_bg": 0.04,
+        "log2_spec": 1.676,
+        "weight": 0.398
+      },
+      {
+        "gene": "GYS1",
+        "freq_in": 0.212,
+        "freq_bg": 0.022,
+        "log2_spec": 1.861,
+        "weight": 0.396
+      },
+      {
+        "gene": "TSC1",
+        "freq_in": 0.3,
+        "freq_bg": 0.091,
+        "log2_spec": 1.312,
+        "weight": 0.394
+      },
+      {
+        "gene": "DDIT4",
+        "freq_in": 0.25,
+        "freq_bg": 0.053,
+        "log2_spec": 1.544,
+        "weight": 0.386
+      },
+      {
+        "gene": "TSC2",
+        "freq_in": 0.275,
+        "freq_bg": 0.074,
+        "log2_spec": 1.39,
+        "weight": 0.382
+      },
+      {
+        "gene": "SLC2A3",
+        "freq_in": 0.237,
+        "freq_bg": 0.051,
+        "log2_spec": 1.514,
+        "weight": 0.36
+      },
+      {
+        "gene": "TFEB",
+        "freq_in": 0.2,
+        "freq_bg": 0.023,
+        "log2_spec": 1.778,
+        "weight": 0.356
+      },
+      {
+        "gene": "FLT1",
+        "freq_in": 0.375,
+        "freq_bg": 0.17,
+        "log2_spec": 0.949,
+        "weight": 0.356
+      },
+      {
+        "gene": "PDGFB",
+        "freq_in": 0.4,
+        "freq_bg": 0.194,
+        "log2_spec": 0.885,
+        "weight": 0.354
+      },
+      {
+        "gene": "MET",
+        "freq_in": 0.388,
+        "freq_bg": 0.183,
+        "log2_spec": 0.909,
+        "weight": 0.352
+      }
+    ],
+    "anti_genes": [],
+    "expected_biological_contexts": [
+      "Functional enrichment",
+      "Module scoring",
+      "Pathway projection"
+    ],
+    "atlas_observations": [
+      "OA vs normal hyaline: decreased in OA (significant, FDR=0.0351, delta=-0.099)"
+    ],
+    "p5_robustness_status": {
+      "mean_score_correlation": null,
+      "mean_top_label_agreement": null,
+      "robustness_note": "Lower stability"
+    },
+    "confidence_level": "LOW",
+    "known_limitations": [
+      "Consensus-only; atlas-specific weighting limited to AvAm axis"
+    ],
+    "recommended_interpretation_wording": [
+      "This sample shows enrichment for Hypoxia gene module",
+      "This cluster exhibits Hypoxia transcriptional signature",
+      "Atlas-internal analysis shows Hypoxia scores are associated with tissue/disease state"
+    ],
+    "forbidden_overclaim_wording": [
+      "DO NOT claim: 'proves {axis_name} causes disease X'",
+      "DO NOT claim: 'experimentally validated'",
+      "DO NOT claim: 'independent validation confirms'",
+      "DO NOT claim: 'therapeutic target' without external evidence",
+      "DO NOT claim: 'this axis directly measures {specific molecular mechanism}'"
+    ]
+  },
+  {
+    "axis_id": "functional_axis::Ferroptosis",
+    "layer": "functional_axis",
+    "name_en": "Ferroptosis",
+    "name_cn": "铁死亡",
+    "biological_meaning": "Functional gene module: 铁死亡",
+    "core_supporting_genes": [
+      {
+        "gene": "FTH1",
+        "freq_in": 0.933,
+        "freq_bg": 0.047,
+        "log2_spec": 3.343,
+        "weight": 3.12
+      },
+      {
+        "gene": "FTL",
+        "freq_in": 0.733,
+        "freq_bg": 0.044,
+        "log2_spec": 3.062,
+        "weight": 2.246
+      },
+      {
+        "gene": "SLC7A11",
+        "freq_in": 0.667,
+        "freq_bg": 0.031,
+        "log2_spec": 3.146,
+        "weight": 2.097
+      },
+      {
+        "gene": "SLC3A2",
+        "freq_in": 0.733,
+        "freq_bg": 0.072,
+        "log2_spec": 2.685,
+        "weight": 1.969
+      },
+      {
+        "gene": "SQSTM1",
+        "freq_in": 0.8,
+        "freq_bg": 0.117,
+        "log2_spec": 2.348,
+        "weight": 1.879
+      },
+      {
+        "gene": "GPX4",
+        "freq_in": 0.6,
+        "freq_bg": 0.035,
+        "log2_spec": 2.936,
+        "weight": 1.761
+      },
+      {
+        "gene": "NUPR1",
+        "freq_in": 0.6,
+        "freq_bg": 0.039,
+        "log2_spec": 2.87,
+        "weight": 1.722
+      },
+      {
+        "gene": "UBC",
+        "freq_in": 0.6,
+        "freq_bg": 0.045,
+        "log2_spec": 2.769,
+        "weight": 1.662
+      },
+      {
+        "gene": "HMOX1",
+        "freq_in": 0.8,
+        "freq_bg": 0.182,
+        "log2_spec": 1.873,
+        "weight": 1.498
+      },
+      {
+        "gene": "NQO1",
+        "freq_in": 0.667,
+        "freq_bg": 0.108,
+        "log2_spec": 2.181,
+        "weight": 1.454
+      },
+      {
+        "gene": "TXNRD1",
+        "freq_in": 0.533,
+        "freq_bg": 0.057,
+        "log2_spec": 2.44,
+        "weight": 1.301
+      },
+      {
+        "gene": "TMBIM6",
+        "freq_in": 0.467,
+        "freq_bg": 0.026,
+        "log2_spec": 2.757,
+        "weight": 1.286
+      },
+      {
+        "gene": "RNASEK",
+        "freq_in": 0.4,
+        "freq_bg": 0.007,
+        "log2_spec": 2.979,
+        "weight": 1.192
+      },
+      {
+        "gene": "MAFF",
+        "freq_in": 0.467,
+        "freq_bg": 0.039,
+        "log2_spec": 2.529,
+        "weight": 1.18
+      },
+      {
+        "gene": "IDI1",
+        "freq_in": 0.4,
+        "freq_bg": 0.01,
+        "log2_spec": 2.913,
+        "weight": 1.165
+      },
+      {
+        "gene": "EIF1",
+        "freq_in": 0.4,
+        "freq_bg": 0.013,
+        "log2_spec": 2.831,
+        "weight": 1.133
+      },
+      {
+        "gene": "PNRC1",
+        "freq_in": 0.4,
+        "freq_bg": 0.018,
+        "log2_spec": 2.724,
+        "weight": 1.09
+      },
+      {
+        "gene": "PPP1R15A",
+        "freq_in": 0.467,
+        "freq_bg": 0.053,
+        "log2_spec": 2.333,
+        "weight": 1.089
+      },
+      {
+        "gene": "SELENOM",
+        "freq_in": 0.4,
+        "freq_bg": 0.021,
+        "log2_spec": 2.671,
+        "weight": 1.068
+      },
+      {
+        "gene": "HERPUD1",
+        "freq_in": 0.4,
+        "freq_bg": 0.022,
+        "log2_spec": 2.644,
+        "weight": 1.058
+      },
+      {
+        "gene": "GABARAPL1",
+        "freq_in": 0.4,
+        "freq_bg": 0.026,
+        "log2_spec": 2.569,
+        "weight": 1.028
+      },
+      {
+        "gene": "TSC22D1",
+        "freq_in": 0.4,
+        "freq_bg": 0.036,
+        "log2_spec": 2.384,
+        "weight": 0.954
+      },
+      {
+        "gene": "ATF4",
+        "freq_in": 0.533,
+        "freq_bg": 0.12,
+        "log2_spec": 1.778,
+        "weight": 0.948
+      },
+      {
+        "gene": "RPL8",
+        "freq_in": 0.333,
+        "freq_bg": 0.004,
+        "log2_spec": 2.826,
+        "weight": 0.942
+      },
+      {
+        "gene": "CYSTM1",
+        "freq_in": 0.333,
+        "freq_bg": 0.004,
+        "log2_spec": 2.819,
+        "weight": 0.94
+      },
+      {
+        "gene": "SERF2",
+        "freq_in": 0.333,
+        "freq_bg": 0.005,
+        "log2_spec": 2.807,
+        "weight": 0.936
+      },
+      {
+        "gene": "IER3",
+        "freq_in": 0.467,
+        "freq_bg": 0.08,
+        "log2_spec": 1.99,
+        "weight": 0.929
+      },
+      {
+        "gene": "DDIT3",
+        "freq_in": 0.533,
+        "freq_bg": 0.125,
+        "log2_spec": 1.734,
+        "weight": 0.925
+      },
+      {
+        "gene": "ATP6V0E1",
+        "freq_in": 0.333,
+        "freq_bg": 0.006,
+        "log2_spec": 2.774,
+        "weight": 0.925
+      },
+      {
+        "gene": "RABAC1",
+        "freq_in": 0.333,
+        "freq_bg": 0.007,
+        "log2_spec": 2.743,
+        "weight": 0.914
+      }
+    ],
+    "anti_genes": [],
+    "expected_biological_contexts": [
+      "Functional enrichment",
+      "Module scoring",
+      "Pathway projection"
+    ],
+    "atlas_observations": [
+      "OA vs normal hyaline: decreased in OA (significant, FDR=0.0035, delta=-0.219)"
+    ],
+    "p5_robustness_status": {
+      "mean_score_correlation": null,
+      "mean_top_label_agreement": null,
+      "robustness_note": "Lower stability"
+    },
+    "confidence_level": "LOW",
+    "known_limitations": [
+      "Consensus-only; atlas-specific weighting limited to AvAm axis"
+    ],
+    "recommended_interpretation_wording": [
+      "This sample shows enrichment for Ferroptosis gene module",
+      "This cluster exhibits Ferroptosis transcriptional signature",
+      "Atlas-internal analysis shows Ferroptosis scores are associated with tissue/disease state"
+    ],
+    "forbidden_overclaim_wording": [
+      "DO NOT claim: 'proves {axis_name} causes disease X'",
+      "DO NOT claim: 'experimentally validated'",
+      "DO NOT claim: 'independent validation confirms'",
+      "DO NOT claim: 'therapeutic target' without external evidence",
+      "DO NOT claim: 'this axis directly measures {specific molecular mechanism}'"
+    ]
+  },
+  {
+    "axis_id": "functional_axis::Inflammation_NFkB",
+    "layer": "functional_axis",
+    "name_en": "Inflammation_NFkB",
+    "name_cn": "NF-kB炎症通路",
+    "biological_meaning": "Functional gene module: NF-kB炎症通路",
+    "core_supporting_genes": [
+      {
+        "gene": "IL18",
+        "freq_in": 0.815,
+        "freq_bg": 0.16,
+        "log2_spec": 2.042,
+        "weight": 1.664
+      },
+      {
+        "gene": "IL21",
+        "freq_in": 0.613,
+        "freq_bg": 0.067,
+        "log2_spec": 2.505,
+        "weight": 1.537
+      },
+      {
+        "gene": "TLR2",
+        "freq_in": 0.807,
+        "freq_bg": 0.179,
+        "log2_spec": 1.9,
+        "weight": 1.533
+      },
+      {
+        "gene": "NLRP3",
+        "freq_in": 0.655,
+        "freq_bg": 0.091,
+        "log2_spec": 2.326,
+        "weight": 1.525
+      },
+      {
+        "gene": "IL33",
+        "freq_in": 0.647,
+        "freq_bg": 0.086,
+        "log2_spec": 2.357,
+        "weight": 1.525
+      },
+      {
+        "gene": "IL23A",
+        "freq_in": 0.664,
+        "freq_bg": 0.096,
+        "log2_spec": 2.287,
+        "weight": 1.518
+      },
+      {
+        "gene": "CCR2",
+        "freq_in": 0.664,
+        "freq_bg": 0.098,
+        "log2_spec": 2.273,
+        "weight": 1.509
+      },
+      {
+        "gene": "IFNG",
+        "freq_in": 0.866,
+        "freq_bg": 0.226,
+        "log2_spec": 1.729,
+        "weight": 1.497
+      },
+      {
+        "gene": "NOD2",
+        "freq_in": 0.63,
+        "freq_bg": 0.086,
+        "log2_spec": 2.324,
+        "weight": 1.465
+      },
+      {
+        "gene": "IL13",
+        "freq_in": 0.689,
+        "freq_bg": 0.12,
+        "log2_spec": 2.121,
+        "weight": 1.462
+      },
+      {
+        "gene": "TLR4",
+        "freq_in": 0.782,
+        "freq_bg": 0.183,
+        "log2_spec": 1.836,
+        "weight": 1.435
+      },
+      {
+        "gene": "IL17A",
+        "freq_in": 0.706,
+        "freq_bg": 0.138,
+        "log2_spec": 2.009,
+        "weight": 1.418
+      },
+      {
+        "gene": "IL22",
+        "freq_in": 0.58,
+        "freq_bg": 0.072,
+        "log2_spec": 2.363,
+        "weight": 1.37
+      },
+      {
+        "gene": "IL4",
+        "freq_in": 0.773,
+        "freq_bg": 0.196,
+        "log2_spec": 1.744,
+        "weight": 1.348
+      },
+      {
+        "gene": "IL10",
+        "freq_in": 0.824,
+        "freq_bg": 0.231,
+        "log2_spec": 1.634,
+        "weight": 1.346
+      },
+      {
+        "gene": "IL2",
+        "freq_in": 0.739,
+        "freq_bg": 0.195,
+        "log2_spec": 1.69,
+        "weight": 1.25
+      },
+      {
+        "gene": "IL12B",
+        "freq_in": 0.571,
+        "freq_bg": 0.087,
+        "log2_spec": 2.185,
+        "weight": 1.248
+      },
+      {
+        "gene": "TNFRSF1A",
+        "freq_in": 0.681,
+        "freq_bg": 0.159,
+        "log2_spec": 1.806,
+        "weight": 1.229
+      },
+      {
+        "gene": "IL1B",
+        "freq_in": 0.941,
+        "freq_bg": 0.353,
+        "log2_spec": 1.3,
+        "weight": 1.223
+      },
+      {
+        "gene": "IL23R",
+        "freq_in": 0.504,
+        "freq_bg": 0.055,
+        "log2_spec": 2.404,
+        "weight": 1.212
+      },
+      {
+        "gene": "TLR9",
+        "freq_in": 0.597,
+        "freq_bg": 0.108,
+        "log2_spec": 2.03,
+        "weight": 1.211
+      },
+      {
+        "gene": "TLR7",
+        "freq_in": 0.479,
+        "freq_bg": 0.052,
+        "log2_spec": 2.38,
+        "weight": 1.14
+      },
+      {
+        "gene": "TNF",
+        "freq_in": 0.975,
+        "freq_bg": 0.412,
+        "log2_spec": 1.15,
+        "weight": 1.121
+      },
+      {
+        "gene": "CD40",
+        "freq_in": 0.63,
+        "freq_bg": 0.157,
+        "log2_spec": 1.719,
+        "weight": 1.083
+      },
+      {
+        "gene": "FOXP3",
+        "freq_in": 0.555,
+        "freq_bg": 0.107,
+        "log2_spec": 1.941,
+        "weight": 1.077
+      },
+      {
+        "gene": "IL1RN",
+        "freq_in": 0.613,
+        "freq_bg": 0.153,
+        "log2_spec": 1.709,
+        "weight": 1.048
+      },
+      {
+        "gene": "TSLP",
+        "freq_in": 0.479,
+        "freq_bg": 0.067,
+        "log2_spec": 2.177,
+        "weight": 1.043
+      },
+      {
+        "gene": "IL1A",
+        "freq_in": 0.723,
+        "freq_bg": 0.237,
+        "log2_spec": 1.427,
+        "weight": 1.032
+      },
+      {
+        "gene": "CXCL10",
+        "freq_in": 0.605,
+        "freq_bg": 0.151,
+        "log2_spec": 1.701,
+        "weight": 1.029
+      },
+      {
+        "gene": "TLR3",
+        "freq_in": 0.546,
+        "freq_bg": 0.114,
+        "log2_spec": 1.86,
+        "weight": 1.016
+      }
+    ],
+    "anti_genes": [],
+    "expected_biological_contexts": [
+      "Functional enrichment",
+      "Module scoring",
+      "Pathway projection"
+    ],
+    "atlas_observations": [
+      "OA vs normal hyaline: decreased in OA (not significant, FDR=0.2969, delta=-0.023)"
+    ],
+    "p5_robustness_status": {
+      "mean_score_correlation": null,
+      "mean_top_label_agreement": null,
+      "robustness_note": "Lower stability"
+    },
+    "confidence_level": "LOW",
+    "known_limitations": [
+      "Consensus-only; atlas-specific weighting limited to AvAm axis"
+    ],
+    "recommended_interpretation_wording": [
+      "This sample shows enrichment for Inflammation_NFkB gene module",
+      "This cluster exhibits Inflammation_NFkB transcriptional signature",
+      "Atlas-internal analysis shows Inflammation_NFkB scores are associated with tissue/disease state"
+    ],
+    "forbidden_overclaim_wording": [
+      "DO NOT claim: 'proves {axis_name} causes disease X'",
+      "DO NOT claim: 'experimentally validated'",
+      "DO NOT claim: 'independent validation confirms'",
+      "DO NOT claim: 'therapeutic target' without external evidence",
+      "DO NOT claim: 'this axis directly measures {specific molecular mechanism}'"
+    ]
+  },
+  {
+    "axis_id": "functional_axis::IL1_Signaling",
+    "layer": "functional_axis",
+    "name_en": "IL1_Signaling",
+    "name_cn": "IL-1炎症信号",
+    "biological_meaning": "Functional gene module: IL-1炎症信号",
+    "core_supporting_genes": [
+      {
+        "gene": "CXCL3",
+        "freq_in": 0.861,
+        "freq_bg": 0.05,
+        "log2_spec": 3.181,
+        "weight": 2.74
+      },
+      {
+        "gene": "CXCL2",
+        "freq_in": 0.911,
+        "freq_bg": 0.089,
+        "log2_spec": 2.791,
+        "weight": 2.542
+      },
+      {
+        "gene": "TNFAIP2",
+        "freq_in": 0.723,
+        "freq_bg": 0.035,
+        "log2_spec": 3.182,
+        "weight": 2.3
+      },
+      {
+        "gene": "ZC3H12A",
+        "freq_in": 0.743,
+        "freq_bg": 0.057,
+        "log2_spec": 2.89,
+        "weight": 2.146
+      },
+      {
+        "gene": "TNIP1",
+        "freq_in": 0.713,
+        "freq_bg": 0.051,
+        "log2_spec": 2.915,
+        "weight": 2.078
+      },
+      {
+        "gene": "SLC2A6",
+        "freq_in": 0.634,
+        "freq_bg": 0.021,
+        "log2_spec": 3.276,
+        "weight": 2.076
+      },
+      {
+        "gene": "IER3",
+        "freq_in": 0.752,
+        "freq_bg": 0.07,
+        "log2_spec": 2.747,
+        "weight": 2.067
+      },
+      {
+        "gene": "IRAK2",
+        "freq_in": 0.653,
+        "freq_bg": 0.031,
+        "log2_spec": 3.111,
+        "weight": 2.033
+      },
+      {
+        "gene": "RNF19B",
+        "freq_in": 0.584,
+        "freq_bg": 0.01,
+        "log2_spec": 3.394,
+        "weight": 1.983
+      },
+      {
+        "gene": "DUSP5",
+        "freq_in": 0.624,
+        "freq_bg": 0.034,
+        "log2_spec": 2.996,
+        "weight": 1.869
+      },
+      {
+        "gene": "RELB",
+        "freq_in": 0.693,
+        "freq_bg": 0.071,
+        "log2_spec": 2.616,
+        "weight": 1.813
+      },
+      {
+        "gene": "NFKBIE",
+        "freq_in": 0.574,
+        "freq_bg": 0.022,
+        "log2_spec": 3.124,
+        "weight": 1.794
+      },
+      {
+        "gene": "IL15RA",
+        "freq_in": 0.644,
+        "freq_bg": 0.058,
+        "log2_spec": 2.687,
+        "weight": 1.73
+      },
+      {
+        "gene": "TNIP3",
+        "freq_in": 0.535,
+        "freq_bg": 0.014,
+        "log2_spec": 3.199,
+        "weight": 1.71
+      },
+      {
+        "gene": "GBP1",
+        "freq_in": 0.554,
+        "freq_bg": 0.021,
+        "log2_spec": 3.082,
+        "weight": 1.709
+      },
+      {
+        "gene": "AMPD3",
+        "freq_in": 0.545,
+        "freq_bg": 0.018,
+        "log2_spec": 3.124,
+        "weight": 1.701
+      },
+      {
+        "gene": "TRAF1",
+        "freq_in": 0.673,
+        "freq_bg": 0.076,
+        "log2_spec": 2.525,
+        "weight": 1.7
+      },
+      {
+        "gene": "GPR84",
+        "freq_in": 0.515,
+        "freq_bg": 0.008,
+        "log2_spec": 3.277,
+        "weight": 1.687
+      },
+      {
+        "gene": "CXCL1",
+        "freq_in": 0.782,
+        "freq_bg": 0.141,
+        "log2_spec": 2.122,
+        "weight": 1.66
+      },
+      {
+        "gene": "MAP3K8",
+        "freq_in": 0.653,
+        "freq_bg": 0.075,
+        "log2_spec": 2.495,
+        "weight": 1.63
+      },
+      {
+        "gene": "EHD1",
+        "freq_in": 0.515,
+        "freq_bg": 0.014,
+        "log2_spec": 3.15,
+        "weight": 1.622
+      },
+      {
+        "gene": "NFKB2",
+        "freq_in": 0.733,
+        "freq_bg": 0.121,
+        "log2_spec": 2.198,
+        "weight": 1.611
+      },
+      {
+        "gene": "SERPINB2",
+        "freq_in": 0.614,
+        "freq_bg": 0.058,
+        "log2_spec": 2.617,
+        "weight": 1.606
+      },
+      {
+        "gene": "SOD2",
+        "freq_in": 0.792,
+        "freq_bg": 0.158,
+        "log2_spec": 2.019,
+        "weight": 1.599
+      },
+      {
+        "gene": "NINJ1",
+        "freq_in": 0.515,
+        "freq_bg": 0.018,
+        "log2_spec": 3.059,
+        "weight": 1.575
+      },
+      {
+        "gene": "B4GALT5",
+        "freq_in": 0.495,
+        "freq_bg": 0.013,
+        "log2_spec": 3.103,
+        "weight": 1.536
+      },
+      {
+        "gene": "BCL3",
+        "freq_in": 0.614,
+        "freq_bg": 0.069,
+        "log2_spec": 2.486,
+        "weight": 1.526
+      },
+      {
+        "gene": "ICAM1",
+        "freq_in": 0.901,
+        "freq_bg": 0.244,
+        "log2_spec": 1.693,
+        "weight": 1.525
+      },
+      {
+        "gene": "IFIH1",
+        "freq_in": 0.584,
+        "freq_bg": 0.055,
+        "log2_spec": 2.596,
+        "weight": 1.516
+      },
+      {
+        "gene": "STX11",
+        "freq_in": 0.475,
+        "freq_bg": 0.008,
+        "log2_spec": 3.176,
+        "weight": 1.509
+      }
+    ],
+    "anti_genes": [],
+    "expected_biological_contexts": [
+      "Functional enrichment",
+      "Module scoring",
+      "Pathway projection"
+    ],
+    "atlas_observations": [
+      "OA vs normal hyaline: decreased in OA (not significant, FDR=0.0692, delta=-0.067)"
+    ],
+    "p5_robustness_status": {
+      "mean_score_correlation": null,
+      "mean_top_label_agreement": null,
+      "robustness_note": "Lower stability"
+    },
+    "confidence_level": "LOW",
+    "known_limitations": [
+      "Consensus-only; atlas-specific weighting limited to AvAm axis"
+    ],
+    "recommended_interpretation_wording": [
+      "This sample shows enrichment for IL1_Signaling gene module",
+      "This cluster exhibits IL1_Signaling transcriptional signature",
+      "Atlas-internal analysis shows IL1_Signaling scores are associated with tissue/disease state"
+    ],
+    "forbidden_overclaim_wording": [
+      "DO NOT claim: 'proves {axis_name} causes disease X'",
+      "DO NOT claim: 'experimentally validated'",
+      "DO NOT claim: 'independent validation confirms'",
+      "DO NOT claim: 'therapeutic target' without external evidence",
+      "DO NOT claim: 'this axis directly measures {specific molecular mechanism}'"
+    ]
+  },
+  {
+    "axis_id": "functional_axis::TNF_Signaling",
+    "layer": "functional_axis",
+    "name_en": "TNF_Signaling",
+    "name_cn": "TNF炎症信号",
+    "biological_meaning": "Functional gene module: TNF炎症信号",
+    "core_supporting_genes": [
+      {
+        "gene": "MAPK11",
+        "freq_in": 0.776,
+        "freq_bg": 0.07,
+        "log2_spec": 2.783,
+        "weight": 2.159
+      },
+      {
+        "gene": "CHUK",
+        "freq_in": 0.869,
+        "freq_bg": 0.116,
+        "log2_spec": 2.465,
+        "weight": 2.143
+      },
+      {
+        "gene": "IKBKG",
+        "freq_in": 0.822,
+        "freq_bg": 0.094,
+        "log2_spec": 2.603,
+        "weight": 2.14
+      },
+      {
+        "gene": "IKBKB",
+        "freq_in": 0.888,
+        "freq_bg": 0.141,
+        "log2_spec": 2.294,
+        "weight": 2.037
+      },
+      {
+        "gene": "MAPK10",
+        "freq_in": 0.776,
+        "freq_bg": 0.084,
+        "log2_spec": 2.622,
+        "weight": 2.034
+      },
+      {
+        "gene": "MAPK12",
+        "freq_in": 0.701,
+        "freq_bg": 0.059,
+        "log2_spec": 2.78,
+        "weight": 1.948
+      },
+      {
+        "gene": "MAPK13",
+        "freq_in": 0.692,
+        "freq_bg": 0.057,
+        "log2_spec": 2.795,
+        "weight": 1.933
+      },
+      {
+        "gene": "MAPK9",
+        "freq_in": 0.86,
+        "freq_bg": 0.145,
+        "log2_spec": 2.221,
+        "weight": 1.909
+      },
+      {
+        "gene": "RELA",
+        "freq_in": 0.935,
+        "freq_bg": 0.217,
+        "log2_spec": 1.884,
+        "weight": 1.761
+      },
+      {
+        "gene": "MAP2K4",
+        "freq_in": 0.72,
+        "freq_bg": 0.099,
+        "log2_spec": 2.365,
+        "weight": 1.702
+      },
+      {
+        "gene": "NFKBIA",
+        "freq_in": 0.832,
+        "freq_bg": 0.186,
+        "log2_spec": 1.901,
+        "weight": 1.581
+      },
+      {
+        "gene": "MAPK14",
+        "freq_in": 0.879,
+        "freq_bg": 0.227,
+        "log2_spec": 1.747,
+        "weight": 1.535
+      },
+      {
+        "gene": "MAPK8",
+        "freq_in": 0.907,
+        "freq_bg": 0.248,
+        "log2_spec": 1.683,
+        "weight": 1.526
+      },
+      {
+        "gene": "AKT3",
+        "freq_in": 0.748,
+        "freq_bg": 0.144,
+        "log2_spec": 2.039,
+        "weight": 1.525
+      },
+      {
+        "gene": "NFKB1",
+        "freq_in": 0.953,
+        "freq_bg": 0.302,
+        "log2_spec": 1.509,
+        "weight": 1.439
+      },
+      {
+        "gene": "MAP2K6",
+        "freq_in": 0.607,
+        "freq_bg": 0.078,
+        "log2_spec": 2.359,
+        "weight": 1.433
+      },
+      {
+        "gene": "PIK3R3",
+        "freq_in": 0.654,
+        "freq_bg": 0.106,
+        "log2_spec": 2.177,
+        "weight": 1.424
+      },
+      {
+        "gene": "MAP3K7",
+        "freq_in": 0.664,
+        "freq_bg": 0.113,
+        "log2_spec": 2.133,
+        "weight": 1.415
+      },
+      {
+        "gene": "TAB2",
+        "freq_in": 0.542,
+        "freq_bg": 0.047,
+        "log2_spec": 2.603,
+        "weight": 1.411
+      },
+      {
+        "gene": "AKT2",
+        "freq_in": 0.785,
+        "freq_bg": 0.191,
+        "log2_spec": 1.792,
+        "weight": 1.407
+      },
+      {
+        "gene": "JUN",
+        "freq_in": 0.897,
+        "freq_bg": 0.279,
+        "log2_spec": 1.527,
+        "weight": 1.37
+      },
+      {
+        "gene": "PIK3R2",
+        "freq_in": 0.654,
+        "freq_bg": 0.128,
+        "log2_spec": 1.986,
+        "weight": 1.299
+      },
+      {
+        "gene": "TAB1",
+        "freq_in": 0.505,
+        "freq_bg": 0.047,
+        "log2_spec": 2.511,
+        "weight": 1.267
+      },
+      {
+        "gene": "TRAF6",
+        "freq_in": 0.645,
+        "freq_bg": 0.136,
+        "log2_spec": 1.902,
+        "weight": 1.227
+      },
+      {
+        "gene": "MAPK3",
+        "freq_in": 0.869,
+        "freq_bg": 0.305,
+        "log2_spec": 1.371,
+        "weight": 1.191
+      },
+      {
+        "gene": "PIK3R1",
+        "freq_in": 0.692,
+        "freq_bg": 0.177,
+        "log2_spec": 1.709,
+        "weight": 1.182
+      },
+      {
+        "gene": "MAP2K7",
+        "freq_in": 0.636,
+        "freq_bg": 0.139,
+        "log2_spec": 1.858,
+        "weight": 1.181
+      },
+      {
+        "gene": "FOS",
+        "freq_in": 0.794,
+        "freq_bg": 0.26,
+        "log2_spec": 1.448,
+        "weight": 1.15
+      },
+      {
+        "gene": "MAPK1",
+        "freq_in": 0.85,
+        "freq_bg": 0.318,
+        "log2_spec": 1.292,
+        "weight": 1.099
+      },
+      {
+        "gene": "TRAF3",
+        "freq_in": 0.458,
+        "freq_bg": 0.055,
+        "log2_spec": 2.27,
+        "weight": 1.04
+      }
+    ],
+    "anti_genes": [],
+    "expected_biological_contexts": [
+      "Functional enrichment",
+      "Module scoring",
+      "Pathway projection"
+    ],
+    "atlas_observations": [
+      "OA vs normal hyaline: decreased in OA (not significant, FDR=0.0888, delta=-0.069)"
+    ],
+    "p5_robustness_status": {
+      "mean_score_correlation": null,
+      "mean_top_label_agreement": null,
+      "robustness_note": "Lower stability"
+    },
+    "confidence_level": "LOW",
+    "known_limitations": [
+      "Consensus-only; atlas-specific weighting limited to AvAm axis"
+    ],
+    "recommended_interpretation_wording": [
+      "This sample shows enrichment for TNF_Signaling gene module",
+      "This cluster exhibits TNF_Signaling transcriptional signature",
+      "Atlas-internal analysis shows TNF_Signaling scores are associated with tissue/disease state"
+    ],
+    "forbidden_overclaim_wording": [
+      "DO NOT claim: 'proves {axis_name} causes disease X'",
+      "DO NOT claim: 'experimentally validated'",
+      "DO NOT claim: 'independent validation confirms'",
+      "DO NOT claim: 'therapeutic target' without external evidence",
+      "DO NOT claim: 'this axis directly measures {specific molecular mechanism}'"
+    ]
+  },
+  {
+    "axis_id": "functional_axis::Hypertrophy",
+    "layer": "functional_axis",
+    "name_en": "Hypertrophy",
+    "name_cn": "软骨细胞肥大",
+    "biological_meaning": "Functional gene module: 软骨细胞肥大",
+    "core_supporting_genes": [
+      {
+        "gene": "RUNX2",
+        "freq_in": 0.719,
+        "freq_bg": 0.212,
+        "log2_spec": 1.556,
+        "weight": 1.119
+      },
+      {
+        "gene": "IGF1",
+        "freq_in": 0.763,
+        "freq_bg": 0.297,
+        "log2_spec": 1.227,
+        "weight": 0.936
+      },
+      {
+        "gene": "PTH",
+        "freq_in": 0.482,
+        "freq_bg": 0.095,
+        "log2_spec": 1.874,
+        "weight": 0.904
+      },
+      {
+        "gene": "FGFR3",
+        "freq_in": 0.632,
+        "freq_bg": 0.211,
+        "log2_spec": 1.386,
+        "weight": 0.875
+      },
+      {
+        "gene": "PTHLH",
+        "freq_in": 0.553,
+        "freq_bg": 0.158,
+        "log2_spec": 1.534,
+        "weight": 0.848
+      },
+      {
+        "gene": "COL2A1",
+        "freq_in": 0.649,
+        "freq_bg": 0.248,
+        "log2_spec": 1.228,
+        "weight": 0.797
+      },
+      {
+        "gene": "PTH1R",
+        "freq_in": 0.386,
+        "freq_bg": 0.061,
+        "log2_spec": 1.974,
+        "weight": 0.762
+      },
+      {
+        "gene": "MMP13",
+        "freq_in": 0.658,
+        "freq_bg": 0.273,
+        "log2_spec": 1.132,
+        "weight": 0.745
+      },
+      {
+        "gene": "ACAN",
+        "freq_in": 0.526,
+        "freq_bg": 0.172,
+        "log2_spec": 1.375,
+        "weight": 0.724
+      },
+      {
+        "gene": "COL10A1",
+        "freq_in": 0.5,
+        "freq_bg": 0.153,
+        "log2_spec": 1.437,
+        "weight": 0.718
+      },
+      {
+        "gene": "GHR",
+        "freq_in": 0.386,
+        "freq_bg": 0.086,
+        "log2_spec": 1.676,
+        "weight": 0.647
+      },
+      {
+        "gene": "SOX9",
+        "freq_in": 0.57,
+        "freq_bg": 0.252,
+        "log2_spec": 1.04,
+        "weight": 0.593
+      },
+      {
+        "gene": "IHH",
+        "freq_in": 0.412,
+        "freq_bg": 0.123,
+        "log2_spec": 1.42,
+        "weight": 0.586
+      },
+      {
+        "gene": "MMP9",
+        "freq_in": 0.711,
+        "freq_bg": 0.407,
+        "log2_spec": 0.736,
+        "weight": 0.523
+      },
+      {
+        "gene": "SPP1",
+        "freq_in": 0.553,
+        "freq_bg": 0.269,
+        "log2_spec": 0.918,
+        "weight": 0.507
+      },
+      {
+        "gene": "TGFB1",
+        "freq_in": 0.772,
+        "freq_bg": 0.503,
+        "log2_spec": 0.572,
+        "weight": 0.441
+      },
+      {
+        "gene": "ENPP1",
+        "freq_in": 0.272,
+        "freq_bg": 0.057,
+        "log2_spec": 1.595,
+        "weight": 0.434
+      },
+      {
+        "gene": "TNFSF11",
+        "freq_in": 0.36,
+        "freq_bg": 0.13,
+        "log2_spec": 1.19,
+        "weight": 0.428
+      },
+      {
+        "gene": "VDR",
+        "freq_in": 0.395,
+        "freq_bg": 0.161,
+        "log2_spec": 1.073,
+        "weight": 0.424
+      },
+      {
+        "gene": "THRA",
+        "freq_in": 0.254,
+        "freq_bg": 0.049,
+        "log2_spec": 1.618,
+        "weight": 0.412
+      },
+      {
+        "gene": "HDAC4",
+        "freq_in": 0.254,
+        "freq_bg": 0.05,
+        "log2_spec": 1.607,
+        "weight": 0.409
+      },
+      {
+        "gene": "ALPL",
+        "freq_in": 0.263,
+        "freq_bg": 0.059,
+        "log2_spec": 1.529,
+        "weight": 0.402
+      },
+      {
+        "gene": "FGF23",
+        "freq_in": 0.316,
+        "freq_bg": 0.102,
+        "log2_spec": 1.266,
+        "weight": 0.4
+      },
+      {
+        "gene": "ACE",
+        "freq_in": 0.342,
+        "freq_bg": 0.127,
+        "log2_spec": 1.15,
+        "weight": 0.393
+      },
+      {
+        "gene": "ACP5",
+        "freq_in": 0.263,
+        "freq_bg": 0.062,
+        "log2_spec": 1.485,
+        "weight": 0.391
+      },
+      {
+        "gene": "BMP7",
+        "freq_in": 0.404,
+        "freq_bg": 0.185,
+        "log2_spec": 0.946,
+        "weight": 0.382
+      },
+      {
+        "gene": "GH1",
+        "freq_in": 0.298,
+        "freq_bg": 0.103,
+        "log2_spec": 1.182,
+        "weight": 0.353
+      },
+      {
+        "gene": "CCN2",
+        "freq_in": 0.404,
+        "freq_bg": 0.198,
+        "log2_spec": 0.873,
+        "weight": 0.352
+      },
+      {
+        "gene": "MGP",
+        "freq_in": 0.289,
+        "freq_bg": 0.097,
+        "log2_spec": 1.209,
+        "weight": 0.35
+      },
+      {
+        "gene": "REN",
+        "freq_in": 0.281,
+        "freq_bg": 0.092,
+        "log2_spec": 1.218,
+        "weight": 0.342
+      }
+    ],
+    "anti_genes": [],
+    "expected_biological_contexts": [
+      "Functional enrichment",
+      "Module scoring",
+      "Pathway projection"
+    ],
+    "atlas_observations": [
+      "OA vs normal hyaline: increased in OA (not significant, FDR=0.0692, delta=0.060)"
+    ],
+    "p5_robustness_status": {
+      "mean_score_correlation": null,
+      "mean_top_label_agreement": null,
+      "robustness_note": "Lower stability"
+    },
+    "confidence_level": "LOW",
+    "known_limitations": [
+      "Consensus-only; atlas-specific weighting limited to AvAm axis"
+    ],
+    "recommended_interpretation_wording": [
+      "This sample shows enrichment for Hypertrophy gene module",
+      "This cluster exhibits Hypertrophy transcriptional signature",
+      "Atlas-internal analysis shows Hypertrophy scores are associated with tissue/disease state"
+    ],
+    "forbidden_overclaim_wording": [
+      "DO NOT claim: 'proves {axis_name} causes disease X'",
+      "DO NOT claim: 'experimentally validated'",
+      "DO NOT claim: 'independent validation confirms'",
+      "DO NOT claim: 'therapeutic target' without external evidence",
+      "DO NOT claim: 'this axis directly measures {specific molecular mechanism}'"
+    ]
+  },
+  {
+    "axis_id": "functional_axis::EndochondralOssification",
+    "layer": "functional_axis",
+    "name_en": "EndochondralOssification",
+    "name_cn": "软骨内骨化",
+    "biological_meaning": "Functional gene module: 软骨内骨化",
+    "core_supporting_genes": [
+      {
+        "gene": "PTHLH",
+        "freq_in": 0.774,
+        "freq_bg": 0.15,
+        "log2_spec": 2.043,
+        "weight": 1.58
+      },
+      {
+        "gene": "RUNX2",
+        "freq_in": 0.858,
+        "freq_bg": 0.206,
+        "log2_spec": 1.825,
+        "weight": 1.567
+      },
+      {
+        "gene": "IHH",
+        "freq_in": 0.689,
+        "freq_bg": 0.113,
+        "log2_spec": 2.184,
+        "weight": 1.504
+      },
+      {
+        "gene": "PTH",
+        "freq_in": 0.604,
+        "freq_bg": 0.091,
+        "log2_spec": 2.216,
+        "weight": 1.338
+      },
+      {
+        "gene": "FGFR3",
+        "freq_in": 0.755,
+        "freq_bg": 0.206,
+        "log2_spec": 1.651,
+        "weight": 1.246
+      },
+      {
+        "gene": "ACAN",
+        "freq_in": 0.689,
+        "freq_bg": 0.166,
+        "log2_spec": 1.773,
+        "weight": 1.221
+      },
+      {
+        "gene": "MMP13",
+        "freq_in": 0.821,
+        "freq_bg": 0.267,
+        "log2_spec": 1.458,
+        "weight": 1.197
+      },
+      {
+        "gene": "SOX9",
+        "freq_in": 0.783,
+        "freq_bg": 0.244,
+        "log2_spec": 1.504,
+        "weight": 1.178
+      },
+      {
+        "gene": "PTH1R",
+        "freq_in": 0.491,
+        "freq_bg": 0.057,
+        "log2_spec": 2.335,
+        "weight": 1.146
+      },
+      {
+        "gene": "COL2A1",
+        "freq_in": 0.764,
+        "freq_bg": 0.244,
+        "log2_spec": 1.469,
+        "weight": 1.122
+      },
+      {
+        "gene": "COL10A1",
+        "freq_in": 0.594,
+        "freq_bg": 0.15,
+        "log2_spec": 1.69,
+        "weight": 1.004
+      },
+      {
+        "gene": "FGFR1",
+        "freq_in": 0.689,
+        "freq_bg": 0.226,
+        "log2_spec": 1.42,
+        "weight": 0.978
+      },
+      {
+        "gene": "IGF1",
+        "freq_in": 0.764,
+        "freq_bg": 0.297,
+        "log2_spec": 1.229,
+        "weight": 0.939
+      },
+      {
+        "gene": "ALPL",
+        "freq_in": 0.425,
+        "freq_bg": 0.053,
+        "log2_spec": 2.21,
+        "weight": 0.938
+      },
+      {
+        "gene": "BMP7",
+        "freq_in": 0.566,
+        "freq_bg": 0.179,
+        "log2_spec": 1.426,
+        "weight": 0.807
+      },
+      {
+        "gene": "BGLAP",
+        "freq_in": 0.406,
+        "freq_bg": 0.076,
+        "log2_spec": 1.859,
+        "weight": 0.754
+      },
+      {
+        "gene": "GLI3",
+        "freq_in": 0.491,
+        "freq_bg": 0.137,
+        "log2_spec": 1.535,
+        "weight": 0.753
+      },
+      {
+        "gene": "SOX6",
+        "freq_in": 0.396,
+        "freq_bg": 0.077,
+        "log2_spec": 1.811,
+        "weight": 0.718
+      },
+      {
+        "gene": "IGF2",
+        "freq_in": 0.538,
+        "freq_bg": 0.191,
+        "log2_spec": 1.287,
+        "weight": 0.692
+      },
+      {
+        "gene": "SPP1",
+        "freq_in": 0.623,
+        "freq_bg": 0.266,
+        "log2_spec": 1.088,
+        "weight": 0.678
+      },
+      {
+        "gene": "PTCH1",
+        "freq_in": 0.462,
+        "freq_bg": 0.146,
+        "log2_spec": 1.387,
+        "weight": 0.641
+      },
+      {
+        "gene": "FGF2",
+        "freq_in": 0.651,
+        "freq_bg": 0.318,
+        "log2_spec": 0.929,
+        "weight": 0.605
+      },
+      {
+        "gene": "SHOX",
+        "freq_in": 0.292,
+        "freq_bg": 0.032,
+        "log2_spec": 2.057,
+        "weight": 0.602
+      },
+      {
+        "gene": "BMP2",
+        "freq_in": 0.632,
+        "freq_bg": 0.309,
+        "log2_spec": 0.926,
+        "weight": 0.585
+      },
+      {
+        "gene": "FGF18",
+        "freq_in": 0.406,
+        "freq_bg": 0.118,
+        "log2_spec": 1.438,
+        "weight": 0.583
+      },
+      {
+        "gene": "CDKN1C",
+        "freq_in": 0.368,
+        "freq_bg": 0.093,
+        "log2_spec": 1.545,
+        "weight": 0.568
+      },
+      {
+        "gene": "MGP",
+        "freq_in": 0.368,
+        "freq_bg": 0.094,
+        "log2_spec": 1.537,
+        "weight": 0.566
+      },
+      {
+        "gene": "SOX5",
+        "freq_in": 0.34,
+        "freq_bg": 0.073,
+        "log2_spec": 1.659,
+        "weight": 0.564
+      },
+      {
+        "gene": "IGF1R",
+        "freq_in": 0.519,
+        "freq_bg": 0.229,
+        "log2_spec": 1.03,
+        "weight": 0.534
+      },
+      {
+        "gene": "NKX3-2",
+        "freq_in": 0.274,
+        "freq_bg": 0.037,
+        "log2_spec": 1.903,
+        "weight": 0.521
+      }
+    ],
+    "anti_genes": [],
+    "expected_biological_contexts": [
+      "Functional enrichment",
+      "Module scoring",
+      "Pathway projection"
+    ],
+    "atlas_observations": [
+      "OA vs normal hyaline: increased in OA (not significant, FDR=0.5338, delta=0.018)"
+    ],
+    "p5_robustness_status": {
+      "mean_score_correlation": null,
+      "mean_top_label_agreement": null,
+      "robustness_note": "Lower stability"
+    },
+    "confidence_level": "LOW",
+    "known_limitations": [
+      "Consensus-only; atlas-specific weighting limited to AvAm axis"
+    ],
+    "recommended_interpretation_wording": [
+      "This sample shows enrichment for EndochondralOssification gene module",
+      "This cluster exhibits EndochondralOssification transcriptional signature",
+      "Atlas-internal analysis shows EndochondralOssification scores are associated with tissue/disease state"
+    ],
+    "forbidden_overclaim_wording": [
+      "DO NOT claim: 'proves {axis_name} causes disease X'",
+      "DO NOT claim: 'experimentally validated'",
+      "DO NOT claim: 'independent validation confirms'",
+      "DO NOT claim: 'therapeutic target' without external evidence",
+      "DO NOT claim: 'this axis directly measures {specific molecular mechanism}'"
+    ]
+  }
+]

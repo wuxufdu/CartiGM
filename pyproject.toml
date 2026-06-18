@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cartigsfm"
+version = "0.4.0"
+description = "Cartilage-domain gene-set foundation model utilities"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "CartiGSFM project" }]
+license = { text = "MIT" }
+dependencies = [
+    "numpy",
+    "pandas",
+]
+
+[project.scripts]
+cartigsfm = "cartigsfm.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["cartigsfm*"]
+
+[tool.setuptools.package-data]
+cartigsfm = [
+    "resources/dictionary_v1/*.json",
+    "resources/rag_v1/*.json",
+    "resources/p9_v1/config/*.json",
+    "resources/p9_v1/docs/*.md",
+    "resources/p9_v1/tsv/*.tsv",
+]

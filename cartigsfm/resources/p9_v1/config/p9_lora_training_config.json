@@ -1,0 +1,57 @@
+{
+  "actually_trained": true,
+  "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "base_model_params_M": 494.03,
+  "trainable_params_M": 2.16,
+  "trainable_fraction": 0.00436,
+  "device": "mps",
+  "device_dtype": "float32",
+  "ram_gb": 16,
+  "max_seq_length": 320,
+  "epochs": 1,
+  "per_device_batch_size": 1,
+  "gradient_accumulation_steps": 2,
+  "effective_batch_size": 2,
+  "learning_rate": 2e-4,
+  "lr_scheduler_type": "cosine",
+  "warmup_ratio": 0.03,
+  "lora": {
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.05,
+    "bias": "none",
+    "task_type": "CAUSAL_LM",
+    "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj"]
+  },
+  "qlora_enabled": false,
+  "data": {
+    "train_jsonl": "jsonl/p8_train.jsonl",
+    "valid_jsonl": "jsonl/p8_valid.jsonl",
+    "test_jsonl": "jsonl/p8_test.jsonl",
+    "evaluation_jsonl": "jsonl/p9_p4_augmented_eval.jsonl",
+    "n_train_used": 60,
+    "n_valid_used": 10,
+    "n_total_train": 361,
+    "n_total_valid": 75
+  },
+  "training_metrics": {
+    "train_loss_first": 2.8593,
+    "train_loss_final": 1.8596,
+    "train_loss_avg": 2.2588,
+    "eval_loss_final": 1.5784,
+    "wall_clock_minutes": 16.9
+  },
+  "limitations": [
+    "Trained on 60 of 361 train samples due to 16 GB MPS memory limit",
+    "1 epoch only",
+    "max_seq_length=320 may truncate longer cluster_interpretation outputs",
+    "Single base model (Qwen2.5-0.5B); larger Qwen2.5-3B/7B require GPU host"
+  ],
+  "hard_constraints": [
+    "Do not claim CartiGSFM is a trained large language model.",
+    "Do not claim external/independent validation; P4 is pending.",
+    "Do not claim Inflammation_NFkB / IL1 / TNF significantly increased in OA (FDR not met).",
+    "Do not invent gene names, p-values, FDR, sample sizes.",
+    "Do not claim therapeutic targets or causal mechanism from CartiGSFM scores."
+  ]
+}

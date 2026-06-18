@@ -1,0 +1,33 @@
+# Logs and large raw downloads
+logs/
+data/
+
+# Smoke / scratch outputs
+/tmp/
+
+# Research handoff / review artifacts
+handoff_*/
+review_*/
+cartigsfm_p*_delivery*.tar.gz
+*.tar.gz
+
+# Manuscript/private working artifacts
+docs/~$*
+*.docx
+
+# Figure and notebook build outputs
+figures/
+notebooks/
+
+# Python cruft
+.venv/
+*.egg-info/
+__pycache__/
+*.pyc
+.pytest_cache/
+build/
+dist/
+.ipynb_checkpoints/
+.DS_Store
+scripts/
+docs/
