@@ -1,5 +1,75 @@
 # CartiGSFM - Cartilage Gene-Set Foundation Model (work in progress)
 
+## cartigsfm package v0.6.1 (this directory)
+
+The `cartigsfm/` Python package in this repository is the runtime artifact;
+the `data/processed/` corpus described further down is the offline research
+layer that feeds it. After `pip install -e .` you get a CLI plus a small
+inference stack:
+
+- **Three-layer dictionary v1.8.6 (53 axes)** at
+  `cartigsfm/resources/dictionary_v1/cartilage_dictionary_v1.json`
+  - 10 `cell_subtype` axes (Effector_Metabolic / Progenitor / Homeostatic /
+    Hypoxic / Metabolic_Stress / Inflammatory_Response /
+    Prehypertrophic_Matrix / Fibrocartilage / Superficial_Zone /
+    Reparative_Stress Chondrocytes), rebuilt from a balanced acc_new
+    wilcoxon DE pass (v1.8.4), refit on in-domain EBR DE for the 7
+    EBR-present axes (v1.8.5), and cross-injected with mutual anti
+    markers (v1.8.6 P-D triangulation).
+  - 4 `tissue_developmental_state` axes including
+    `Nasal_Septum_Cartilage`, built from EBR nose-vs-(ear+rib) GPU
+    Mann-Whitney U with 10 anatomical anchors + 10 data-driven markers.
+  - 39 `functional_axis` entries spanning cartilage development,
+    signalling, OA biology, and a 10-axis metabolism block (Glycolysis,
+    OxPhos, TCA, PPP, FAO, Lipogenesis, Cholesterol, Lipid_Droplet,
+    Glutaminolysis, Mitochondrial_Biogenesis).
+- **Bundled cs_classifier_v1** at
+  `cartigsfm/resources/cs_classifier_v1/`:
+  `classifier.pt` (v1, 0.85M params, 384/192 MLP) +
+  `classifier_v2.pt` (v2, 1.7M params, 512/256 MLP with Gaussian-noise +
+  MixUp augmentation) + `hvg_genes.tsv` (2000 HVG basis on
+  acc_new var ∩ EBR var).
+  - EBR within-cluster cell-level holdout: v1 76.6% / v2 76.9% /
+    **ensemble 77.6%**; within-cluster cluster top-1: v1 76.2% /
+    ensemble 76.2%.
+  - EBR leave-batch-out (held-out tissue) mean cell accuracy: v1 48.8% /
+    **v2 57.5%**. See [reports/P_F_TRAINING_REPORT.md](reports/P_F_TRAINING_REPORT.md).
+- **CLI commands** (all also importable from `cartigsfm.*`):
+  ```
+  cartigsfm dictionary-v1                                  # axis summary
+  cartigsfm score --query genes.txt                        # subtype/function score from a gene list
+  cartigsfm function-score --genes COL2A1,ACAN,SOX9
+  cartigsfm project --matrix bulk.tsv --out scores.tsv     # bulk projection
+  cartigsfm cs-predict --h5ad your.h5ad --out preds.tsv \  # P-F per-cell prediction
+      --layer log1p_norm --mode ensemble --device cuda
+  cartigsfm p4-project --h5ad your.h5ad --outdir P4_out \
+      --sample-col sample --tissue-col tissue --cluster-col cluster
+  cartigsfm annotate --p4-outdir P4_out --method all       # P15 cross-method
+  cartigsfm interpret --p4-outdir P4_out                   # evidence-constrained
+  cartigsfm scgpt-pretrain ...                             # P16 small-transformer MLM
+  cartigsfm train-fusion ...                               # P17 fusion ablation
+  cartigsfm p6-info | rag-info | claim-check | p9-info | p9-eval
+  cartigsfm agent                                          # LLM tool-use over CartiGM
+  ```
+- **Tests**: `python -m unittest discover -s tests` -> 78 unit tests pass
+  (skipped=18 for R-backend / heavy-GPU paths). The bundled checkpoint and
+  HVG basis are exercised by `tests/test_cs_classifier.py`.
+- **Changelog (most recent first)**:
+  - v0.6.1 - cs_classifier v2 + softmax-average ensemble; LBO
+    cross-tissue 48.8% -> 57.5%; within-cluster cell 76.6% -> 77.6%.
+  - v0.6.0 - dictionary v1.8.6 + bundled cs_classifier_v1 (v1) +
+    `cartigsfm cs-predict` CLI; new modules ablation / agent / annotate /
+    fusion / gsfm / interpret / scgpt / scgpt_pretrain.
+  - v0.5.0 - tissue_developmental_state::Nasal_Septum_Cartilage axis.
+  - v0.4.0 - initial bundled three-layer dictionary + P4/P6/P9 RAG /
+    LoRA metadata loaders.
+
+The text below this section describes the offline research corpus
+(`data/processed/`) that the dictionary was mined from; it is preserved
+for traceability and is not required to use the installed package.
+
+---
+
 A cartilage-domain foundation model in the spirit of GSFM
 ([Patterns 2026, doi:10.1016/j.patter.2026.101565](https://doi.org/10.1016/j.patter.2026.101565)),
 specialised to chondrocyte / cartilage / OA biology. This repo is the
