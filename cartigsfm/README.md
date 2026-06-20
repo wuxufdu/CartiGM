@@ -103,3 +103,60 @@ panel) is preserved for backward compatibility.
 `Avascular_Antimineralization`, a literature-prior cartilage identity axis
 represented by genes such as `MGP`, `CNMD`, `TNMD`, `TIMP3`, `TNFRSF11B`,
 `ANKH`, `ENPP1`, `FRZB`, `SOX9`, and `ACAN`.
+
+## P15: cluster-level annotation with cross-method comparison
+
+`cartigsfm.annotate` ships one entry point that runs a query h5ad through
+seven backends and writes a pairwise agreement matrix. Real CellTypist,
+the bundled deterministic scGPT proxy, the CartiGM P4 dictionary
+projection, the marker-only dictionary re-projection, a GPTcelltype
+prompt builder, and four R-only placeholders (SingleR / scmap / Symphony
+/ CellAssign) are all surfaced through the same function signature.
+
+```bash
+# annotate EBR using every working backend, with the bundled v1
+# dictionary as the ground truth and acc.chongdrocyte_subtype as the
+# CellTypist reference labels
+python -m cartigsfm annotate --method all \
+    --p4-outdir F:/cartifm/outputs/P4_EBR_real_validation \
+    --query-h5ad F:/cartifm/outputs/EBR/EBR.h5ad \
+    --reference-h5ad F:/cartifm/acc.h5ad \
+    --reference-label-col chongdrocyte_subtype \
+    --cluster-col leiden_res0_5 \
+    --out F:/cartifm/CartiGM/reports/P15_ANNOTATION_COMPARISON.md \
+    --max-reference-cells 20000 \
+    --device cuda:0
+
+# single-method quick run (e.g. only the bundled scGPT proxy)
+python -m cartigsfm annotate --method scgpt \
+    --query-h5ad F:/cartifm/outputs/EBR/EBR.h5ad \
+    --cluster-col leiden_res0_5 \
+    --per-cluster-tsv F:/cartifm/outputs/EBR/ebr_scgpt.tsv
+```
+
+The `--method all` run writes:
+
+- `annotation_comparison_long.tsv` long-form `(method, cluster, label)`
+- `annotation_comparison_wide.tsv` per-cluster wide table
+- `annotation_comparison_pairwise.tsv` pairwise agreement matrix
+- `annotation_comparison_summary.json` n_clusters_per_method + agreement
+- `P15_ANNOTATION_COMPARISON.md` human-readable report (also at
+  `reports/P15_ANNOTATION_COMPARISON.md` for the canonical EBR run)
+- `annotation_gptcelltype_prompts.tsv` prompt-only fallback for GPTcelltype
+
+EBR does not ship with curator cell-type labels, so the comparison is
+reported as **pairwise agreement with the CartiGM `cartigsm` branch as
+the reference**. For a true head-to-head benchmark against a labelled
+atlas, run `cartigsfm annotate ... --reference-h5ad <labelled_atlas>`
+on the labelled atlas instead of on EBR.
+
+### GPU note
+
+All training-capable entry points accept `--device` (default: `cuda:0`
+if a CUDA device is reachable, `mps` on Apple Silicon, `cpu` otherwise).
+`cartigsfm.prefer_device()` and `cartigsfm.device_summary()` are the
+underlying helpers. CellTypist v1.7.1 uses scikit-learn's `SGDClassifier`
+under the hood, which is CPU-only; the device argument is recorded in
+the returned note but training stays on CPU. For a GPU-runnable
+cell-typing path, load real scGPT-human weights and call them directly;
+the bundled scGPT branch is a deterministic proxy marked `fallback=True`.

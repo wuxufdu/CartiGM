@@ -163,3 +163,40 @@ def p9_is_adapter_available(adapter_dir: str | os.PathLike[str] | None = None) -
         (path / "adapter_model.safetensors").exists()
         or (path / "adapter_model.bin").exists()
     )
+def prefer_device(explicit: Optional[str] = None) -> str:
+    """Pick the best available torch device, preferring CUDA.
+
+    The user wants all training to run on GPU when possible. This helper
+    resolves to ``"cuda:0"`` when a CUDA device is reachable, falls back
+    to MPS on Apple Silicon, and finally to ``"cpu"``. The ``explicit``
+    argument wins, so callers can still force ``"cpu"`` in tests.
+    """
+    if explicit:
+        return str(explicit)
+    try:
+        import torch
+    except Exception:
+        return "cpu"
+    try:
+        if hasattr(torch, "cuda") and torch.cuda.is_available():
+            return "cuda:0"
+        if hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
+            return "mps"
+    except Exception:
+        return "cpu"
+    return "cpu"
+
+
+def device_summary(device: Optional[str] = None) -> Dict[str, Any]:
+    """Tiny summary dict for the chosen device, useful in tool notes."""
+    chosen = prefer_device(device)
+    info: Dict[str, Any] = {"device": chosen}
+    try:
+        import torch
+        info["torch_version"] = getattr(torch, "__version__", "")
+        if chosen.startswith("cuda"):
+            info["cuda_device_count"] = int(torch.cuda.device_count())
+            info["cuda_device_name"] = torch.cuda.get_device_name(0)
+    except Exception:
+        pass
+    return info

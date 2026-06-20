@@ -81,6 +81,11 @@ claim = cartigsfm.find_claim_safety(
 p9 = cartigsfm.load_p9_training_config()
 p9_metrics = cartigsfm.load_p9_model_comparison()
 adapter_available = cartigsfm.p9_is_adapter_available()
+interp = cartigsfm.interpret_gene_list(["MGP", "CNMD", "LECT1", "TIMP3",
+                                         "ANKH", "ENPP1", "TNFRSF11B",
+                                         "FRZB", "SOX9", "ACAN"])
+safe = cartigsfm.apply_safety_filter(interp)
+print(cartigsfm.render_markdown(safe))
 ```
 
 Useful CLI commands:
@@ -122,6 +127,249 @@ cartigsfm p4-project \
 
 The command writes all three-layer scores, top assignments, tissue summaries,
 marker validation tables, and a conservative P4 report.
+
+## Evidence-constrained interpretation
+
+`cartigsfm interpret` turns gene-list scores or P4 score tables into
+evidence-constrained biological interpretations. Every output is
+anchored in `cartilage_dictionary_v1`, the P6 CartiGSFM-RAG claim
+safety classifier, and the P9 hard constraints from the LoRA model
+card, so overclaim about external validation, LLM training, or
+therapeutic targets is blocked at the source.
+
+Three input modes are supported:
+
+- `--mode genes` (with `--genes` or `--gene-file`) scores a gene list
+  against the curated `core_genes` of every v1 axis. Useful for
+  one-off queries such as "what does this set of 10 AvAm genes look
+  like in the dictionary".
+- `--mode p4-dir` reads `tsv/p4_sample_cluster_three_layer_scores.tsv`
+  from a previous `p4-project` outdir and groups the highest scoring
+  sample-cluster per axis.
+- `--mode p4-csv` reads an arbitrary long-form score table with
+  `axis_id` and `score` columns (and optional `layer`, `sample`).
+
+Every interpretation surfaces, per layer, the safety classification of
+each axis (`PENDING_INDEPENDENT_VALIDATION` for production axes,
+`SUPPLEMENTARY_ONLY` for reference, `EXPLORATORY` for
+literature-prior). It also reports, for each axis, the recommended and
+forbidden wording pulled from the bundled evidence cards.
+
+Free-text claims can be audited against the same P6 / P9 safety
+metadata with `--claim` (repeatable). Each claim is classified as one
+of `NOT_SUPPORTED`, `UNREVIEWED`, or matched against an exact entry in
+`p6_claim_safety_classifier.json`. Claims that fail the safety filter
+are listed under `Cannot Claim` and trigger a warning.
+
+Example: a 10-gene AvAm panel
+
+```bash
+cartigsfm interpret \
+  --mode genes \
+  --genes "MGP,CNMD,LECT1,TIMP3,ANKH,ENPP1,TNFRSF11B,FRZB,SOX9,ACAN" \
+  --claim "MGP is a therapeutic target for OA" \
+  --claim "CartiGSFM is a trained cartilage LLM" \
+  --claim "Avascular_Antimineralization is increased in OA" \
+  --format markdown
+```
+
+Example: a real P4 self-validation outdir
+
+```bash
+cartigsfm p4-project \
+  --h5ad self_data.h5ad \
+  --sample-col sample --tissue-col tissue --cluster-col cluster \
+  --outdir cartigsfm_p4_independent_validation_delivery
+
+cartigsfm interpret \
+  --mode p4-dir \
+  --input cartigsfm_p4_independent_validation_delivery \
+  --format markdown \
+  --out p4_interpretation.md
+```
+
+The same flow is available programmatically via
+`interpret_gene_list`, `interpret_p4_dir`, `interpret_p4_csv`,
+`classify_claim`, and `apply_safety_filter`.
+
+## CartiAgent: LLM-driven tool use (P11)
+
+`cartigsfm.agent` is the small LLM agent that fronts the package. It
+exposes a stable 5-tool schema (`TOOL_SCHEMA` in Python) and a CLI:
+
+| tool | what it does |
+| --- | --- |
+| `cartigm_score(genes, top_per_layer, overall_top)` | score a gene list against the 42 axes, return safety + evidence + experiment |
+| `p4_project(h5ad_path, outdir, ...)` | run a P4 self-validation projection and return the file paths |
+| `rag_evidence_lookup(query)` | P6 RAG evidence cards + claim safety for an axis or free-text topic |
+| `gsfm_score(genes, axis_id=None, top_n=5)` | GSFM branch: gene-set / axis similarity (weighted Jaccard on `core_genes`) |
+| `scgpt_encode(h5ad_path, cluster_col="cluster")` | scGPT branch: per-cluster axis embedding from h5ad or DataFrame |
+
+The keyword dispatcher (`run_query_keyword`) routes by simple tokens
+("p4" / "h5ad" / "self-validation" -> p4_project, "gsfm" /
+"axis similarity" -> gsfm_score, "scgpt" / "cluster encode" ->
+scgpt_encode, "evidence" / "rag" / "claim" -> rag_evidence_lookup,
+otherwise detected gene symbols -> cartigm_score). The LLM ReAct
+loop (`run_query_llm`) drives a Qwen2.5-7B-Instruct model with
+OpenAI-compatible native function calling, max 4 iterations.
+
+```bash
+# keyword mode (default; no GPU needed)
+python -m cartigsfm agent --query "MGP CNMD ACAN enriched in cartilage"
+python -m cartigsfm agent --query "gsfm score MGP CNMD ACAN"
+python -m cartigsfm agent --query "scgpt encode my_clusters.h5ad"
+python -m cartigsfm agent --query "evidence for Avascular_Antimineralization"
+
+# LLM mode (requires a local Qwen2.5-7B-Instruct directory)
+python -m cartigsfm agent \
+    --query "Which cartilage axis best explains this AvAm panel?" \
+    --mode llm \
+    --model F:\cartifm\models\Qwen2.5-7B-Instruct
+```
+
+The agent deliberately **never invents** gene names, p-values,
+sample sizes, or therapeutic conclusions. Every tool result is
+run through `apply_safety_filter` (P9 hard-constraint list + P6
+claim-safety classifier) before the LLM sees it.
+
+## GSFM / scGPT fusion (P12 + P13)
+
+The package ships two **frozen** branches alongside the existing
+CartiGM projection:
+
+- `cartigsfm.gsfm` is the gene-set / axis embedding branch. It
+  scores a marker list against every v1 axis with a weighted
+  Jaccard coefficient on each axis's `marker_weights`, returns the
+  top axes, and exposes `gsfm_axis_embedding(axis_id)` as a
+  JSON-serializable feature dict. Use it whenever only a marker
+  list is available (no expression matrix).
+- `cartigsfm.scgpt` is the cluster expression encoder. It accepts
+  an h5ad (with `anndata`) or a raw genes-by-samples DataFrame,
+  builds a genes x cluster pseudobulk, and returns a per-cluster
+  axis embedding (mean expression of axis core_genes per cluster)
+  plus a per-cluster `top_axis_id`. Use it whenever expression
+  data is available.
+
+Both branches share the bundled v1 dictionary, the P6 axis
+evidence cards, and the P9 hard-constraint list, so the agent
+cannot make a fabricated-axis claim. Neither branch calls the
+LLM; both are deterministic feature extractors ready to be
+swapped for real GSFM PPMI+SVD or scGPT-human weights when
+available in the sandbox.
+
+```python
+import cartigsfm
+
+# GSFM branch
+top = cartigsfm.gsfm_marker_axes(
+    ["MGP", "CNMD", "TIMP3", "ANKH", "ENPP1",
+     "TNFRSF11B", "FRZB", "SOX9", "ACAN"],
+    top_n=5,
+)
+avam = cartigsfm.gsfm_axis_embedding(
+    "functional_axis::Avascular_Antimineralization"
+)
+
+# scGPT branch
+result = cartigsfm.scgpt_encode_dataframe(
+    expr_df, gene_col="gene",
+)
+for cluster_summary in result["per_cluster_summary"]:
+    print(cluster_summary["cluster"],
+          cluster_summary["top_axis_id"],
+          cluster_summary["top_score"])
+```
+
+The four-way ablation runner
+(`cartigsfm.run_ablation(outdir)` + `cartigsfm.render_ablation_markdown`)
+compares CartiGM-only, CartiGM+GSFM, CartiGM+scGPT, and the full
+stack (all three + the LLM keyword dispatch) on any P4 outdir. It
+reports top-axis accuracy against a per-tissue ground-truth set,
+evidence citation rate, hallucination rate, and P4 self-data
+consistency. CLI:
+
+```bash
+python -m cartigsfm ablation \
+    --outdir cartigsfm_p4_independent_validation_delivery \
+    --format markdown > reports/ablation_$(date +%Y%m%d).md
+```
+
+See `reports/P10_P13_INTEGRATION.md` for the full model
+architecture, the ablation table, and the limitations of the
+current proxies.
+
+
+
+## Real-data P4 + ablate-real (P14)
+
+The package can be driven against a real cartilage single-cell experiment end-to-end.
+The P4 projection turns an h5ad or pseudobulk into a three-layer
+CartiGM score table, and ablate-real compares the four
+configurations (CartiGM only, CartiGM + GSFM, CartiGM + scGPT, full
+stack + LLM agent) on top of that P4 outdir using tissue /
+celltype-annotation-based ground truth and a P6 / P9 LLM refusal
+audit.
+
+```powershell
+# 1. Inspect an h5ad before projecting; auto-detect sample / tissue / cluster columns
+python -m cartigsfm inspect-h5ad --h5ad F:\cartifm\acc.h5ad
+
+# 2. Project onto cartilage_dictionary_v1 (auto-streams if h5ad > 2 GB)
+python -m cartigsfm p4-project --h5ad F:\cartifm\acc.h5ad --sample-col orig.ident --tissue-col group --cluster-col seurat_clusters --no-celltype-filter --min-cells 50 --chunk-size 10000 --outdir F:\cartifm\outputs\P14_acc_atlas_projection
+
+# 3. Real-data ablation with annotation-based ground truth + LLM refusal audit
+python -m cartigsfm ablate-real --outdir F:\cartifm\outputs\P14_acc_atlas_projection --meta-col tissue --celltype-col cluster --out F:\cartifm\outputs\ablation_acc_real.md --json-out F:\cartifm\outputs\ablation_acc_real.json
+```
+
+p4-project writes the standard P4 delivery (pseudobulk, meta,
+three-layer scores, top assignments, tissue summary, marker
+validation, Markdown report) and ablate-real adds the four-way
+metrics + per-config top-1 + LLM refusal table.
+
+Streaming pseudobulk is the default for any h5ad > 2 GB on disk; the
+chunk size is auto-resolved from the gene panel size. Override with
+--streaming / --no-streaming / --chunk-size. The full
+real-data report is at reports/P14_REAL_DATA_ABLATION.md.
+
+## Branch provenance: real weights vs lightweight fallback
+
+The cartigsfm.gsfm (P12) and cartigsfm.scgpt (P13) branches in
+this sandbox are lightweight deterministic proxies, not the real
+foundation-model encoders. Both use the bundled
+cartilage_dictionary_v1 core_genes as the embedding basis.
+
+- cartigsfm.gsfm: weighted Jaccard on axis core_genes. Real
+  GSFM is PPMI + SVD on 13,227 cartilage gene sets; weights are not
+  bundled in this sandbox.
+- cartigsfm.scgpt: per-cluster mean core_gene expression as
+  the cluster embedding. Real scGPT-human is a transformer pretrained
+  on 33M human cells; weights are not bundled in this sandbox.
+
+ablate-real always reports which branch is a fallback. To use real
+weights when they become available, pass --use-real-scgpt-gsfm; the
+labels flip automatically and the report stops saying "lightweight
+fallback".
+
+## Tests
+
+```bash
+python -m unittest discover -s tests
+```
+
+On a fresh GitHub clone the suite runs as **17 OK / 18 skip / 0 fail / 0 error** (35 tests in total). The 18 skipped tests are guarded with `unittest.skipUnless` and require files that are intentionally not bundled in the public package because they live on the source machine only:
+
+- `data/processed/cgrm_v0.3.1_subtype_dictionary.json`
+- `data/processed/v0.6.5_function_specificity.json`
+- `scripts/63_summarize_projection_for_figures.py`
+- `scripts/64_plot_cross_tissue_projection.py`
+- `scripts/65_annotate_marker_table.py`
+- `review_p9_delivery/cartigsfm_p9_lora_training_delivery/adapter/` (LoRA adapter weights, ~16 MB)
+
+The 4 always-bundled tests cover the package version, the v0.3.1 unknown-version error path, the three-layer `cartilage_dictionary_v1` shape, and the P6 RAG / claim-safety resources. The 13 always-bundled tests in `tests/test_cartigsfm_interpret.py` cover the new evidence-constrained interpretation module: axis safety classification, claim classifier (exact-match + regex overclaim guard), gene-list scoring, P4 score-CSV interpretation, JSON and Markdown renderers.
+
+On the source machine (the original Windows workstation that produced the handoff), the same suite runs as **35 OK / 0 skip / 0 fail / 0 error** because all of the source-only files are present. The source-machine 22/22 figure in `NEXT_CODEX_HANDOFF.md` therefore remains the source of truth for the legacy tests, while the GitHub clone gives a deterministic, runnable baseline.
+
+With the P10-P13 fusion pass, the suite expands to **53 OK / 18 skip / 0 fail / 0 error** (71 tests in total): the original 4 + 18 interpret + 13 agent + 11 GSFM + 7 scGPT. The 18 skip count is unchanged (still source-machine files only). The 4-way ablation runner (`cartigsfm.ablation`) is exercised via the CLI rather than unit tests because it depends on a real P4 outdir.
 
 ## Benchmark
 

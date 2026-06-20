@@ -29,5 +29,30 @@ build/
 dist/
 .ipynb_checkpoints/
 .DS_Store
-scripts/
+scripts/__pycache__/
 docs/
+
+# Local scratch / patch helpers (keep out of repo)
+_apply_*.py
+_check_*.py
+_patch_*.py
+_inspect_*.py
+day1_*.py
+day1_*.log
+day1_*.err
+day1_*.out
+install.log
+install.err
+test_*.log
+interpret_test_*.log
+smoke_*.py
+
+# Per-axis backups produced by dictionary install scripts
+cartigsfm/resources/dictionary_v1/*.bak
+cartigsfm/resources/rag_v1/*.bak
+
+# Demo / e2e working dir
+cartigsfm_p4_e2e_demo/
+demo_e2e_*.py
+demo_genes.md
+cartigsfm_p4_e2e_interpretation.md

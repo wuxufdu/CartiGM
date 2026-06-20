@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cartigsfm"
-version = "0.4.0"
+version = "0.6.0"
 description = "Cartilage-domain gene-set foundation model utilities"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -28,4 +28,6 @@ cartigsfm = [
     "resources/p9_v1/config/*.json",
     "resources/p9_v1/docs/*.md",
     "resources/p9_v1/tsv/*.tsv",
+    "resources/cs_classifier_v1/*.pt",
+    "resources/cs_classifier_v1/*.tsv",
 ]
