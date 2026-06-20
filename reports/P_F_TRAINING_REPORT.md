@@ -57,12 +57,47 @@ The trained classifier improves cluster top-1 by **+31 pp**.
 No celltype falls below 70%; Homeostatic - the residual confusion in v1.8.5
 (27% top-1 cell) - climbs to 78.4%.
 
-## 5. Caveats
+## 5. Cross-batch (LBO) and v2 augmentation
 
-- The hold-out is cell-level within each (batch, cluster) unit. Cluster-level
-  hold-out turned out too hard because acc and EBR have systematic
-  cluster-specific batch shifts; the learned model still relies on having
-  *seen* a few cells from each EBR cluster during training.
+The within-cluster cell-level holdout reuses cells from each EBR
+(batch, cluster) unit; it does *not* test whether the classifier extrapolates
+to a previously unseen tissue. To stress that we also ran a leave-batch-out
+evaluation that holds out ear / nose / rib in turn:
+
+| held-out batch | n_test | v1 cell acc | v2 cell acc |
+|---|---|---|---|
+| ear | 7641 | 53.6% | 67.8% |
+| nose | 16436 | 43.8% | 52.6% |
+| rib | 8204 | 49.1% | 52.1% |
+| **mean** |   | **48.8%** | **57.5%** |
+
+The v2 model adds Gaussian input noise (sigma=0.15), MixUp (alpha=0.2), a
+slightly wider hidden stack (512/256), higher dropout (0.5 / input 0.15),
+and weight_decay=3e-3 on top of an extended 100-epoch cosine schedule. It
+lifts cross-batch (LBO) accuracy by **+8.7 pp** while preserving the
+within-cluster cell-level number (76.9% vs v1 76.6%); the within-cluster
+cluster-majority drops from 76.2% to 69.0% because v2 spreads probability
+more evenly between subtypes.
+
+The bundled package therefore ships two checkpoints (`classifier.pt` =
+v1, `classifier_v2.pt` = v2) and a default ensemble that averages their
+softmaxes:
+
+| model | within-cluster cell | within-cluster cluster top-1 | LBO mean cell |
+|---|---|---|---|
+| v1 | 76.6% | 76.2% | 48.8% |
+| v2 | 76.9% | 69.0% | 57.5% |
+| **ensemble (default)** | **77.6%** | **76.2%** | n/a |
+
+`cartigsfm cs-predict` defaults to `--mode ensemble`; pass `--mode v1` for
+the older behaviour or `--mode v2` for cross-tissue queries.
+
+## 6. Caveats
+
+- The within-cluster hold-out is cell-level inside each (batch, cluster)
+  unit; the model still relies on having *seen* a few cells from each EBR
+  cluster during training. The LBO column above is the authoritative
+  cross-tissue generalization measurement.
 - The 3 atlas-only cs classes (Hypoxic / Metabolic_Stress / Superficial_Zone)
   retain the v1.8.4 acc_new-supervised dictionary panels but were not
   separately validated on EBR (EBR has none of them).
@@ -71,7 +106,7 @@ No celltype falls below 70%; Homeostatic - the residual confusion in v1.8.5
   RTX 5070 needs PyTorch >=2.7 nightly for sm_120 support and the local 4090
   was preferred for fast iteration.
 
-## 6. Artifacts
+## 7. Artifacts
 
 - `outputs/training_local/classifier.pt` - state_dict + class/gene order + config
 - `outputs/training_local/train_log.tsv` - per-epoch loss/acc/F1
@@ -81,4 +116,18 @@ No celltype falls below 70%; Homeostatic - the residual confusion in v1.8.5
 - `outputs/training_local/ebr_per_cluster.tsv` - per-(batch,cluster) majority
 - `outputs/training_local/ebr_confusion.tsv` - confusion matrix
 - `outputs/training_local/summary.json` - headline numbers
+- `outputs/training_local/lbo_v1_metrics.tsv` - v1 leave-batch-out
+- `outputs/training_local/lbo_v1_per_celltype.tsv`
+- `outputs/training_local/v2/classifier_v2.pt` - v2 augmentation checkpoint
+- `outputs/training_local/v2/lbo_metrics.tsv` - v2 leave-batch-out
+- `outputs/training_local/v2/lbo_per_celltype.tsv`
+- `outputs/training_local/v2/within_cluster_metrics.tsv`
+- `outputs/training_local/v2/within_cluster_per_celltype.tsv`
+- `outputs/training_local/v2/within_cluster_per_cluster.tsv`
+- `outputs/training_local/v2/summary.json`
+- `outputs/training_local/ensemble/within_cluster_summary.tsv` - v1 / v2 / ensemble side-by-side
+- `outputs/training_local/ensemble/within_cluster_*_per_celltype.tsv`
+- `cartigsfm/resources/cs_classifier_v1/classifier.pt` - bundled v1
+- `cartigsfm/resources/cs_classifier_v1/classifier_v2.pt` - bundled v2
+- `cartigsfm/resources/cs_classifier_v1/hvg_genes.tsv` - bundled HVG basis
 - `outputs/training_subset/acc_train.npz`, `ebr_eval.npz`, `hvg_genes.tsv` - feature dumps

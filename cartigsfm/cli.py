@@ -397,17 +397,42 @@ def cmd_cs_predict(args):
     from .cs_classifier import (
         align_to_genes,
         bundled_classifier_path,
+        bundled_classifier_v2_path,
         load_classifier,
         predict_from_array,
+        predict_ensemble,
     )
 
-    ckpt = Path(args.ckpt) if args.ckpt else bundled_classifier_path()
-    if not ckpt.exists():
-        raise SystemExit(f"checkpoint not found: {ckpt}")
+    mode = (args.mode or "ensemble").lower()
+    if args.ckpt:
+        ckpts = [Path(args.ckpt)]
+    elif mode == "v1":
+        ckpts = [bundled_classifier_path()]
+    elif mode == "v2":
+        ckpts = [bundled_classifier_v2_path()]
+    elif mode == "ensemble":
+        ckpts = [bundled_classifier_path(), bundled_classifier_v2_path()]
+    else:
+        raise SystemExit(f"unknown --mode {mode!r}; expected v1 / v2 / ensemble")
+    for c in ckpts:
+        if not c.exists():
+            raise SystemExit(f"checkpoint not found: {c}")
 
     device = args.device or ("cuda" if torch.cuda.is_available() else "cpu")
-    sys.stderr.write(f"[cs-predict] loading classifier {ckpt} on {device}\n")
-    model, classes, genes, cfg = load_classifier(ckpt, device=device)
+    sys.stderr.write(f"[cs-predict] mode={mode} on {device}\n")
+    models = []
+    classes = None; genes = None; cfg = None
+    for c in ckpts:
+        sys.stderr.write(f"[cs-predict] loading {c}\n")
+        m, cls_, g_, cfg_ = load_classifier(c, device=device)
+        models.append(m)
+        if classes is None:
+            classes, genes, cfg = cls_, g_, cfg_
+        else:
+            if list(cls_) != list(classes):
+                raise SystemExit("class order mismatch across ensemble checkpoints")
+            if list(g_) != list(genes):
+                raise SystemExit("HVG order mismatch across ensemble checkpoints")
 
     sys.stderr.write(f"[cs-predict] reading h5ad {args.h5ad}\n")
     adata = ad.read_h5ad(args.h5ad)
@@ -432,9 +457,14 @@ def cmd_cs_predict(args):
     )
 
     sys.stderr.write("[cs-predict] running forward pass\n")
-    idx, probs = predict_from_array(
-        X_aligned, model, classes, device=device, batch_size=int(args.batch_size)
-    )
+    if len(models) == 1:
+        idx, probs = predict_from_array(
+            X_aligned, models[0], classes, device=device, batch_size=int(args.batch_size)
+        )
+    else:
+        idx, probs = predict_ensemble(
+            X_aligned, models, classes, device=device, batch_size=int(args.batch_size)
+        )
     pred = np.array(classes)[idx]
 
     obs_index = list(adata.obs_names)
@@ -945,6 +975,12 @@ def main():
     csp.add_argument("--h5ad", required=True, help="input h5ad")
     csp.add_argument("--out", required=True, help="output TSV (per-cell predictions + class probabilities)")
     csp.add_argument(
+        "--mode",
+        default="ensemble",
+        choices=["v1", "v2", "ensemble"],
+        help="which bundled checkpoint to use (default: ensemble = v1 + v2 average softmax)",
+    )
+    csp.add_argument(
         "--layer",
         default=None,
         help="adata layer to use (default: .X). For EBR-style data with negative .X use 'log1p_norm'.",
@@ -952,7 +988,7 @@ def main():
     csp.add_argument(
         "--ckpt",
         default=None,
-        help="override checkpoint path (default: bundled cs_classifier_v1/classifier.pt)",
+        help="override checkpoint path (single checkpoint, takes precedence over --mode)",
     )
     csp.add_argument(
         "--device",

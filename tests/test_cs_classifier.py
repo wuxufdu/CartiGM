@@ -50,5 +50,33 @@ class TestCSClassifierLoader(unittest.TestCase):
         self.assertTrue(np.all(Xa[:, 50:] == 0.0))
 
 
+    def test_v2_checkpoint_loads_and_ensemble_predicts(self) -> None:
+        import numpy as np
+        from cartigsfm.cs_classifier import (
+            bundled_classifier_path,
+            bundled_classifier_v2_path,
+            load_classifier,
+            predict_ensemble,
+        )
+        v1 = bundled_classifier_path()
+        v2 = bundled_classifier_v2_path()
+        if not (v1.exists() and v2.exists()):
+            self.skipTest("v1 or v2 checkpoint missing")
+        try:
+            import torch  # noqa: F401
+        except Exception:
+            self.skipTest("torch unavailable")
+        m1, c1, g1, cfg1 = load_classifier(v1, device="cpu")
+        m2, c2, g2, cfg2 = load_classifier(v2, device="cpu")
+        self.assertEqual(c1, c2)
+        self.assertEqual(g1, g2)
+        X = np.zeros((3, len(g1)), dtype=np.float32)
+        idx, probs = predict_ensemble(X, [m1, m2], c1, device="cpu")
+        self.assertEqual(idx.shape, (3,))
+        self.assertEqual(probs.shape, (3, len(c1)))
+        for row_sum in probs.sum(axis=1):
+            self.assertAlmostEqual(float(row_sum), 1.0, places=4)
+
+
 if __name__ == "__main__":
     unittest.main()

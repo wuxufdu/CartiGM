@@ -15,7 +15,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from importlib import resources
 from pathlib import Path
-from typing import List, Sequence
+from typing import List, Sequence, Tuple
 
 import numpy as np
 import torch
@@ -65,6 +65,7 @@ def load_classifier(ckpt_path: str | Path, device: str | torch.device | None = N
         hidden1=int(cfg_d.get("hidden1", 384)),
         hidden2=int(cfg_d.get("hidden2", 192)),
         dropout=float(cfg_d.get("dropout", 0.4)),
+        input_dropout=float(cfg_d.get("input_dropout", 0.1)),
     )
     model = CSClassifier(cfg)
     model.load_state_dict(ckpt["state_dict"])
@@ -80,6 +81,20 @@ def bundled_classifier_path() -> Path:
     """Return the filesystem path of the bundled v1 classifier checkpoint."""
     p = resources.files("cartigsfm").joinpath(
         "resources", "cs_classifier_v1", "classifier.pt"
+    )
+    return Path(str(p))
+
+
+def bundled_classifier_v2_path() -> Path:
+    """Return the filesystem path of the bundled v2 augmentation checkpoint.
+
+    The v2 checkpoint trades a small within-cluster gain for a much higher
+    cross-batch (LBO) accuracy. Use it on its own for cross-tissue queries,
+    or average it with v1 via :func:`predict_ensemble` for a stronger
+    within-cluster decision.
+    """
+    p = resources.files("cartigsfm").joinpath(
+        "resources", "cs_classifier_v1", "classifier_v2.pt"
     )
     return Path(str(p))
 
@@ -148,3 +163,28 @@ def predict_from_array(
             out_idx[i:i + batch_size] = logits.argmax(dim=1).cpu().numpy()
             out_probs[i:i + batch_size] = probs.cpu().numpy()
     return out_idx, out_probs
+
+
+def predict_ensemble(
+    X: np.ndarray,
+    models: Sequence[CSClassifier],
+    classes: Sequence[str],
+    device: str | torch.device | None = None,
+    batch_size: int = 4096,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Average-softmax ensemble across multiple checkpoints.
+
+    Each model in ``models`` must share the same class order. Caller is
+    responsible for aligning columns to that shared HVG basis.
+    """
+    device = device or ("cuda" if torch.cuda.is_available() else "cpu")
+    n = X.shape[0]; n_classes = len(classes)
+    acc = np.zeros((n, n_classes), dtype=np.float32)
+    with torch.no_grad():
+        for m in models:
+            m = m.to(device)
+            for i in range(0, n, batch_size):
+                xb = torch.from_numpy(X[i:i + batch_size].astype(np.float32)).to(device)
+                acc[i:i + batch_size] += torch.softmax(m(xb), dim=1).cpu().numpy()
+    acc /= float(len(models))
+    return acc.argmax(axis=1), acc
