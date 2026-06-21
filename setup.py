@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="cartigsfm",
-    version="0.6.0",
+    version="0.6.1",
     description="Cartilage-domain gene-set foundation model utilities",
     long_description=open("README.md", encoding="utf-8").read() if __import__("pathlib").Path("README.md").exists() else "",
     long_description_content_type="text/markdown",

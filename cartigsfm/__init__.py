@@ -1,4 +1,4 @@
-﻿"""CartiGSFM: cartilage-domain gene-set foundation model utilities.
+"""CartiGSFM: cartilage-domain gene-set foundation model utilities.
 
 Public API:
    load_dictionary(version="v0.3.1") -> dict
@@ -118,7 +118,7 @@ from .ablation import (
    run_ablation_real,
 )
 
-__version__ = "0.5.0"
+__version__ = "0.6.1"
 __all__ = [
    "load_dictionary",
    "load_specificity",
