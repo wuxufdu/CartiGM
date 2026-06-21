@@ -1,0 +1,82 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<title>CartiGM Flow</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>body{margin:0;padding:20px;font-family:sans-serif;background:#fff;}
+.mermaid{display:flex;justify-content:center;}</style>
+</head><body><div class="mermaid">flowchart TB
+    subgraph DATA["Data Sources"]
+        A1["Public Cartilage Atlas<br/>acc_new.h5ad<br/>416k cells / 10 subtypes"]
+        A2["In-house EBR scRNA<br/>EBR.h5ad<br/>32k cells / ear+nose+rib"]
+        A3["Literature Gene-Set Corpus<br/>13k cartilage gene sets"]
+    end
+
+    subgraph DICT["Three-Layer Dictionary v1.8.6 - 53 Axes"]
+        D1["cell_subtype - 10 axes<br/>Effector_Metabolic / Progenitor /<br/>Homeostatic / Hypoxic / Metabolic_Stress /<br/>Inflammatory / Prehypertrophic /<br/>Fibrocartilage / Superficial_Zone / Reparative_Stress"]
+        D2["tissue_developmental_state - 4 axes<br/>Hyaline_Articular / Elastic_Auricular /<br/>Fibrocartilage_Meniscus / Nasal_Septum"]
+        D3["functional_axis - 39 axes<br/>Dev/ECM/Signaling/Inflammation/<br/>Senescence/Apoptosis/Metabolism(Glycolysis/<br/>OXPHOS/TCA/PPP/FAO/Lipogenesis/Cholesterol/LipidDroplet)/<br/>OA/RA"]
+    end
+
+    subgraph BUILD["Dictionary Construction & Iteration"]
+        B1["v1.1 marker/anti overlap fix"]
+        B2["v1.2 Nasal septum axis<br/>EBR GPU Mann-Whitney U + FDR"]
+        B3["v1.4 merge atlas markers"]
+        B4["v1.6 axis_id literature rename"]
+        B5["v1.7 extend 10 metabolism axes"]
+        B6["v1.8.4 acc_new all 10 axes<br/>supervised Wilcoxon DE rebuild"]
+        B7["v1.8.5 EBR 7 axes<br/>in-domain DE refit"]
+        B8["v1.8.6 P-D anti-marker<br/>triangulation anti-leakage"]
+        B1 --> B2 --> B3 --> B4 --> B5 --> B6 --> B7 --> B8
+    end
+
+    subgraph P4["P4 Independent Validation"]
+        P1["pseudobulk aggregation<br/>batch x cluster"]
+        P2["z-score + dictionary projection<br/>core/panel/anti scoring"]
+        P3["top-1 accuracy report"]
+        P1 --> P2 --> P3
+    end
+
+    subgraph PF["P-F Model Training - GPU 4090"]
+        F1["HVG 2000 features<br/>acc∩EBR gene intersection 28k"]
+        F2["acc 63k + EBR 32k<br/>joint supervised training"]
+        F3["v1 MLP<br/>2000→384→192→10<br/>0.85M params 60ep"]
+        F4["v2 MLP + MixUp + noise<br/>100ep + LBO eval"]
+        F5["ensemble<br/>v1+v2 softmax average"]
+        F1 --> F2 --> F3 --> F4 --> F5
+    end
+
+    subgraph OUT["Outputs & Applications"]
+        O1["cs-predict CLI<br/>end-to-end cell classification"]
+        O2["dictionary-v1 / score<br/>gene-list scoring"]
+        O3["p4-project<br/>third-party data validation"]
+        O4["interpret / agent<br/>RAG evidence interpretation"]
+    end
+
+    A1 --> B6
+    A1 --> F2
+    A2 --> B2
+    A2 --> B7
+    A2 --> F2
+    A3 --> D3
+
+    B8 --> D1
+    B8 --> D2
+    B5 --> D3
+
+    D1 --> P2
+    D1 --> F3
+    F5 --> O1
+    D1 --> O2
+    P3 --> O3
+    D3 --> O4
+
+    P3 -.->|"v1.8.5 dict projection<br/>cell 68% / cluster 45%"| F3
+    F5 -.->|"trained<br/>cell 77.6% / cluster 76%"| O1
+
+    style DATA fill:#e8f4f8,stroke:#2196F3
+    style DICT fill:#fff3e0,stroke:#FF9800
+    style BUILD fill:#e8f5e9,stroke:#4CAF50
+    style P4 fill:#fce4ec,stroke:#E91E63
+    style PF fill:#f3e5f5,stroke:#9C27B0
+    style OUT fill:#e0f2f1,stroke:#009688</div>
+<script>mermaid.initialize({startOnLoad:true,theme:'base',themeVariables:{fontSize:'14px'},flowchart:{curve:'basis',htmlLabels:true}});</script>
+</body></html>
