@@ -6,8 +6,8 @@
     {
       "axis_id": "cell_subtype::EC_Lipo_Plasticity",
       "layer": "cell_subtype",
-      "name_en": "EC_Lipo_Plasticity",
-      "name_cn": "EC_Lipo_Plasticity",
+      "name_en": "Effector_Metabolic_Chondrocytes",
+      "name_cn": "效应代谢软骨细胞",
       "biological_scope": "Chondrocyte transcriptomic state derived from 77-sample atlas integration",
       "core_genes": [
         "ANXA5",
@@ -44,18 +44,18 @@
         "SHFM1"
       ],
       "anti_genes": [
-        "SOD2",
-        "SERPINE2",
-        "MMP3",
-        "TXN",
-        "SLC7A2",
-        "CD55",
-        "BMP2",
-        "TNFRSF11B",
-        "SAT1",
-        "WTAP"
+        "FRZB",
+        "FGFBP2",
+        "COL2A1",
+        "SMOC2",
+        "CLEC3A",
+        "OGN",
+        "CHAD",
+        "ASPN",
+        "CILP",
+        "SERPINA5"
       ],
-      "interpretation": "EC_Lipo_Plasticity",
+      "interpretation": "Effector/metabolic chondrocyte-like state enriched for ANXA5, FOSL1, HMGA1 and redox/metabolic plasticity markers; aligned with reported effector chondrocyte terminology while retaining a metabolic qualifier.",
       "limitations": [
         "Atlas-derived; experimental validation pending"
       ],
@@ -66,61 +66,69 @@
       ],
       "evidence_level": "ATLAS_INTERNAL",
       "robustness_score_correlation": null,
-      "robustness_top_label_agreement": null
+      "robustness_top_label_agreement": null,
+      "aliases": [
+        "EC_Lipo_Plasticity",
+        "Effector_Chondrocytes",
+        "ECs",
+        "Effector chondrocytes",
+        "metabolic effector chondrocytes"
+      ],
+      "naming_policy": "Literature-aligned display name; stable axis_id is retained for backwards compatibility."
     },
     {
       "axis_id": "cell_subtype::Fibro_Matrix",
       "layer": "cell_subtype",
-      "name_en": "Fibro_Matrix",
-      "name_cn": "Fibro_Matrix",
+      "name_en": "Stromal_Matrix_Chondrocytes",
+      "name_cn": "基质间质样软骨细胞",
       "biological_scope": "Chondrocyte transcriptomic state derived from 77-sample atlas integration",
       "core_genes": [
-        "CRTAC1",
         "SCARA3",
-        "TCF4",
-        "AEBP1",
-        "CHI3L2",
-        "CHI3L1",
-        "ASPN",
-        "COL12A1",
         "PLCG2",
-        "NBL1"
-      ],
-      "panel_genes": [
-        "CRTAC1",
-        "SCARA3",
-        "TCF4",
-        "AEBP1",
-        "CHI3L2",
-        "CHI3L1",
-        "ASPN",
-        "COL12A1",
-        "PLCG2",
-        "NBL1",
+        "MTRNR2L12",
         "EPB41L2",
         "COLEC12",
         "VCAM1",
-        "ABI3BP",
-        "C1R",
-        "COL1A2",
-        "TNC",
-        "ZFP36L2",
-        "LTBP3",
-        "COL3A1"
+        "LTBP2",
+        "NFIA",
+        "NTN1",
+        "SLC40A1"
+      ],
+      "panel_genes": [
+        "SCARA3",
+        "PLCG2",
+        "MTRNR2L12",
+        "EPB41L2",
+        "COLEC12",
+        "VCAM1",
+        "LTBP2",
+        "NFIA",
+        "NTN1",
+        "SLC40A1",
+        "MAF",
+        "PTPRD",
+        "CDH13",
+        "PIK3R1",
+        "PDE4D",
+        "TNRC6B",
+        "MAML2",
+        "PLAGL1",
+        "FTX",
+        "GPM6B"
       ],
       "anti_genes": [
-        "CRTAC1",
-        "HTRA1",
-        "PRG4",
-        "S100A4",
-        "FN1",
-        "CRLF1",
-        "ABI3BP",
-        "TMSB4X",
-        "TIMP3",
-        "TNXB"
+        "CLEC3A",
+        "CHAD",
+        "S100A1",
+        "FGFBP2",
+        "COL2A1",
+        "MT1G",
+        "COL9A3",
+        "PDPN",
+        "FRZB",
+        "SNORC"
       ],
-      "interpretation": "Fibro_Matrix",
+      "interpretation": "Stromal matrix chondrocyte state marked by SCARA3, COLEC12, VCAM1, LTBP2 and CDH13; interpreted as a stromal/adhesive matrix program rather than the canonical COL1A1/S100A4 fibrocartilage program.",
       "limitations": [
         "Atlas-derived; experimental validation pending"
       ],
@@ -131,13 +139,21 @@
       ],
       "evidence_level": "ATLAS_INTERNAL",
       "robustness_score_correlation": null,
-      "robustness_top_label_agreement": null
+      "robustness_top_label_agreement": null,
+      "aliases": [
+        "Fibro_Matrix",
+        "Stromal matrix chondrocytes",
+        "stromal-like chondrocytes",
+        "SCARA3_COLEC12_Stromal_Matrix",
+        "adhesive stromal-like matrix chondrocytes"
+      ],
+      "naming_policy": "Literature-aligned display name; stable axis_id is retained for backwards compatibility."
     },
     {
       "axis_id": "cell_subtype::Homeostatic_Matrix",
       "layer": "cell_subtype",
-      "name_en": "Homeostatic_Matrix",
-      "name_cn": "Homeostatic_Matrix",
+      "name_en": "Matrix_Maintenance_Chondrocytes",
+      "name_cn": "基质维持软骨细胞",
       "biological_scope": "Chondrocyte transcriptomic state derived from 77-sample atlas integration",
       "core_genes": [
         "FMOD",
@@ -145,11 +161,11 @@
         "OGN",
         "CILP2",
         "SMOC2",
-        "COL2A1",
         "CILP",
         "PRELP",
-        "SCRG1",
-        "FIBIN"
+        "FIBIN",
+        "COL11A1",
+        "PLA2G2A"
       ],
       "panel_genes": [
         "FMOD",
@@ -157,35 +173,35 @@
         "OGN",
         "CILP2",
         "SMOC2",
-        "COL2A1",
         "CILP",
         "PRELP",
-        "SCRG1",
         "FIBIN",
         "COL11A1",
-        "COL3A1",
         "PLA2G2A",
-        "MIA",
         "ASPN",
-        "SPARC",
         "CCPG1",
         "ECRG4",
         "ANGPTL2",
-        "CLEC3A"
+        "SERPINA3",
+        "CDO1",
+        "CHI3L2",
+        "COL5A2",
+        "H19",
+        "CTHRC1"
       ],
       "anti_genes": [
-        "FGFBP2",
-        "S100A1",
-        "SNORC",
-        "SERPINA1",
-        "CHAD",
-        "SCRG1",
-        "COL9A3",
-        "CLEC3A",
-        "ACAN",
-        "PDPN"
+        "COL1A1",
+        "MMP2",
+        "IGFBP5",
+        "ATF3",
+        "SERPINF1",
+        "FOSB",
+        "C11ORF96",
+        "PPP1R15A",
+        "COL14A1",
+        "BASP1"
       ],
-      "interpretation": "Homeostatic_Matrix",
+      "interpretation": "Matrix-maintenance chondrocyte state enriched for FMOD, COMP, OGN, CILP2 and SMOC2; this program is not assumed to be restricted to normal cartilage.",
       "limitations": [
         "Atlas-derived; experimental validation pending"
       ],
@@ -196,13 +212,21 @@
       ],
       "evidence_level": "ATLAS_INTERNAL",
       "robustness_score_correlation": null,
-      "robustness_top_label_agreement": null
+      "robustness_top_label_agreement": null,
+      "aliases": [
+        "Homeostatic_Matrix",
+        "Homeostatic chondrocytes",
+        "HomC",
+        "HomCs",
+        "matrix maintenance chondrocytes"
+      ],
+      "naming_policy": "Literature-aligned display name; stable axis_id is retained for backwards compatibility."
     },
     {
       "axis_id": "cell_subtype::Hypoxia_Adaptive",
       "layer": "cell_subtype",
-      "name_en": "Hypoxia_Adaptive",
-      "name_cn": "Hypoxia_Adaptive",
+      "name_en": "Hypoxic_Chondrocytes",
+      "name_cn": "低氧适应软骨细胞",
       "biological_scope": "Chondrocyte transcriptomic state derived from 77-sample atlas integration",
       "core_genes": [
         "CIRBP",
@@ -212,9 +236,9 @@
         "VEGFA",
         "PGK1",
         "GAS5",
-        "SNHG12",
         "MXI1",
-        "SNHG6"
+        "SNHG6",
+        "WWP2"
       ],
       "panel_genes": [
         "CIRBP",
@@ -224,7 +248,6 @@
         "VEGFA",
         "PGK1",
         "GAS5",
-        "SNHG12",
         "MXI1",
         "SNHG6",
         "WWP2",
@@ -233,24 +256,25 @@
         "APOD",
         "EIF4B",
         "FAM162A",
-        "GPX3",
         "ADSSL1",
         "P4HA1",
-        "SMIM3"
+        "SMIM3",
+        "SYF2",
+        "NOP53"
       ],
       "anti_genes": [
-        "EPB41L4A-AS1",
-        "SNRPD2",
-        "NDRG1",
-        "SLC3A2",
-        "MIF",
-        "TAF1D",
-        "ANP32B",
-        "GSTO1",
-        "RSL24D1",
-        "EIF3I"
+        "PRG4",
+        "COL1A1",
+        "COL14A1",
+        "MMP2",
+        "SERPINF1",
+        "IGFBP5",
+        "TMSB4X",
+        "COL1A2",
+        "TNXB",
+        "SPARCL1"
       ],
-      "interpretation": "Hypoxia_Adaptive",
+      "interpretation": "Hypoxic chondrocyte state characterized by hypoxia-adaptive markers including BNIP3, NDUFA4L2 and VEGFA.",
       "limitations": [
         "Atlas-derived; experimental validation pending"
       ],
@@ -261,61 +285,67 @@
       ],
       "evidence_level": "ATLAS_INTERNAL",
       "robustness_score_correlation": null,
-      "robustness_top_label_agreement": null
+      "robustness_top_label_agreement": null,
+      "aliases": [
+        "Hypoxia_Adaptive",
+        "Hypoxic chondrocytes",
+        "hypoxia-adaptive chondrocytes"
+      ],
+      "naming_policy": "Literature-aligned display name; stable axis_id is retained for backwards compatibility."
     },
     {
       "axis_id": "cell_subtype::Hypoxia_Metabolic_Stress",
       "layer": "cell_subtype",
-      "name_en": "Hypoxia_Metabolic_Stress",
-      "name_cn": "Hypoxia_Metabolic_Stress",
+      "name_en": "Metabolic_Stress_Chondrocytes",
+      "name_cn": "代谢应激软骨细胞",
       "biological_scope": "Chondrocyte transcriptomic state derived from 77-sample atlas integration",
       "core_genes": [
-        "EPB41L4A-AS1",
         "SNRPD2",
-        "NDRG1",
-        "SLC3A2",
         "MIF",
-        "TAF1D",
-        "ANP32B",
         "GSTO1",
         "RSL24D1",
-        "EIF3I"
+        "SNU13",
+        "SF3B5",
+        "COX7A2L",
+        "VDAC1",
+        "SF3B6",
+        "DNAJB9"
       ],
       "panel_genes": [
-        "EPB41L4A-AS1",
         "SNRPD2",
-        "NDRG1",
-        "SLC3A2",
         "MIF",
-        "TAF1D",
-        "ANP32B",
         "GSTO1",
         "RSL24D1",
-        "EIF3I",
-        "POLR1D",
-        "SNHG6",
-        "BNIP3",
         "SNU13",
-        "UPP1",
-        "GAS5",
-        "NOP53",
-        "SNHG12",
-        "SYF2",
-        "HSPA9"
+        "SF3B5",
+        "COX7A2L",
+        "VDAC1",
+        "SF3B6",
+        "DNAJB9",
+        "CIB1",
+        "UBXN1",
+        "ELOC",
+        "DHPS",
+        "LSM3",
+        "CCDC59",
+        "TOMM5",
+        "PHB2",
+        "SF3B2",
+        "BOD1"
       ],
       "anti_genes": [
-        "CIRBP",
-        "BNIP3",
-        "NDUFA4L2",
-        "EPB41L4A-AS1",
-        "VEGFA",
-        "PGK1",
-        "GAS5",
-        "SNHG12",
-        "MXI1",
-        "SNHG6"
+        "COL2A1",
+        "CHAD",
+        "COL3A1",
+        "PRG4",
+        "CILP",
+        "FRZB",
+        "HTRA1",
+        "ABI3BP",
+        "ISLR",
+        "CLEC3A"
       ],
-      "interpretation": "Hypoxia_Metabolic_Stress",
+      "interpretation": "Metabolic-stress chondrocyte state enriched for SNRPD2, MIF, GSTO1 and related stress/metabolic response markers; kept distinct from the stronger hypoxic chondrocyte axis.",
       "limitations": [
         "Atlas-derived; experimental validation pending"
       ],
@@ -326,61 +356,67 @@
       ],
       "evidence_level": "ATLAS_INTERNAL",
       "robustness_score_correlation": null,
-      "robustness_top_label_agreement": null
+      "robustness_top_label_agreement": null,
+      "aliases": [
+        "Hypoxia_Metabolic_Stress",
+        "Metabolic stress chondrocytes",
+        "stress/metabolic chondrocytes"
+      ],
+      "naming_policy": "Literature-aligned display name; stable axis_id is retained for backwards compatibility."
     },
     {
       "axis_id": "cell_subtype::Inflammatory_Remodeling",
       "layer": "cell_subtype",
-      "name_en": "Inflammatory_Remodeling",
-      "name_cn": "Inflammatory_Remodeling",
+      "name_en": "Inflammatory_Response_Chondrocytes",
+      "name_cn": "炎症应答软骨细胞",
       "biological_scope": "Chondrocyte transcriptomic state derived from 77-sample atlas integration",
       "core_genes": [
         "SOD2",
         "SERPINE2",
         "MMP3",
-        "TXN",
         "SLC7A2",
         "CD55",
-        "BMP2",
-        "TNFRSF11B",
-        "SAT1",
-        "WTAP"
+        "WTAP",
+        "G0S2",
+        "SLC39A14",
+        "IER3",
+        "PRDX1"
       ],
       "panel_genes": [
         "SOD2",
         "SERPINE2",
         "MMP3",
-        "TXN",
         "SLC7A2",
         "CD55",
-        "BMP2",
-        "TNFRSF11B",
-        "SAT1",
         "WTAP",
-        "TM4SF1",
         "G0S2",
-        "HMGA1",
-        "S100A11",
         "SLC39A14",
-        "C11orf96",
-        "TNFRSF12A",
-        "INHBA",
+        "IER3",
         "PRDX1",
-        "RAN"
+        "ICAM1",
+        "SDC4",
+        "BZW1",
+        "RCAN1",
+        "CCL20",
+        "NRP2",
+        "CAV1",
+        "TNFAIP8",
+        "LAMB3",
+        "METRNL"
       ],
       "anti_genes": [
-        "ANXA5",
-        "FOSL1",
-        "HMGA1",
-        "TXNRD1",
-        "RAN",
-        "TXN",
-        "TNFRSF12A",
-        "TUBA1C",
-        "S100A11",
-        "YBX1"
+        "COL1A2",
+        "COL1A1",
+        "CLEC3A",
+        "COL14A1",
+        "FOS",
+        "JUN",
+        "SERPINF1",
+        "ID3",
+        "S100A4",
+        "IBSP"
       ],
-      "interpretation": "Inflammatory_Remodeling",
+      "interpretation": "Inflammatory-response chondrocyte state enriched for MMP3, ICAM1, CCL20, NOS2, PTGS2 and oxidative-stress genes such as SOD2; interpreted as an inflammation-responsive state rather than an OA-specific population.",
       "limitations": [
         "Atlas-derived; experimental validation pending"
       ],
@@ -391,13 +427,21 @@
       ],
       "evidence_level": "ATLAS_INTERNAL",
       "robustness_score_correlation": null,
-      "robustness_top_label_agreement": null
+      "robustness_top_label_agreement": null,
+      "aliases": [
+        "Inflammatory_Remodeling",
+        "Inflammatory response chondrocytes",
+        "Inflammatory_Chondrocytes",
+        "InfC-like",
+        "inflammatory remodeling chondrocytes"
+      ],
+      "naming_policy": "Literature-aligned display name; stable axis_id is retained for backwards compatibility."
     },
     {
       "axis_id": "cell_subtype::Maturation_Matrix",
       "layer": "cell_subtype",
-      "name_en": "Maturation_Matrix",
-      "name_cn": "Maturation_Matrix",
+      "name_en": "Prehypertrophic_Matrix_Chondrocytes",
+      "name_cn": "前肥大化基质软骨细胞",
       "biological_scope": "Chondrocyte transcriptomic state derived from 77-sample atlas integration",
       "core_genes": [
         "FGFBP2",
@@ -428,24 +472,24 @@
         "S100B",
         "CYTL1",
         "HAPLN1",
-        "C11orf96",
+        "C11ORF96",
         "SPINT2",
         "CNMD",
         "COL2A1"
       ],
       "anti_genes": [
-        "FMOD",
-        "COMP",
-        "OGN",
-        "CILP2",
-        "SMOC2",
-        "COL2A1",
-        "CILP",
-        "PRELP",
-        "SCRG1",
-        "FIBIN"
+        "MMP2",
+        "TNC",
+        "COL1A1",
+        "PRG4",
+        "COL14A1",
+        "IGFBP5",
+        "COL1A2",
+        "VCAM1",
+        "ASPN",
+        "SERPINF1"
       ],
-      "interpretation": "Maturation_Matrix",
+      "interpretation": "Prehypertrophic matrix chondrocyte state with strong cartilage matrix maturation markers and supportive hypertrophic/mineralization-associated signals including COL10A1, IBSP and SPP1.",
       "limitations": [
         "Atlas-derived; experimental validation pending"
       ],
@@ -456,13 +500,21 @@
       ],
       "evidence_level": "ATLAS_INTERNAL",
       "robustness_score_correlation": null,
-      "robustness_top_label_agreement": null
+      "robustness_top_label_agreement": null,
+      "aliases": [
+        "Maturation_Matrix",
+        "pre-hypertrophic chondrocytes",
+        "preHTC-like",
+        "hypertrophic-like chondrocytes",
+        "matrix maturation chondrocytes"
+      ],
+      "naming_policy": "Literature-aligned display name; stable axis_id is retained for backwards compatibility."
     },
     {
       "axis_id": "cell_subtype::Mesenchymal_Remodeling",
       "layer": "cell_subtype",
-      "name_en": "Mesenchymal_Remodeling",
-      "name_cn": "Mesenchymal_Remodeling",
+      "name_en": "Fibrocartilage_Chondrocytes",
+      "name_cn": "纤维软骨样软骨细胞",
       "biological_scope": "Chondrocyte transcriptomic state derived from 77-sample atlas integration",
       "core_genes": [
         "TMSB4X",
@@ -499,18 +551,18 @@
         "BASP1"
       ],
       "anti_genes": [
-        "CRTAC1",
-        "HTRA1",
-        "PRG4",
-        "S100A4",
-        "FN1",
-        "CRLF1",
-        "ABI3BP",
-        "TMSB4X",
-        "TIMP3",
-        "TNXB"
+        "COL2A1",
+        "CHAD",
+        "COL9A3",
+        "CLEC3A",
+        "MT1G",
+        "FRZB",
+        "S100A1",
+        "FGFBP2",
+        "COL11A2",
+        "MIA"
       ],
-      "interpretation": "Mesenchymal_Remodeling",
+      "interpretation": "Fibrocartilage chondrocyte state marked by a fibro-mesenchymal remodeling program including COL1A1, COL1A2, COL14A1, MMP2, S100A4, VCAN and COL6 family genes.",
       "limitations": [
         "Atlas-derived; experimental validation pending"
       ],
@@ -521,61 +573,69 @@
       ],
       "evidence_level": "ATLAS_INTERNAL",
       "robustness_score_correlation": null,
-      "robustness_top_label_agreement": null
+      "robustness_top_label_agreement": null,
+      "aliases": [
+        "Mesenchymal_Remodeling",
+        "Fibro_Mesenchymal_Remodeling",
+        "Fibrocartilage chondrocytes",
+        "FC",
+        "FCs"
+      ],
+      "naming_policy": "Literature-aligned display name; stable axis_id is retained for backwards compatibility."
     },
     {
       "axis_id": "cell_subtype::PRG4_Interface",
       "layer": "cell_subtype",
-      "name_en": "PRG4_Interface",
-      "name_cn": "PRG4_Interface",
+      "name_en": "Superficial_Zone_Chondrocytes",
+      "name_cn": "表层软骨细胞",
       "biological_scope": "Chondrocyte transcriptomic state derived from 77-sample atlas integration",
       "core_genes": [
         "CRTAC1",
         "HTRA1",
         "PRG4",
-        "S100A4",
         "FN1",
         "CRLF1",
         "ABI3BP",
-        "TMSB4X",
         "TIMP3",
-        "TNXB"
+        "TNXB",
+        "IGFBP5",
+        "CRIP1"
       ],
       "panel_genes": [
         "CRTAC1",
         "HTRA1",
         "PRG4",
-        "S100A4",
         "FN1",
         "CRLF1",
         "ABI3BP",
-        "TMSB4X",
         "TIMP3",
         "TNXB",
         "IGFBP5",
         "CRIP1",
-        "NBL1",
         "SH3BGRL3",
         "DEFB1",
         "ISLR",
         "CAPS",
         "TPPP3",
-        "TAGLN2",
-        "ACKR3"
+        "ACKR3",
+        "ITGB8",
+        "CDON",
+        "CD151",
+        "TNFAIP6"
       ],
       "anti_genes": [
-        "CRTAC1",
-        "SCARA3",
-        "TCF4",
-        "AEBP1",
-        "CHI3L2",
-        "CHI3L1",
-        "ASPN",
-        "COL12A1",
-        "PLCG2",
-        "NBL1"
+        "CLEC3A",
+        "FRZB",
+        "CHAD",
+        "ACAN",
+        "CYTL1",
+        "S100A1",
+        "COL9A3",
+        "STC2",
+        "MMP3",
+        "CNMD"
       ],
-      "interpretation": "PRG4_Interface",
+      "interpretation": "Superficial zone chondrocyte state enriched for PRG4 and interface/lubrication-associated markers, with progenitor-like features interpreted conservatively.",
       "limitations": [
         "Atlas-derived; experimental validation pending"
       ],
@@ -586,13 +646,21 @@
       ],
       "evidence_level": "ATLAS_INTERNAL",
       "robustness_score_correlation": null,
-      "robustness_top_label_agreement": null
+      "robustness_top_label_agreement": null,
+      "aliases": [
+        "PRG4_Interface",
+        "PRG4+ superficial zone chondrocytes",
+        "Superficial zone chondrocytes",
+        "SZC",
+        "lubricating superficial chondrocytes"
+      ],
+      "naming_policy": "Literature-aligned display name; stable axis_id is retained for backwards compatibility."
     },
     {
       "axis_id": "cell_subtype::Stress_IEG",
       "layer": "cell_subtype",
-      "name_en": "Stress_IEG",
-      "name_cn": "Stress_IEG",
+      "name_en": "Reparative_Stress_Chondrocytes",
+      "name_cn": "修复应激软骨细胞",
       "biological_scope": "Chondrocyte transcriptomic state derived from 77-sample atlas integration",
       "core_genes": [
         "FOS",
@@ -629,18 +697,18 @@
         "SNAI1"
       ],
       "anti_genes": [
-        "CIRBP",
-        "BNIP3",
-        "NDUFA4L2",
-        "EPB41L4A-AS1",
-        "VEGFA",
-        "PGK1",
-        "GAS5",
-        "SNHG12",
-        "MXI1",
-        "SNHG6"
+        "PRG4",
+        "IGFBP5",
+        "TNC",
+        "COL1A1",
+        "COL14A1",
+        "IGFBP4",
+        "COL1A2",
+        "S100A4",
+        "COL6A3",
+        "SERPINF1"
       ],
-      "interpretation": "Stress_IEG",
+      "interpretation": "Reparative stress chondrocyte state enriched for immediate-early and heat-shock response genes including FOS, JUNB, GADD45B, DNAJB1 and HSPA1A.",
       "limitations": [
         "Atlas-derived; experimental validation pending"
       ],
@@ -651,7 +719,15 @@
       ],
       "evidence_level": "ATLAS_INTERNAL",
       "robustness_score_correlation": null,
-      "robustness_top_label_agreement": null
+      "robustness_top_label_agreement": null,
+      "aliases": [
+        "Stress_IEG",
+        "Reparative chondrocytes",
+        "RepC-like",
+        "immediate early response chondrocytes",
+        "stress-response chondrocytes"
+      ],
+      "naming_policy": "Literature-aligned display name; stable axis_id is retained for backwards compatibility."
     },
     {
       "axis_id": "tissue_developmental_state::ElasticCartilage_Auricular",
@@ -703,7 +779,6 @@
         "SELK"
       ],
       "anti_genes": [
-        "ACAN",
         "SNORC",
         "MGP",
         "S100B",
@@ -712,7 +787,6 @@
         "COL9A3",
         "SMOC2",
         "HAPLN1",
-        "COL2A1",
         "MIA",
         "CILP",
         "FBLN1",
@@ -909,7 +983,6 @@
         "COL9A3",
         "SMOC2",
         "HAPLN1",
-        "COL2A1",
         "MIA",
         "CILP"
       ],
@@ -15783,5 +15856,49 @@
       "Inflammation_NFkB, IL1_Signaling, and TNF_Signaling are significantly increased in OA"
     ]
   },
-  "knowledge_base_complete": true
+  "knowledge_base_complete": true,
+  "dictionary_panel_qc": {
+    "repaired_at": "2026-06-19",
+    "cell_subtype_axes_rebuilt_from": "atlas_markers.csv",
+    "cell_subtype_axes_rebuilt": [
+      "cell_subtype::EC_Lipo_Plasticity",
+      "cell_subtype::Fibro_Matrix",
+      "cell_subtype::Homeostatic_Matrix",
+      "cell_subtype::Hypoxia_Adaptive",
+      "cell_subtype::Hypoxia_Metabolic_Stress",
+      "cell_subtype::Inflammatory_Remodeling",
+      "cell_subtype::Maturation_Matrix",
+      "cell_subtype::Mesenchymal_Remodeling",
+      "cell_subtype::PRG4_Interface",
+      "cell_subtype::Stress_IEG"
+    ],
+    "anti_overlap_removed_axes": {
+      "tissue_developmental_state::ElasticCartilage_Auricular": [
+        "ACAN",
+        "COL2A1"
+      ],
+      "tissue_developmental_state::Fibrocartilage_Meniscus": [
+        "COL2A1"
+      ]
+    },
+    "remaining_marker_anti_overlap_n": 0,
+    "cell_subtype_marker_policy": "Each cell_subtype core/panel marker must have its maximum atlas differential score in the same subtype; pvals_adj <= 0.05; logfoldchanges > 0; artifact genes filtered.",
+    "cell_subtype_core_marker_n": 10,
+    "cell_subtype_panel_marker_n": 20,
+    "artifact_gene_filters": [
+      "MT-*",
+      "RPS*",
+      "RPL*",
+      "MALAT1",
+      "XIST",
+      "NEAT1"
+    ],
+    "atlas_marker_table_shape": [
+      15914,
+      7
+    ],
+    "renamed_at": "2026-06-20",
+    "cell_subtype_name_policy": "Final literature-aligned display names were assigned while preserving stable axis_id values and old names as aliases.",
+    "cell_subtype_name_version": "1.4"
+  }
 }
