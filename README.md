@@ -1,269 +1,277 @@
-# CartiGSFM - Cartilage Gene-Set Foundation Model (work in progress)
+# CartiGM / CartiGSFM
 
-A cartilage-domain foundation model in the spirit of GSFM
-([Patterns 2026, doi:10.1016/j.patter.2026.101565](https://doi.org/10.1016/j.patter.2026.101565)),
-specialised to chondrocyte / cartilage / OA biology. This repo is the
-public-data half of the project: a curated, HGNC-normalised human
-cartilage gene-set corpus, a 45-category subtype + function dictionary
-mined from it, and a small two-stage embedding model on top. A
-one-command interface ingests user scRNA cluster markers and rebuilds
-the dictionary; the scRNA-derived half is being integrated on a
-separate machine and merges in via that interface.
+**CartiGM** is a cartilage-focused gene-set and single-cell interpretation framework for chondrocyte biology, cartilage tissue states, and disease-associated functional programs. It provides a curated three-layer cartilage dictionary, command-line utilities, and a lightweight local web portal for gene-list scoring, h5ad projection, annotation benchmarking, and evidence-constrained biological interpretation.
 
-## Latest version: v0.8.3
+The project is designed for cartilage single-cell and transcriptomic studies, especially analyses involving chondrocyte subtypes, auricular / hyaline / fibrocartilage tissue states, osteoarthritis-related biology, metabolic stress, ferroptosis, matrix remodeling, and cartilage-specific functional axes.
 
-### What changed since v0.8
+---
 
-- **OA dictionary rebuilt** (`scripts/22_repair_oa_dictionary.py`): the
-  v0.6 `Osteoarthritis` consensus came from DisGeNET / ChEA OA-risk
-  sets and held only 27 genes, much thinner than its functional
-  neighbours. v0.6.1 unions that with anchor-driven OA-cartilage
-  dysregulation sets (IL1/TNF cytokines, MMPs, ADAMTS, COL2A1/ACAN/COMP
-  loss, COL10A1/RUNX2 hypertrophy, CDKN1A/2A senescence). Consensus
-  27 -> 105; specificity markers 12 -> 50, top-weighted by PTGS2 / MMP3
-  / MMP1 / IL1B / IL1A / IL1RN / MMP2 / TNF.
-- **Log-space hypergeometric enrichment**: bulk DEG queries (4k+ genes)
-  used to saturate `-log10(p)` at the cap (=12) for nearly every
-  category, leaving combined ranking up to embedding alone. v0.8.2
-  switches to log-space, raises the cap to 60, and tightens the
-  normaliser. Canonical 13/13 + stress 3/3 unchanged.
-- **Leave-one-GSE-out external validation** (`scripts/21`): retrains
-  PPMI+SVD and the contrastive projection on a corpus that has the
-  target GSE removed, then classifies the held-out study's union DEG
-  query. Reports an `fn::Osteoarthritis` rank, an
-  `fn::Inflammation_NFkB` rank, and a constellation rank over the OA
-  biology axes (Inflammation_NFkB, IL1, TNF, Senescence, Apoptosis,
-  Hypoxia, Ferroptosis, MMP, ADAMTS, Hypertrophy, ECM_Organization).
-- **Holdout matrix**: `data/processed/HOLDOUT_MATRIX.md` aggregates two
-  cross-study runs:
+## Overview
 
-  | holdout    | study type                    | OA-up constellation rank | OA-dn constellation rank |
-  |------------|-------------------------------|--------------------------|--------------------------|
-  | GSE114007  | OA vs Normal cartilage        | 10 (fn::Hypoxia)         | 2 (fn::Ferroptosis)      |
-  | GSE236122  | synovial fibroblast stress    | 3 (fn::IL1_Signaling)    | 7 (fn::IL1_Signaling)    |
+CartiGM organizes cartilage biology into a **three-layer dictionary**:
 
-  See `data/processed/holdout_GSE114007/REPORT.md` and
-  `data/processed/holdout_GSE236122/REPORT.md` for full top-15 tables
-  and interpretation.
+| Layer | Content |
+|---|---|
+| **Cell subtype** | Chondrocyte states such as Effector_Metabolic, Homeostatic, Progenitor, Inflammatory_Response, Prehypertrophic_Matrix, Fibrocartilage, and Reparative_Stress chondrocytes. |
+| **Tissue / developmental state** | Cartilage tissue contexts including auricular elastic cartilage, articular hyaline cartilage, meniscus fibrocartilage, and nasal septum cartilage. |
+| **Functional axis** | 39 biological axes covering cartilage development, ECM remodeling, signaling, inflammation, OA programs, ferroptosis, senescence, hypoxia, and metabolic pathways. |
 
-| layer | what | files |
-|---|---|---|
-| corpus | 13,227 human cartilage gene sets (RummaGEO + Rummagene + Enrichr + 15 curated paper sets) | `data/processed/cartilage_genesets_v03.parquet` |
-| dictionary | 19 subtypes + 26 functions, specificity-ranked top-50 markers per category, shared cartilage/ECM core separated | `data/processed/v0.4_subtype_v05_specificity.json`, `data/processed/v0.6_function_specificity.json` |
-| provenance | per-category set_id evidence files with source / term / DOI | `data/processed/provenance/INDEX.tsv` + 45 per-category TSVs |
-| model v1 (default) | PPMI+SVD 128-dim gene+set embeddings | `data/processed/embeddings/` |
-| model v2 (opt-in) | supervised-contrastive projection trained on the 45 dictionary categories | `data/processed/embeddings_v08/` |
-| classifier | marker list -> ranked subtypes/functions, overlap + embedding + signature boost | `scripts/16_classify_marker_list.py` |
-| scRNA ingest | one-command rebuild from a user TSV of cluster markers | `scripts/19_seed_from_scrna.py` |
-| HGNC alias map | 58,409 alias -> current symbol mappings used everywhere | `data/processed/hgnc_alias_to_current.json` |
+The package includes:
 
-Earlier versions (v0.1-v0.6) are still on disk for audit; see
-`data/processed/DATASET_CARD.md` for the full version history.
+- `cartilage_dictionary_v1`: a curated 53-axis cartilage dictionary.
+- `cartigsfm score`: gene-list scoring against cartilage cell states, tissue states, and functional axes.
+- `cartigsfm p4-project`: projection of independent single-cell or pseudobulk data onto the dictionary.
+- `cartigsfm annotate`: cluster-level annotation using CartiGM and optional reference methods.
+- `cartigsfm cs-predict`: bundled chondrocyte subtype classifier.
+- `cartigsfm interpret`: evidence-constrained biological interpretation with claim-safety rules.
+- `cartigsfm-web`: a lightweight local web interface for open-source use.
 
-## Python package resources
+---
 
-`cartigsfm` 0.4.0 bundles lightweight manuscript-facing resources:
+## Installation
 
-- `cartilage_dictionary_v1.json`: three-layer cartilage dictionary with 10 cell-subtype axes, 3 tissue/developmental-state axes, and 29 functional axes.
-- P6 CartiGSFM-RAG JSON resources: knowledge base, axis evidence cards, prompt templates, and claim-safety classifier.
-- P9 CartiGSFM-LoRA prototype metadata: training config, model card, report text, and evaluation tables. Adapter weights are not bundled in the base package; use `CARTIGSFM_P9_ADAPTER_DIR` or a local P9 delivery folder.
-
-Useful Python entry points:
-
-```python
-import cartigsfm
-
-dictionary = cartigsfm.load_cartilage_dictionary_v1()
-knowledge_base = cartigsfm.load_rag_knowledge_base()
-claim = cartigsfm.find_claim_safety(
-    "CartiGSFM is a trained cartilage large language model (LLM)"
-)
-p9 = cartigsfm.load_p9_training_config()
-p9_metrics = cartigsfm.load_p9_model_comparison()
-adapter_available = cartigsfm.p9_is_adapter_available()
-```
-
-Useful CLI commands:
+Clone the repository and install the package in editable mode:
 
 ```bash
-cartigsfm dictionary-v1 --show-axes
-cartigsfm rag-info
-cartigsfm claim-check --claim "CartiGSFM is a trained cartilage large language model (LLM)"
-cartigsfm p9-info
-cartigsfm p9-eval
-cartigsfm p9-adapter-path --check
+git clone <your-repository-url>
+cd <your-repository-folder>
+pip install -e .
 ```
 
-P9 improves language-layer behavior (unsupported-claim refusal and evidence-citation style) but does not change gene-set scoring or single-cell projection scores.
+For the local web portal:
 
-For independent in-house single-cell validation, `p4-project` projects either
-an `.h5ad` file or an existing pseudobulk matrix onto all 42
-`cartilage_dictionary_v1` axes:
+```bash
+pip install -e ".[web]"
+```
+
+The core package requires Python 3.9+ and depends mainly on `numpy` and `pandas`. Some workflows, such as h5ad projection or annotation backends, may require additional scientific Python or R packages depending on the selected method.
+
+---
+
+## Quick usage
+
+### 1. Show the bundled cartilage dictionary
+
+```bash
+cartigsfm dictionary-v1
+```
+
+This summarizes the three-layer CartiGM dictionary and available axes.
+
+---
+
+### 2. Score a gene list
+
+Create a gene list file:
+
+```text
+genes.txt
+```
+
+Example content:
+
+```text
+COL2A1
+ACAN
+SOX9
+MMP13
+ADAMTS5
+IL1B
+TNF
+GPX4
+SOD2
+TXNRD1
+```
+
+Run:
+
+```bash
+cartigsfm score --query genes.txt
+```
+
+This returns ranked cartilage cell states, tissue states, and functional axes matching the input genes.
+
+---
+
+### 3. Project single-cell data onto CartiGM axes
+
+For an `.h5ad` file:
 
 ```bash
 cartigsfm p4-project \
-  --h5ad self_data.h5ad \
+  --h5ad your_data.h5ad \
   --sample-col sample \
   --tissue-col tissue \
   --cluster-col cluster \
   --celltype-col celltype \
-  --outdir cartigsfm_p4_independent_validation_delivery
+  --layer log1p_norm \
+  --outdir cartigm_p4_output
 ```
 
-If `scanpy/anndata` is not available, first create a genes x sample-cluster
-pseudobulk matrix and run:
+For a precomputed pseudobulk matrix:
 
 ```bash
 cartigsfm p4-project \
   --pseudobulk p4_self_sample_cluster_pseudobulk.tsv \
   --meta p4_self_sample_cluster_meta.tsv \
-  --outdir cartigsfm_p4_independent_validation_delivery
+  --outdir cartigm_p4_output
 ```
 
-The command writes all three-layer scores, top assignments, tissue summaries,
-marker validation tables, and a conservative P4 report.
+Main outputs include:
 
-## Benchmark
+```text
+cartigm_p4_output/tsv/p4_sample_cluster_three_layer_scores.tsv
+cartigm_p4_output/tsv/p4_sample_cluster_top_assignments.tsv
+cartigm_p4_output/tsv/p4_tissue_axis_summary.tsv
+cartigm_p4_output/docs/P4_INDEPENDENT_VALIDATION_REPORT.md
+```
 
-`scripts/17_evaluate_modelv1.py` runs three classifiers (overlap,
-embedding-only cosine, combined) against 13 held-out canonical marker
-queries plus 3 stress queries with deliberately reduced overlap to
-the dictionary.
+---
 
-|                          | v0.7.1 (PPMI+SVD) | v0.8 (contrastive) |
-|--------------------------|-------------------|--------------------|
-| canonical overlap        | 12/13             | 12/13              |
-| canonical embedding-only | 13/13             | 13/13              |
-| canonical combined       | 13/13             | 13/13              |
-| stress overlap           | 2/3               | 2/3                |
-| stress embedding-only    | 0/3               | 2/3                |
-| stress combined          | 3/3               | 3/3                |
+### 4. Annotate clusters
 
-v0.8 lifts the stress embedding-only axis from 0/3 to 2/3 (Mechano
-low-overlap and Hypoxia downstream now resolved by embedding alone)
-without regressing any other axis. Senescence SASP is still pulled by
-Autophagy on the embedding-only axis but combined still recovers via
-the SIGNATURE_BOOST table in `scripts/16`.
-
-v0.7.1 PPMI+SVD remains the default; v0.8 is opt-in via a single env
-var because it requires PyTorch.
-
-## Quick start
-
-Classify a marker list:
+After running `p4-project`, annotate clusters with CartiGM:
 
 ```bash
-# default v0.7.1 embedding (no torch dependency)
-python3 scripts/16_classify_marker_list.py PRG4 CILP CLU S100A4 TNC
-
-# v0.8 contrastive embedding
-CARTI_EMB_DIR=data/processed/embeddings_v08 \
-    python3 scripts/16_classify_marker_list.py PRG4 CILP CLU S100A4 TNC
-
-# read from a file, top-5 only, function categories
-python3 scripts/16_classify_marker_list.py --file my_markers.txt --kind function --topk 5
+cartigsfm annotate \
+  --method cartigsm \
+  --p4-outdir cartigm_p4_output \
+  --out annotation_report.md \
+  --per-cluster-tsv annotation_per_cluster.tsv
 ```
 
-Evaluate end-to-end against the held-out and stress queries:
+To run all available annotation backends:
 
 ```bash
-python3 scripts/17_evaluate_modelv1.py
-CARTI_EMB_DIR=data/processed/embeddings_v08 python3 scripts/17_evaluate_modelv1.py
+cartigsfm annotate \
+  --method all \
+  --p4-outdir cartigm_p4_output \
+  --query-h5ad your_data.h5ad \
+  --reference-h5ad reference_data.h5ad \
+  --reference-label-col celltype \
+  --cluster-col cluster \
+  --out annotation_comparison.md
 ```
 
-Older hypergeometric-only query interface (still useful for batch reports):
+---
+
+### 5. Predict chondrocyte subtypes per cell
 
 ```bash
-python3 scripts/06_query_marker_list.py CLUSTER_MARKERS.txt --top-k 25 --out results/cluster_X
+cartigsfm cs-predict \
+  --h5ad your_data.h5ad \
+  --layer log1p_norm \
+  --mode ensemble \
+  --device cuda \
+  --out cell_subtype_predictions.tsv
 ```
 
-## Plug your scRNA clusters in
+The bundled classifier is intended for chondrocyte subtype prediction and should be interpreted together with marker expression, tissue context, and manual review.
 
-Format your cluster markers as a TSV with header `cluster_id`,
-`cell_type_label`, `markers` (comma / pipe / semicolon / whitespace
-separated). Optional columns: `doi`, `study`, `function_label`. Then:
+---
+
+### 6. Generate evidence-constrained interpretation
 
 ```bash
-# full rebuild: scRNA -> v0.8 corpus -> dictionary -> embeddings
-python3 scripts/19_seed_from_scrna.py path/to/markers.tsv
-
-# stop after corpus merge (handy while debugging label normalisation)
-python3 scripts/19_seed_from_scrna.py path/to/markers.tsv --skip-pipeline
+cartigsfm interpret \
+  --mode genes \
+  --genes "COL2A1,ACAN,SOX9,MMP13,ADAMTS5,IL1B,TNF,SOD2,TXNRD1" \
+  --format markdown
 ```
 
-Labels are normalised to the 45 canonical keywords through
-`SUBTYPE_LABEL_MAP` and `FUNCTION_LABEL_MAP` in `scripts/19`; unmapped
-labels are flagged with a warning instead of silently misrouted. The
-pipeline rebuilds the v0.8 corpus, re-seeds the dictionary by reusing
-`scripts/09`, then re-runs scripts 11, 13, 10, 14, 15 to refresh the
-specificity tables and gene/set embeddings.
+This produces a conservative biological interpretation anchored in the bundled dictionary and claim-safety rules.
 
-## How it was built
+---
 
-1. v0.1 - keyword search across RummaGEO, Rummagene and Enrichr; anchor
-   seeding from 60 cartilage genes (`scripts/01-04`, 13,212 sets).
-2. v0.2 - hypergeometric feature-based expansion of v0.1 dictionary
-   entries (`scripts/07`).
-3. v0.3 - 15 curated paper-attributed marker sets (Ji 2019, Decker 2017,
-   Mizuhashi 2018, Tam 2020, Sun 2020) seed the formerly-empty subtypes;
-   expansion runs again (`scripts/08, 09`). Corpus reaches 13,227 sets.
-4. v0.4 - TF-IDF specificity replaces absolute-frequency consensus
-   (`scripts/10`): per-category top-50 markers ranked by
-   `freq * log2((freq + alpha) / (bg_freq + alpha))`, shared-core gene
-   list separated.
-5. v0.5 - IHH, FGF, Hypoxia rebuilt from narrow canonical anchors after
-   v0.4 specificity exposed label pollution; MSC_Progenitor trimmed
-   from 10,324-gene blow-out to focused surface markers (`scripts/11`).
-6. v0.6 - ADAMTS, Ferroptosis, Mechanotransduction filled
-   (`scripts/13`); MMP/ADAMTS family-prefix disambiguation enforced
-   (`scripts/14`). 13/13 canonical validation.
-7. v0.7 / v0.7.1 - PPMI+SVD gene + set embeddings (`scripts/15`);
-   classifier with HGNC alias resolver (`scripts/18`) and
-   pathway-signature TF boost. Canonical 13/13, stress 3/3 combined.
-8. v0.8 - supervised-contrastive projection trained on the dictionary
-   (`scripts/20`). Stress embedding-only 0/3 -> 2/3. scRNA ingest
-   end-to-end pipeline (`scripts/19`).
+## Local web portal
 
-`data/processed/DATASET_CARD.md` carries the long-form version history,
-schemas and build commands.
+Start the web interface:
 
-## Pipeline at a glance
-
-```
-scripts/
-  01-04   public-data fetch + HGNC normalisation
-  05-09   subtype/function dictionary scaffolding + curated seeding
-  10-14   specificity, anchor repairs, function fills, family disambiguation
-  15      PPMI+SVD gene + set embeddings (v0.7 baseline)
-  16      marker-list classifier (overlap + embedding + boost)
-  17      held-out + stress benchmark
-  18      HGNC alias map builder
-  19      scRNA cluster-marker ingest + one-command v0.8 rebuild
-  20      supervised-contrastive embedding (v0.8 model layer, opt-in)
+```bash
+cartigsfm-web
 ```
 
-## Roadmap
+Open:
 
-Next, in order:
+```text
+http://127.0.0.1:8000
+```
 
-1. Re-run `scripts/19` once real scRNA cluster markers from the other
-   machine arrive; produce a v0.8.1 corpus + dictionary + retrained
-   contrastive embeddings.
-2. Extend the supervised-contrastive head to a true GSFM-style masked
-   gene modelling pre-training pass on the corpus, then fine-tune the
-   45-category supervised head on top. This is the "foundation model"
-   step proper.
-3. External validation on OA bulk cohorts (GSE114007, GSE57218,
-   GSE169077, etc.).
+The web portal supports:
 
-## Caveats
+- gene-list scoring;
+- dictionary browsing;
+- claim checking;
+- evidence-constrained interpretation;
+- command generation for h5ad projection workflows.
 
-- Human-only by design; ortholog mapping (mouse, etc.) is deferred.
-- Some Enrichr libraries pulled by the anchor-gene step are TF-target
-  or miRNA-target rather than functional pathways; they are kept for
-  downstream multi-view modelling but excluded from pure "function" use
-  by `scripts/14`.
-- Senescence specificity is thin in the public corpus; v0.8 still
-  cannot separate Senescence from Autophagy on the embedding-only
-  axis. Combined axis recovers via signature boost; a richer Senescence
-  cluster from the user scRNA atlas should fix this in v0.8.1.
+Large `.h5ad` files are not uploaded through the web interface. For large single-cell data, use the command-line workflow locally.
+
+---
+
+## Example benchmark use case
+
+A typical validation workflow is:
+
+```bash
+# 1. Project manually annotated h5ad-derived pseudobulk onto CartiGM
+cartigsfm p4-project \
+  --pseudobulk ebr_leiden_res0_5_pseudobulk.tsv \
+  --meta ebr_leiden_res0_5_meta.tsv \
+  --outdir p4_cartigm_latest
+
+# 2. Annotate clusters
+cartigsfm annotate \
+  --method cartigsm \
+  --p4-outdir p4_cartigm_latest \
+  --out annotation_cartigsm.md \
+  --per-cluster-tsv annotation_cartigsm.tsv
+```
+
+In the current EBR manual-annotation benchmark, rerunning CartiGM on the current manually annotated `EBR.h5ad` reached:
+
+| Metric | Value |
+|---|---:|
+| Cell-weighted accuracy | 0.671 |
+| Cluster-majority accuracy | 0.800 |
+| Macro F1 | 0.714 |
+| Weighted F1 | 0.642 |
+
+These values are provided as an in-project benchmark and should not be interpreted as clinical validation.
+
+---
+
+## Project structure
+
+```text
+cartigsfm/                  Python package and CLI
+cartigsfm_web/              Local FastAPI web portal
+cartigsfm/resources/        Bundled dictionary, RAG resources, and classifiers
+data/processed/             Processed research corpus and gene-set resources
+figures/                    Generated figures and benchmark plots
+reports/                    Project reports and validation summaries
+scripts/                    Analysis and figure-generation scripts
+tests/                      Unit tests
+```
+
+---
+
+## Interpretation boundaries
+
+CartiGM is a research tool for cartilage gene-set interpretation and single-cell annotation support. It should be used as an evidence-prioritization and hypothesis-generation framework, not as a clinical diagnostic system. Functional-axis scores, cell-state assignments, and disease-associated interpretations require biological validation and expert review.
+
+---
+
+## Author
+
+**YuJie Shen**  
+PhD candidate in Otorhinolaryngology, Eye & ENT Hospital of Fudan University.  
+Research interests include inner-ear regeneration, cartilage single-cell biology, cartilage gene-set modeling, and medical AI applications in otolaryngology.
+
+Project focus: developing cartilage-domain computational models that connect public transcriptomic resources, single-cell atlases, literature-derived gene sets, and interpretable biological axes for cartilage research.
+
+---
+
+## License
+
+This project is released under the MIT License. See `LICENSE` for details.
