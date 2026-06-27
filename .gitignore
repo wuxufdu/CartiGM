@@ -1,19 +1,37 @@
 # Logs and large raw downloads
 logs/
 data/
+outputs/
+report/
+reports/
+local_tryout/
+celltype_go_meteor_out/
 
 # Smoke / scratch outputs
 /tmp/
+NUL
 
 # Research handoff / review artifacts
 handoff_*/
 review_*/
 cartigsfm_p*_delivery*.tar.gz
 *.tar.gz
+*.zip
+*.h5ad
+*.h5
+*.loom
+*.npz
+*.npy
+*.parquet
 
 # Manuscript/private working artifacts
 docs/~$*
 *.docx
+western blot/
+dotplot_marker_EBR.pdf
+*hmga1*.py
+run_celltype_go_meteor.R
+cartilage_dictionary_v1_atlas_repaired.json
 
 # Figure and notebook build outputs
 figures/
@@ -29,5 +47,32 @@ build/
 dist/
 .ipynb_checkpoints/
 .DS_Store
+scripts/__pycache__/
 scripts/
+scripts/_remote*.py
 docs/
+
+# Local scratch / patch helpers (keep out of repo)
+_apply_*.py
+_check_*.py
+_patch_*.py
+_inspect_*.py
+day1_*.py
+day1_*.log
+day1_*.err
+day1_*.out
+install.log
+install.err
+test_*.log
+interpret_test_*.log
+smoke_*.py
+
+# Per-axis backups produced by dictionary install scripts
+cartigsfm/resources/dictionary_v1/*.bak
+cartigsfm/resources/rag_v1/*.bak
+
+# Demo / e2e working dir
+cartigsfm_p4_e2e_demo/
+demo_e2e_*.py
+demo_genes.md
+cartigsfm_p4_e2e_interpretation.md

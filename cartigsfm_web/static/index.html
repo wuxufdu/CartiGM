@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CartiGM Web Portal</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Cartilage-domain gene-set foundation model</p>
+      <h1>CartiGM Web Portal</h1>
+      <p class="lead">A local, open-source interface for cartilage gene-list scoring, evidence-constrained interpretation, dictionary exploration, and safe command generation.</p>
+      <div class="status" id="status">Loading model status...</div>
+    </div>
+  </header>
+
+  <main>
+    <section class="grid two">
+      <article class="card">
+        <div class="section-title">
+          <span>1</span>
+          <h2>Gene Query</h2>
+        </div>
+        <p>Paste marker genes to rank CartiGM three-layer axes. Output is a screening hypothesis, not a causal claim.</p>
+        <textarea id="genes" spellcheck="false">COL2A1
+ACAN
+SOX9
+PRG4
+COL10A1</textarea>
+        <div class="form-row">
+          <label>Top per layer <input id="top" type="number" min="1" max="50" value="5"></label>
+          <label>Anti penalty <input id="antiPenalty" type="number" min="0" max="5" step="0.1" value="1.0"></label>
+          <button id="scoreButton">Run score</button>
+        </div>
+        <div id="scoreOutput" class="output"></div>
+      </article>
+
+      <article class="card">
+        <div class="section-title">
+          <span>2</span>
+          <h2>Evidence Interpretation</h2>
+        </div>
+        <p>Generate a Markdown interpretation anchored in dictionary evidence, P6 claim safety, and P9 hard constraints.</p>
+        <label>Claims to audit, one per line
+          <textarea id="interpretClaims" spellcheck="false">CartiGM is a trained cartilage large language model (LLM)</textarea>
+        </label>
+        <div class="form-row compact">
+          <label>Top/layer <input id="interpretTopLayer" type="number" min="1" max="20" value="3"></label>
+          <label>Overall top <input id="interpretOverallTop" type="number" min="1" max="50" value="8"></label>
+          <button id="interpretButton">Interpret genes</button>
+        </div>
+        <div id="interpretOutput" class="output"></div>
+      </article>
+    </section>
+
+    <section class="grid two">
+      <article class="card">
+        <div class="section-title">
+          <span>3</span>
+          <h2>Claim Check</h2>
+        </div>
+        <p>Check whether a manuscript-style statement matches bundled P6 safety rules.</p>
+        <textarea id="claim" spellcheck="false">CartiGM is a trained cartilage large language model (LLM)</textarea>
+        <button id="claimButton">Check claim</button>
+        <div id="claimOutput" class="output"></div>
+      </article>
+
+      <article class="card">
+        <div class="section-title">
+          <span>4</span>
+          <h2>Model Evidence</h2>
+        </div>
+        <ul class="evidence-list">
+          <li>Three-layer dictionary: chondrocyte subtype, tissue/developmental state, and functional axis.</li>
+          <li>P6 RAG resources: evidence cards, prompt templates, and claim-safety rules.</li>
+          <li>P9 metadata: language-layer safety behavior, not gene-score retraining.</li>
+          <li>Recommended manuscript wording: "CartiGM provides evidence-constrained cartilage-specific interpretation."</li>
+        </ul>
+        <p class="warning">Do not claim clinical diagnostic performance, therapeutic causality, or fully trained LLM behavior unless validated separately.</p>
+      </article>
+    </section>
+
+    <section class="card">
+      <div class="section-title">
+        <span>5</span>
+        <h2>Dictionary Explorer</h2>
+      </div>
+      <p>Browse the bundled three-layer cartilage dictionary. Axis IDs are stable; display names can be literature-aligned.</p>
+      <div class="tabs" id="dictionaryTabs"></div>
+      <div id="dictionaryOutput" class="dictionary-grid"></div>
+    </section>
+
+    <section class="grid two">
+      <article class="card">
+        <div class="section-title">
+          <span>6</span>
+          <h2>h5ad Command Builder</h2>
+        </div>
+        <p>Generate safe local commands for large h5ad files. The web app does not upload or process h5ad files.</p>
+        <div class="tabs small-tabs" id="commandTabs">
+          <button data-command="p4" class="active">P4 projection</button>
+          <button data-command="inspect">Inspect h5ad</button>
+          <button data-command="cs">cs-predict</button>
+        </div>
+
+        <div id="p4Form" class="command-form">
+          <div class="form-grid">
+            <label>h5ad path <input id="h5adPath" value="your_data.h5ad"></label>
+            <label>outdir <input id="outdir" value="cartigm_p4_out"></label>
+            <label>sample column <input id="sampleCol" value="sample"></label>
+            <label>tissue column <input id="tissueCol" value="tissue"></label>
+            <label>cluster column <input id="clusterCol" value="cluster"></label>
+            <label>celltype column <input id="celltypeCol" value="celltype"></label>
+            <label>layer <input id="layer" placeholder="optional, e.g. log1p_norm"></label>
+            <label>min cells <input id="minCells" type="number" min="1" placeholder="optional"></label>
+            <label>streaming
+              <select id="streaming">
+                <option value="auto">auto</option>
+                <option value="force">force streaming</option>
+                <option value="off">disable streaming</option>
+              </select>
+            </label>
+            <label>chunk size <input id="chunkSize" type="number" min="1" placeholder="optional"></label>
+          </div>
+          <label class="checkbox"><input id="noCelltypeFilter" type="checkbox"> Add --no-celltype-filter</label>
+          <button id="p4Button">Generate P4 command</button>
+        </div>
+
+        <div id="inspectForm" class="command-form hidden">
+          <div class="form-grid">
+            <label>h5ad path <input id="inspectH5adPath" value="your_data.h5ad"></label>
+            <label>format
+              <select id="inspectFormat">
+                <option value="markdown">markdown</option>
+                <option value="json">json</option>
+              </select>
+            </label>
+          </div>
+          <button id="inspectButton">Generate inspect command</button>
+        </div>
+
+        <div id="csForm" class="command-form hidden">
+          <div class="form-grid">
+            <label>h5ad path <input id="csH5adPath" value="your_data.h5ad"></label>
+            <label>output TSV <input id="csOut" value="cartigm_cs_predictions.tsv"></label>
+            <label>mode
+              <select id="csMode">
+                <option value="ensemble">ensemble</option>
+                <option value="v2">v2</option>
+                <option value="v1">v1</option>
+              </select>
+            </label>
+            <label>layer <input id="csLayer" placeholder="optional, e.g. log1p_norm"></label>
+            <label>device <input id="csDevice" placeholder="optional, e.g. cuda"></label>
+            <label>batch size <input id="csBatchSize" type="number" min="1" value="4096"></label>
+          </div>
+          <button id="csButton">Generate cs-predict command</button>
+        </div>
+
+        <pre id="commandOutput" class="command"></pre>
+      </article>
+
+      <article class="card">
+        <div class="section-title">
+          <span>7</span>
+          <h2>Local Workflow</h2>
+        </div>
+        <ol class="workflow-list">
+          <li>Run <code>inspect-h5ad</code> to confirm metadata columns and expression layers.</li>
+          <li>Run <code>p4-project</code> to create pseudobulk scores and P4 reports.</li>
+          <li>Run <code>cs-predict</code> for per-cell 10-class chondrocyte subtype prediction.</li>
+          <li>Use gene interpretation and claim check to write conservative figure legends and result text.</li>
+        </ol>
+        <p class="warning">Large h5ad files stay on your workstation. The web portal only uses bundled CartiGM resources and local command strings.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <span>CartiGM Web Portal runs locally and uses bundled package resources only.</span>
+  </footer>
+  <script src="/static/app.js"></script>
+</body>
+</html>

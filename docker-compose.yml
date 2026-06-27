@@ -1,0 +1,10 @@
+services:
+  cartigsfm-web:
+    build: .
+    container_name: cartigsfm-web
+    restart: unless-stopped
+    environment:
+      CARTIGSFM_WEB_HOST: 0.0.0.0
+      PORT: 8000
+    ports:
+      - "8000:8000"

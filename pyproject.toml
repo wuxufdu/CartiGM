@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cartigsfm"
-version = "0.4.0"
+version = "0.6.1"
 description = "Cartilage-domain gene-set foundation model utilities"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -15,11 +15,18 @@ dependencies = [
     "pandas",
 ]
 
+[project.optional-dependencies]
+web = [
+    "fastapi",
+    "uvicorn",
+]
+
 [project.scripts]
 cartigsfm = "cartigsfm.cli:main"
+cartigsfm-web = "cartigsfm_web.server:main"
 
 [tool.setuptools.packages.find]
-include = ["cartigsfm*"]
+include = ["cartigsfm*", "cartigsfm_web*"]
 
 [tool.setuptools.package-data]
 cartigsfm = [
@@ -28,4 +35,11 @@ cartigsfm = [
     "resources/p9_v1/config/*.json",
     "resources/p9_v1/docs/*.md",
     "resources/p9_v1/tsv/*.tsv",
+    "resources/cs_classifier_v1/*.pt",
+    "resources/cs_classifier_v1/*.tsv",
+]
+cartigsfm_web = [
+    "static/*.html",
+    "static/*.css",
+    "static/*.js",
 ]

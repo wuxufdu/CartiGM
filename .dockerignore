@@ -1,0 +1,34 @@
+.git
+.venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
+.mypy_cache
+.ruff_cache
+.DS_Store
+Thumbs.db
+
+# Local research data and bulky generated outputs
+data
+figures
+report
+reports
+local_tryout
+celltype_go_meteor_out
+review_p9_delivery
+handoff_next_codex
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.h5ad
+*.h5
+*.loom
+*.parquet
+*.npz
+*.npy
+
+# Keep source package resources copied by Dockerfile from cartigsfm/
+!cartigsfm/resources/**
